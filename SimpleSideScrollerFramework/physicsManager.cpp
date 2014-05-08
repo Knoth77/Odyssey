@@ -202,15 +202,78 @@ void physicsManager::activateBot(Bot *bot, float x, float y)
 
 	bot->getBody()->SetTransform(pos, 0.0);
 
-	if (bot->getType() == L"SPIDER_BOT")
+	if (bot->getType() == L"MAGE_BOSS")
 	{
-		//pos.x = x * pixelScaling + (75 * pixelScaling);
-		//pos.y = y * pixelScaling + (75 * pixelScaling);
-		bot->getBody()->SetTransform(pos, 0.0);
+		MageBoss *b = dynamic_cast<MageBoss*>(bot);
+		b->setInitPos(pos.x, pos.y);
 	}
 
 
 	bot->getBody()->SetActive(true);
+}
+
+void physicsManager::initMageOrb(AnimatedSprite *orb, float x, float y, Bot *m)
+{
+	MageBoss *b = dynamic_cast<MageBoss*>(m);
+	if (b != 0)
+	{
+		b2Vec2 pos = m->getBody()->GetPosition();
+
+		b2BodyDef bd;
+		bd.type = b2_dynamicBody;
+		bd.fixedRotation = true;
+
+
+		b2CircleShape c;
+		c.m_radius = .205f;
+		bd.position.Set(x, y);
+
+		b2FixtureDef fd;
+		fd.friction = 0;
+		fd.restitution = 0;
+		fd.density = 5.0f;
+		fd.shape = &c;
+		fd.filter.categoryBits = collisionCatagory::ENEMY;
+		fd.filter.maskBits = collisionCatagory::PLAYER_BULLET;
+
+
+
+		b2Body *cb = gameWorld->CreateBody(&bd);
+		cb->CreateFixture(&fd);
+
+		orb->setBody(cb);
+
+		cb->SetActive(false);
+
+		b2RopeJointDef m_ropeDef;
+		b2Joint* m_rope;
+
+		m_ropeDef.bodyA = m->getBody();
+		m_ropeDef.bodyB = cb;
+		m_ropeDef.collideConnected = false;
+		m_ropeDef.maxLength = .4394;
+		m_ropeDef.localAnchorA.SetZero();
+		m_ropeDef.localAnchorB.SetZero();
+
+		m_rope = gameWorld->CreateJoint(&m_ropeDef);
+		
+	}
+}
+
+void physicsManager::activateMageOrb(AnimatedSprite *orb, b2Vec2 push)
+{
+	orb->getBody()->SetActive(true);
+	orb->getBody()->ApplyLinearImpulse(push, orb->getBody()->GetWorldCenter(), true);
+
+}
+
+void physicsManager::deactivateMageOrb(AnimatedSprite *orb)
+{
+	b2Vec2 zero;
+	zero.x = 0;
+	zero.y = 0;
+	orb->getBody()->SetLinearVelocity(zero);
+	orb->getBody()->SetActive(false);
 }
 
 void physicsManager::initMageBoss(Bot *bot, int bX, int bY, int aR)
@@ -255,7 +318,7 @@ void physicsManager::initMageBoss(Bot *bot, int bX, int bY, int aR)
 
 	b2FixtureDef fixtureDef;
 	fixtureDef.shape = &shape;
-	fixtureDef.density = 1.0f;
+	fixtureDef.density = 1000.0f;
 	fixtureDef.filter.categoryBits = collisionCatagory::ENEMY;
 	uint16 mask = collisionCatagory::WALL | collisionCatagory::PLAYER | collisionCatagory::PLAYER_BULLET | collisionCatagory::ENEMY;
 	fixtureDef.filter.maskBits = mask;
@@ -583,6 +646,9 @@ void physicsManager::gameWorldStep()
 		game->getAudio()->stopAllAudio();
 		game->getGSM()->goToDeathScreen();
 	}
+
+
+
 
 	gameWorld->Step(timeStep, velocityIterations, positionIterations);
 	gameWorld->ClearForces();

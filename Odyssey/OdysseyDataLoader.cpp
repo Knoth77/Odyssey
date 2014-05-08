@@ -474,6 +474,9 @@ void OdysseyDataLoader::loadBotsFromLua(wstring levelName,Game *game)
 					 bot->setAlpha(255);
 					 bot->setCurrentState(L"IDLE");
 					 MageBoss *testBot = dynamic_cast<MageBoss *>(bot);
+					 testBot->registerGame(game);
+					 testBot->setRangeX(412);
+					 testBot->setRangeY(412);
 					 spriteManager->addBot(testBot);
 					 bot->setDefaultX(x);
 					 bot->setDefaultY(y);
@@ -587,7 +590,10 @@ void OdysseyDataLoader::loadBotsFromLua(wstring levelName,Game *game)
 					bot->setAlpha(255);
 					bot->setCurrentState(L"IDLE");
 					MageBoss *testBot = dynamic_cast<MageBoss *>(bot);
+					testBot->registerGame(game);
 					spriteManager->addBot(testBot);
+					testBot->setRangeX(412);
+					testBot->setRangeY(412);
 					bot->setDefaultX(x);
 					bot->setDefaultY(y);
 					game->getGSM()->getPhyiscs()->activateBot(testBot, x, y);

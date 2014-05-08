@@ -6,6 +6,10 @@
 #include "Bullet.h"
 #include "PhysicsCollisionListener.h"
 #include "src\sssf\gsm\ai\Bot.h"
+#include "MeleeBot.h"
+
+
+
 
 class physicsManager
 {
@@ -87,6 +91,12 @@ public:
 	void initGameWorld();
 	void clearGameWorld();
 	void registerGameToListener();
+
+	void initMageOrb(AnimatedSprite *orb, float x, float y, Bot *m);
+	void activateMageOrb(AnimatedSprite *orb, b2Vec2 push);
+	void deactivateMageOrb(AnimatedSprite *orb);
+
+	
 
 	void deleteSpriteBody(AnimatedSprite *sprite);
 

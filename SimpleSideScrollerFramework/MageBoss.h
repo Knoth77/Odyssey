@@ -22,6 +22,20 @@ private:
 	boolean pivot;
 	boolean fired;
 	bool dashB;
+
+	float rangeX;
+	float rangeY;
+	b2Vec2 initPos;
+
+	AnimatedSprite *orbs[4];
+
+	Game *game;
+
+	bool orbsActive;
+
+
+	const float pixelScaling = 0.009765625;
+
 public:
 	MageBoss();
 	~MageBoss();
@@ -34,10 +48,38 @@ public:
 
 	};
 
+	void manageOrbs();
+
+	bool areOrbsActive()
+	{
+		return orbsActive;
+	}
+
+	void reallignOrbs();
+
+	AnimatedSprite *getOrbs(int i)
+	{
+		return orbs[i];
+	}
+
+	void setOrbsActive(bool b)
+	{
+		orbsActive = b;
+	}
+
 	void setSelectedGun(unsigned int x)
 	{
 		selectedGun = x;
 	}
+
+	void registerGame(Game *g)
+	{
+		game = g;
+	}
+
+	void setInitPos(float x, float y) { initPos.x = x; initPos.y = y; }
+	void setRangeX(int x){ rangeX = x*pixelScaling; }
+	void setRangeY(int y){ rangeY = y*pixelScaling; }
 
 	int getSelectedGun()
 	{
@@ -48,6 +90,15 @@ public:
 
 	boolean getPivot() { return pivot; }
 	void setPivot(boolean p) { pivot = p; }
+
+	void decDash()
+	{
+		dashCooldown--;
+	}
+
+	void initOrbs();
+	void activateOrbs();
+	void deactivateOrbs();
 
 	void setBossHealth(unsigned int x)
 	{
@@ -92,4 +143,3 @@ public:
 	void think(Game *game);
 
 };
-

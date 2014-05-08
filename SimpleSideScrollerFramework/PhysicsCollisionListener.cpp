@@ -6,6 +6,7 @@
 #include "MeleeBot.h"
 #include "Fireball.h"
 #include "Laser.h"
+#include "Rocket.h"
 
 
 PhysicsCollisionListener::PhysicsCollisionListener()
@@ -73,7 +74,7 @@ void PhysicsCollisionListener::BeginContact(b2Contact *contact)
 			bool sensA = contact->GetFixtureA()->IsSensor();
 			bool sensB = contact->GetFixtureB()->IsSensor();
 
-			
+
 			if ((sensA && sensB) || !(sensA || sensB))
 			{
 				if (!(sensA || sensB)) // COLLISON WAS BETWEEN PLAYER AND BOT
@@ -103,7 +104,7 @@ void PhysicsCollisionListener::BeginContact(b2Contact *contact)
 					{
 						MeleeBot *mBot = dynamic_cast<MeleeBot*>(A);
 						mBot->setInAttackRadius(true);
-					}					
+					}
 				}
 				else
 				{
@@ -131,7 +132,18 @@ void PhysicsCollisionListener::BeginContact(b2Contact *contact)
 				{
 					MageBoss *mB = dynamic_cast<MageBoss*>(A);
 					//Bot *bot = dynamic_cast<Bot*>(A);
-					mB->dash(game);
+					mB->decDash();
+
+					Rocket *r = dynamic_cast<Rocket*>(B);
+					if (r != 0)
+					{
+						mB->decDash();
+						mB->decDash();
+						mB->decDash();
+						mB->decDash();
+
+					}
+
 					return;
 				}
 
@@ -140,13 +152,23 @@ void PhysicsCollisionListener::BeginContact(b2Contact *contact)
 			{
 				Bot *bot = static_cast<Bot*>(B);
 				if ((contact->GetFixtureB()->GetFilterData().categoryBits == phy->BOT_DODGE) && (bot->getType() == L"MAGE_BOSS"))
-					{
+				{
 					MageBoss *mB = dynamic_cast<MageBoss*>(B);
 					//Bot *bot = dynamic_cast<Bot*>(A);
-					mB->dash(game);
-					//mB->setDashNow(true)
-						return;
+					mB->decDash();
+
+					Rocket *r = dynamic_cast<Rocket*>(A);
+					if (r != 0)
+					{
+						mB->decDash();
+						mB->decDash();
+						mB->decDash();
+						mB->decDash();
+
 					}
+
+					return;
+				}
 			}
 
 
@@ -162,7 +184,7 @@ void PhysicsCollisionListener::BeginContact(b2Contact *contact)
 				if (contact->GetFixtureA()->GetFilterData().categoryBits != phy->ENEMY_BULLET)
 				{
 					Bot *bot = static_cast<Bot*>(B);
-						bot->setHealth(bot->getHealth() - a->getPrimaryDamage());
+					bot->setHealth(bot->getHealth() - a->getPrimaryDamage());
 
 					bot->setJustShot(true);
 					a->handleCollision(game);
@@ -180,8 +202,8 @@ void PhysicsCollisionListener::BeginContact(b2Contact *contact)
 				if (contact->GetFixtureB()->GetFilterData().categoryBits != phy->ENEMY_BULLET)
 				{
 					Bot *bot = static_cast<Bot*>(A);
-		
-						bot->setHealth(bot->getHealth() - b->getPrimaryDamage());
+
+					bot->setHealth(bot->getHealth() - b->getPrimaryDamage());
 
 					bot->setJustShot(true);
 					b->handleCollision(game);

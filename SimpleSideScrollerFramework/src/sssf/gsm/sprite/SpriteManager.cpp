@@ -131,6 +131,22 @@ void SpriteManager::addSpriteItemsToRenderList(	Game *game)
 		{			
 			Bot *bot = (*botIterator);
 			addSpriteToRenderList(bot, renderList, viewport);
+
+			MageBoss *test = dynamic_cast<MageBoss*>(bot);
+
+			if (test != 0)
+			{
+				if (test->areOrbsActive())
+				{
+					
+					for (int i = 0; i < 4; i++)
+					{
+						AnimatedSprite *orb = test->getOrbs(i);
+						addSpriteToRenderList(orb, renderList, viewport);
+					}
+				}
+			}
+
 			botIterator++;
 		}
 
@@ -477,6 +493,8 @@ void SpriteManager::update(Game *game)
 				if (bot->getFrameIndex() == size - 2)
 				{
 					bot->setCurrentState(L"DEAD");
+
+
 				}
 			/*	bot->setHealth(100);
 				recycler.recycleBot(W_MELEE_BOT, bot);
@@ -498,6 +516,22 @@ void SpriteManager::update(Game *game)
 			allDead = false;
 			bot->think(game);
 			bot->updateSprite();
+
+			MageBoss *test = dynamic_cast<MageBoss*>(bot);
+
+			if (test != 0)
+			{
+				if (test->areOrbsActive())
+				{
+					
+					for (int i = 0; i < 4; i++)
+					{
+						AnimatedSprite *orb = test->getOrbs(i);
+						orb->updateSprite();
+					}
+				}
+			}
+
 
 			if (bot->getHealth() <= 0)
 			{

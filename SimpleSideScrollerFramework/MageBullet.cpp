@@ -19,6 +19,13 @@ MageBullet::~MageBullet()
 void MageBullet::handleCollision(Game *game)
 {
 	initCollide = true;
+
+	float pixelScaling = game->getGSM()->getPhyiscs()->getPixelScaling();
+	b2Vec2 bullPos = this->getBody()->GetPosition();
+	Effect *explosionSprite = game->getGSM()->getSpriteManager()->getEffectRecycler()->retrieveEffect(game, L"EXPLOSION");
+	explosionSprite->setDefaultX(((bullPos.x) / pixelScaling) - 20);
+	explosionSprite->setDefaultY(((bullPos.y) / pixelScaling) - 20);
+	game->getGSM()->getSpriteManager()->addEffect(explosionSprite);
 }
 
 
