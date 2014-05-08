@@ -1,7 +1,7 @@
 #include "MageBoss.h"
 #include "Fireball.h"
 #include "MageBullet.h"
-
+#include <cmath>
 
 
 MageBoss::MageBoss()
@@ -15,6 +15,7 @@ MageBoss::MageBoss()
 	bulletFire = -1;
 	pivot = false;
 	fired = false;
+	dashCooldown = 15;
 }
 
 
@@ -29,6 +30,8 @@ void MageBoss::changeAnimationState()
 
 void MageBoss::think(Game *game)
 {
+   int defX = this->getDefaultX();
+   int defY = this->getDefaultY();
 	if (this->getCurrentState() == L"IDLE" || this->getCurrentState() == L"IDLE_RIGHT")
 	{
 		if (this->getMarkedForDeath() == true)
@@ -62,7 +65,7 @@ void MageBoss::think(Game *game)
 						bullet->setCurrentState(L"PRIMARY_FIRE");
 						game->getGSM()->getPhyiscs()->activateEnemyBullet(bullet, this->getBody()->GetPosition().x, this->getBody()->GetPosition().y);
 						game->getGSM()->getSpriteManager()->addActiveBullet(bullet);
-						this->setFireCooldown(30);
+						this->setFireCooldown(15);
 					}
 					else
 					{
@@ -118,7 +121,7 @@ void MageBoss::think(Game *game)
 					mageBullet->setCurrentState(L"PRIMARY_FIRE");
 					game->getGSM()->getPhyiscs()->activateEnemyBullet(mageBullet, this->getBody()->GetPosition().x, this->getBody()->GetPosition().y);
 					game->getGSM()->getSpriteManager()->addActiveBullet(mageBullet);
-					this->setBulletCooldown(50);
+					this->setBulletCooldown(40);
 					bulletFire = 10;
 					fired = true;
 				}
@@ -161,7 +164,7 @@ void MageBoss::think(Game *game)
 					fireBall->setCurrentState(L"PRIMARY_FIRE");
 					game->getGSM()->getPhyiscs()->activateEnemyBullet(fireBall, this->getBody()->GetPosition().x, this->getBody()->GetPosition().y);
 					game->getGSM()->getSpriteManager()->addActiveBullet(fireBall);
-					this->setFireCooldown(30);
+					this->setFireCooldown(15);
 				}
 				else
 				{
@@ -203,17 +206,36 @@ void MageBoss::think(Game *game)
 	
 }
 
-void MageBoss::dash(Game game)
+void MageBoss::dash(Game *game)
 {
-	//b2Vec2 run;
-	//b2Body *botBody = this->getBody();
-	////b2Body *player = game->getGSM()->getPhyiscs()->getPlayerBody();
-	//run.x = botBody->GetPosition().x - player->GetPosition().x;
-	//run.y = botBody->GetPosition().y - player->GetPosition().y;
-	//run.Normalize();
-	//run *= 2;
-	//this->getBody()->SetLinearVelocity(run);
-	//setPivot(false);
+	if (dashCooldown <= 0)
+	{
+		b2Vec2 run;
+		srand(time(NULL));
+		int r = (rand() % (2 - 0 + 1));
+		int r2 = (rand() % (2 - 0 + 1));
+		int dX = 1;
+		int dY = 1;
+
+		if (r < 1)
+			dX = -1;
+		else
+			dX = 1;
+
+		if (r2 < 1)
+			dY = -1;
+		else
+			dY = 1;
+
+		b2Body *botBody = this->getBody();
+		botBody->ApplyLinearImpulse(b2Vec2(30 * dX, 30 * dY), botBody->GetWorldCenter(), true);
+		//botBody->SetTransform(b2Vec2(botBody->GetPosition().x + (1 * dX), (botBody->GetPosition().y + (1 * dY))), botBody->GetAngle());
+		//setDashTime = false
+		dashCooldown = 30;
+	}
+	else
+		dashCooldown--;
+	
 }
 
 Bot* MageBoss::clone(Game *game)

@@ -12,7 +12,7 @@ protected:
 	bool initCollide = false;
 	wstring type;
 	int primaryDamage;
-	int secondaryDamage;
+	//int secondaryDamage;
 	char damageType;
 
 public:
@@ -27,10 +27,10 @@ public:
 
 	int getDamage()
 	{
-		return damageType == 'P' ? primaryDamage : secondaryDamage;
+		return primaryDamage;
 	}
 	void setDamageType(char c) { damageType = c; }
-	int getSecondaryDamage() { return secondaryDamage; }
+	//int getSecondaryDamage() { return secondaryDamage; }
 	wstring getType()
 	{
 		return type;
@@ -60,8 +60,8 @@ public:
 	{
 		primaryDamage = x;
 	}
-	void setSecondaryDamage(int x) { secondaryDamage = x;
-	}
+	//void setSecondaryDamage(int x) { secondaryDamage = x};
+	
 	// WE WILL HAVE MANY TYPES OF BULLETS THAT WILL DO DIFFERANT THINGS ON IMPACT, THE DEFAULT BEHAVOIR THOUGH
 	// IS TO SIMPLY DISSAPEAR AND IF IT HIS AN ENEMY DAMAGE IT
 	virtual void handleCollision(Game *game)=0;

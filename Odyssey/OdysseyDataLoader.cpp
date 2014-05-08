@@ -278,6 +278,7 @@ void OdysseyDataLoader::loadWorld(Game *game, wstring levelInitFile)
 	AnimatedSpriteType *fireballSS = spriteManager->getSpriteType(9);
 	AnimatedSpriteType *mageBulletSS = spriteManager->getSpriteType(10);
 	AnimatedSpriteType *acidSS = spriteManager->getSpriteType(11);
+	AnimatedSpriteType *test = spriteManager->getSpriteType(12);
 
 	ExplosionEffect *sampleExplosion = new ExplosionEffect();
 	sampleExplosion->setSpriteType(explosion);
@@ -353,6 +354,7 @@ void OdysseyDataLoader::loadBotsFromLua(wstring levelName,Game *game)
 		int playerY = pX.GetInteger();
 
 		gsm->getPhyiscs()->initPlayer(player, playerX, playerY);
+		gsm->getSpriteManager()->getPlayer()->initStatusSprite();
 
 		AnimatedSpriteType *botSpriteType = NULL;
 
@@ -473,6 +475,8 @@ void OdysseyDataLoader::loadBotsFromLua(wstring levelName,Game *game)
 					 bot->setCurrentState(L"IDLE");
 					 MageBoss *testBot = dynamic_cast<MageBoss *>(bot);
 					 spriteManager->addBot(testBot);
+					 bot->setDefaultX(x);
+					 bot->setDefaultY(y);
 					 game->getGSM()->getPhyiscs()->activateBot(testBot, x, y);
 					 if (position.GetByName("m").IsConvertibleToInteger())
 						 testBot->changeMovementType(position.GetByName("m").GetInteger());
@@ -537,7 +541,7 @@ void OdysseyDataLoader::loadBotsFromLua(wstring levelName,Game *game)
 				MageBoss *sampleMageBoss = new MageBoss();
 
 				sampleMageBoss->setSpriteType(botSpriteType);
-				game->getGSM()->getPhyiscs()->initMeleeBot(sampleMageBoss, 84, 96, 50); // CHANGE VALUES LATER 
+				game->getGSM()->getPhyiscs()->initMageBoss(sampleMageBoss, 84, 96, 50); // CHANGE VALUES LATER 
 				sampleMageBoss->setHealth(500);
 
 				recycler->registerBotType(W_MAGE_BOSS, sampleMageBoss);
@@ -584,6 +588,8 @@ void OdysseyDataLoader::loadBotsFromLua(wstring levelName,Game *game)
 					bot->setCurrentState(L"IDLE");
 					MageBoss *testBot = dynamic_cast<MageBoss *>(bot);
 					spriteManager->addBot(testBot);
+					bot->setDefaultX(x);
+					bot->setDefaultY(y);
 					game->getGSM()->getPhyiscs()->activateBot(testBot, x, y);
 				}
 			}

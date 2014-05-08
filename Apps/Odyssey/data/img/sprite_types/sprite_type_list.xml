@@ -12,4 +12,6 @@
   <sprite_type>fireball</sprite_type>
   <sprite_type>mage_bullet</sprite_type>
   <sprite_type>acid</sprite_type>
+  <sprite_type>player_status</sprite_type>
+  <sprite_type>electric_orb</sprite_type>
 </sprite_type_list>

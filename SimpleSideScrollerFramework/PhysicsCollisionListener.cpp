@@ -129,8 +129,9 @@ void PhysicsCollisionListener::BeginContact(b2Contact *contact)
 				Bot *bot = static_cast<Bot*>(A);
 				if ((contact->GetFixtureA()->GetFilterData().categoryBits == phy->BOT_DODGE) && (bot->getType() == L"MAGE_BOSS"))
 				{
+					MageBoss *mB = dynamic_cast<MageBoss*>(A);
 					//Bot *bot = dynamic_cast<Bot*>(A);
-					bot->setPlayerInRadius(true);
+					mB->dash(game);
 					return;
 				}
 
@@ -140,8 +141,10 @@ void PhysicsCollisionListener::BeginContact(b2Contact *contact)
 				Bot *bot = static_cast<Bot*>(B);
 				if ((contact->GetFixtureB()->GetFilterData().categoryBits == phy->BOT_DODGE) && (bot->getType() == L"MAGE_BOSS"))
 					{
-						//Bot *bot = dynamic_cast<Bot*>(B);
-						bot->setPlayerInRadius(true);
+					MageBoss *mB = dynamic_cast<MageBoss*>(B);
+					//Bot *bot = dynamic_cast<Bot*>(A);
+					mB->dash(game);
+					//mB->setDashNow(true)
 						return;
 					}
 			}
@@ -159,9 +162,6 @@ void PhysicsCollisionListener::BeginContact(b2Contact *contact)
 				if (contact->GetFixtureA()->GetFilterData().categoryBits != phy->ENEMY_BULLET)
 				{
 					Bot *bot = static_cast<Bot*>(B);
-					if (a->getType() == L"S")
-						bot->setHealth(bot->getHealth() - a->getSecondaryDamage());
-					else
 						bot->setHealth(bot->getHealth() - a->getPrimaryDamage());
 
 					bot->setJustShot(true);
@@ -180,9 +180,7 @@ void PhysicsCollisionListener::BeginContact(b2Contact *contact)
 				if (contact->GetFixtureB()->GetFilterData().categoryBits != phy->ENEMY_BULLET)
 				{
 					Bot *bot = static_cast<Bot*>(A);
-					if (b->getType() == L"S")
-						bot->setHealth(bot->getHealth() - b->getSecondaryDamage());
-					else
+		
 						bot->setHealth(bot->getHealth() - b->getPrimaryDamage());
 
 					bot->setJustShot(true);

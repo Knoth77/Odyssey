@@ -16,6 +16,7 @@ private:
 	int immuneCounter;
 	bool isImmune;
 	Game *game;
+	AnimatedSprite *status;
 	
 
 public:
@@ -29,6 +30,15 @@ public:
 		ROCKET
 
 	};
+
+	void initStatusSprite();
+
+	void updateStatus();
+
+	AnimatedSprite* getStatus()
+	{
+		return status;
+	}
 
 	void registerPlayer(Game *g)
 	{

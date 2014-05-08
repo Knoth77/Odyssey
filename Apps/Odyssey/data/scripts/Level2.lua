@@ -14,7 +14,7 @@ playerStartY = 3072
 SPIDER_BOT = {bot1={x=1056,y=2240},bot2={x=480,y=1600},bot3={x=480,y=1300},
 				bot4={x=480,y=1300}},
 
-MAGE_BOSS = {bot1={x=768,y=192}}				
+MAGE_BOSS = {bot1={x=2240,y=2240}}				
  --RANGE_BOT = {bot1={x=40,y=50},bot2={x=140,y=150}}
  
  }

@@ -18,8 +18,10 @@ private:
 	int fireCooldown;
 	int bulletCooldown;
 	int bulletFire;
+	int dashCooldown;
 	boolean pivot;
 	boolean fired;
+	bool dashB;
 public:
 	MageBoss();
 	~MageBoss();
@@ -83,7 +85,7 @@ public:
 	}
 
 	void changeAnimationState();
-	void dash(Game game);
+	void dash(Game *game);
 	void changeMovementType(int type) { movementPattern->changeMovementType(type); }
 	//void setWalkTicks(int wT) { walkTicks = wT; }
 	Bot* clone(Game *game);

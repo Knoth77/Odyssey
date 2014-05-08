@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "src\sssf\gsm\state\GameStateManager.h"
 
 
 Player::Player()
@@ -13,13 +14,29 @@ Player::Player()
 	outOfHealth = false;
 	immuneCounter = 66;
 	isImmune = false;
+
 }
 
 
 Player::~Player()
 {
+	delete status;
+	status = NULL;
 }
 
+void Player::initStatusSprite()
+{
+	status = new AnimatedSprite();
+	status->setAlpha(255);
+	status->setSpriteType(game->getGSM()->getSpriteManager()->getSpriteType(12));
+	status->setCurrentState(L"ONFIRE");
+	status->setBody(this->getBody());
+}
+
+void Player::updateStatus()
+{
+	status->updateSprite();
+}
 
 void Player::updateSprite()
 {

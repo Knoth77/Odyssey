@@ -7,7 +7,7 @@ Laser::Laser()
 	initCollide = false;
 	type = L"LASER";
 	primaryDamage = 10;
-	secondaryDamage = 30;
+	//secondaryDamage = 30;
 }
 
 

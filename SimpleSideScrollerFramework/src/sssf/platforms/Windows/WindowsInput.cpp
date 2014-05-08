@@ -145,12 +145,12 @@ void WindowsInput::respondToMouseInput(Game *game)
 
 			if (p->getSelectedGun() == p->DEFAULT)// && shotTime == 0)
 			{
-				game->getAudio()->playSound(L"data\\sounds\\laser.wav",false);
+				/*game->getAudio()->playSound(L"data\\sounds\\laser.wav",false);
 				Bullet *bullet = gsm->getSpriteManager()->getBulletRecycler()->retrieveBullet(game, L"LASER");
 				bullet->setCurrentState(L"SECONDARY_FIRE");
 				bullet->setDamageType('S');
 				gsm->getPhyiscs()->activateBullet(bullet);
-				gsm->getSpriteManager()->addActiveBullet(bullet);
+				gsm->getSpriteManager()->addActiveBullet(bullet);*/
 				//p->setNextShotTime(2);
 			}
 			//ProjectileManager::createBullet(game, "SECONDARY", mousePoint);

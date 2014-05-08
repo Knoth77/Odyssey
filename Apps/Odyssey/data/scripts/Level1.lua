@@ -25,7 +25,7 @@ playerStartY = 140
  
 
  LAVA_BOSS = {bot13={x=1532, y = 2598}},
- MAGE_BOSS = {bot1={x=768,y=140}}
+ MAGE_BOSS = {bot1={x=2240,y=640}}
  
  }
 

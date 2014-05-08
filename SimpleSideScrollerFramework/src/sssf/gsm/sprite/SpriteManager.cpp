@@ -136,6 +136,7 @@ void SpriteManager::addSpriteItemsToRenderList(	Game *game)
 
 		// ADD THE PLAYER SPRITE
 		addSpriteToRenderList(&player, renderList, viewport);
+		addSpriteToRenderList(player.getStatus(), renderList, viewport);
 
 
 		list<Bullet*>::iterator bulletsIt;
@@ -362,6 +363,7 @@ void SpriteManager::update(Game *game)
 
 
 	player.updateSprite();
+	player.updateStatus();
 	list<Bullet*>::iterator bulletsIt;
 	bulletsIt = activeBullets.begin();
 
