@@ -333,7 +333,54 @@ void physicsManager::initMageBoss(Bot *bot, int bX, int bY, int aR)
 	bot->getBody()->CreateFixture(&dodgeBulletFixture);
 
 }
+void physicsManager::initLavaBoss(Bot *bot, int bX, int bY, int aR)
+{
+	b2BodyDef myBodyDef;
+	myBodyDef.userData = bot;
+	myBodyDef.type = b2_dynamicBody;
+	myBodyDef.fixedRotation = true;
+	myBodyDef.active = false;
 
+
+
+	b2PolygonShape shape;
+	shape.SetAsBox((bX * pixelScaling) / 2, (bY * pixelScaling) / 2);
+
+	b2FixtureDef detectFixture;
+	b2CircleShape detector;
+	detector.m_radius = 100 * pixelScaling;
+	detectFixture.shape = &detector;
+	detectFixture.isSensor = true;
+	detectFixture.filter.categoryBits = collisionCatagory::BOT_DETECTOR;
+	uint16 mask1 = collisionCatagory::PLAYER | collisionCatagory::PLAYER_BULLET;
+	detectFixture.filter.maskBits = mask1;
+
+
+	b2FixtureDef damageFixture;
+	b2CircleShape damageDetector;
+	damageDetector.m_radius = aR * pixelScaling;
+	damageFixture.shape = &damageDetector;
+	damageFixture.isSensor = true;
+	damageFixture.filter.categoryBits = collisionCatagory::BOT_DAMAGE_RADIUS;
+	damageFixture.filter.maskBits = mask1;
+
+	b2FixtureDef fixtureDef;
+	fixtureDef.shape = &shape;
+	fixtureDef.density = 10000000000.0f;
+	fixtureDef.filter.categoryBits = collisionCatagory::ENEMY;
+	uint16 mask = collisionCatagory::WALL | collisionCatagory::PLAYER | collisionCatagory::PLAYER_BULLET | collisionCatagory::ENEMY;
+	fixtureDef.filter.maskBits = mask;
+
+	myBodyDef.position.Set(0, 0);
+
+
+	bot->setBody(gameWorld->CreateBody(&myBodyDef));
+	bot->getBody()->CreateFixture(&fixtureDef);
+	bot->getBody()->CreateFixture(&detectFixture);
+	bot->getBody()->CreateFixture(&damageFixture);
+
+
+}
 void physicsManager::initMeleeBot(Bot *bot, int bX, int bY, int aR)
 {
 	b2BodyDef myBodyDef;

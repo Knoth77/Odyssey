@@ -77,7 +77,11 @@ void SpriteManager::addSpriteToRenderList(AnimatedSprite *sprite,
 
 		}
 
-
+		if (sprite->getSpriteType() == this->getSpriteType(7))
+		{
+			x = 1532;
+			y = 2598;
+		}
 		
 	}
 
@@ -504,9 +508,7 @@ void SpriteManager::update(Game *game)
 			
 			
 		}
-		else if (bot->getCurrentState().find(L"DEATH") != -1 || bot->getCurrentState().find(L"DEAD") != -1 || 
-
-			bot->getType().find(L"LAVA_BOSS") != -1)//is lava boss skip
+		else if (bot->getCurrentState().find(L"DEATH") != -1 || bot->getCurrentState().find(L"DEAD") != -1)//is lava boss skip
 		{
 			//Prevent dead bots from thinking
 			botIterator++;

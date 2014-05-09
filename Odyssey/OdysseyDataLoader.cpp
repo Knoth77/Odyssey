@@ -397,7 +397,7 @@ void OdysseyDataLoader::loadBotsFromLua(wstring levelName,Game *game)
 				LavaBoss *sampleLavaBoss = new LavaBoss();
 				
 				sampleLavaBoss->setSpriteType(botSpriteType);
-				game->getGSM()->getPhyiscs()->initMeleeBot(sampleLavaBoss,32,32,50); // CHANGE VALUES LATER 
+				game->getGSM()->getPhyiscs()->initLavaBoss(sampleLavaBoss,192,234,50); // CHANGE VALUES LATER 
 				sampleLavaBoss->setHealth(500);
 
 				recycler->registerBotType(W_LAVA_BOSS, sampleLavaBoss);
@@ -460,7 +460,7 @@ void OdysseyDataLoader::loadBotsFromLua(wstring levelName,Game *game)
 				 {
 					bot->setSpriteType(botSpriteType);
 					bot->setAlpha(255);
-					bot->setCurrentState(L"IDLE");
+					bot->setCurrentState(L"IDLE_FOWARD");
 					LavaBoss *testBot = dynamic_cast<LavaBoss *>(bot);
 					spriteManager->addBot(testBot);
 					game->getGSM()->getPhyiscs()->activateBot(testBot, x, y);

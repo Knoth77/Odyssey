@@ -136,6 +136,7 @@ public:
 	void viewportM();
 
 	void initMeleeBot(Bot *bot, int bX, int bY, int aR);
+	void initLavaBoss(Bot *bot, int bX, int bY, int aR);
 	void initMageBoss(Bot *bot, int bX, int bY, int aR);
 	void initRangeBot(Bot *bot, int bX, int bY, int aR);
 	void activateBot(Bot *bot, float x, float y);

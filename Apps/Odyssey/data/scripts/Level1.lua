@@ -1,5 +1,5 @@
-playerStartX = 140
-playerStartY = 140
+playerStartX = 3000
+playerStartY = 3000
  
  
 
@@ -18,13 +18,13 @@ playerStartY = 140
 			  bot7={x=420,y=700},bot8={x=440,y=700},bot9={x=480,y=700},
 			  bot10={x=500,y=700},bot11={x=520,y=700,m=5},bot12={x=540,y=700,m=4}},
 			  
---SPIDER_BOT = {bot1={x=760,y=100},bot2={x=256,y=1248},bot3={x=500,y=1248},
---			  bot4={x=256,y=1504},bot5={x=500,y=1504},bot6={x=1760,y=576},
---			  bot7={x=1760,y=876},bot8={x=1760,y=1176},bot9={x=2060,y=576},
---			  bot10={x=2060,y=876},bot11={x=2060,y=1176},bot12={x=2240,y=2240}},			  
+SPIDER_BOT = {bot1={x=760,y=100},bot2={x=256,y=1248},bot3={x=500,y=1248},
+			  bot4={x=256,y=1504},bot5={x=500,y=1504},bot6={x=1760,y=576},
+			  bot7={x=1760,y=876},bot8={x=1760,y=1176},bot9={x=2060,y=576},
+			  bot10={x=2060,y=876},bot11={x=2060,y=1176},bot12={x=2240,y=2240}},			  
  
 
- LAVA_BOSS = {bot13={x=1532, y = 2598}},
+ LAVA_BOSS = {bot13={x=1632, y = 2698}},
  MAGE_BOSS = {bot1={x=2240,y=640}}
  
  }

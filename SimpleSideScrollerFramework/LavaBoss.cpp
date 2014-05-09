@@ -23,37 +23,33 @@ LavaBoss::~LavaBoss()
 
 void LavaBoss::changeAnimationState()
 {
-	if (this->getMarkedForDeath() == true)
-	{
-		return;
-	}
-
-		this->setCurrentState(L"IDLE");
-	/*if (lastState.find("north") != -1)
-	this->setCurrentState(states[1]);
-	else if (lastState.find("east") != -1)
-	this->setCurrentState(states[3]);
-	else if (lastState.find("south") != -1)
-	this->setCurrentState(states[2]);
-	else//west
-	this->setCurrentState(states[4]);*/
-
 
 }
 
 void LavaBoss::think(Game *game)
 {
-	if (0 < 1)
-		int i = 101;
+	b2Vec2 playerPos = game->getGSM()->getSpriteManager()->getPlayer()->getBody()->GetPosition();
+	//this->getBody()->GetWorldCenter();
+	b2Vec2 bossPos = this->getBody()->GetPosition();
+	if ((playerPos.x >= 17.538 || playerPos.x <= 14.387) && (playerPos.y < 28.49 || playerPos.y > 26.6256294))
+	{
+		if (playerPos.x < bossPos.x)
+			this->setCurrentState(L"IDLE_LEFT");
+		else
+			this->setCurrentState(L"IDLE_RIGHT");
 
-	return;
+	}
+	else if (playerPos.y > bossPos.y + 1)
+		this->setCurrentState(L"IDLE_FOWARD");
+	else if (playerPos.y < bossPos.y)
+		this->setCurrentState(L"IDLE_BACK");
 }
 
 Bot* LavaBoss::clone(Game *game)
 {
 	LavaBoss *newBot = new LavaBoss();
 	newBot->setHealth(this->getHealth());
-	game->getGSM()->getPhyiscs()->initMeleeBot(newBot,32,32,50);
+	game->getGSM()->getPhyiscs()->initLavaBoss(newBot, 192, 234, 50);
 	newBot->movementPattern->setBody(newBot->getBody());
 	return newBot;
 }
