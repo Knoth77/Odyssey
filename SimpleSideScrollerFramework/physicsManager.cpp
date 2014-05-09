@@ -806,6 +806,15 @@ void physicsManager::activateEnemyBullet(Bullet *bullet, float x, float y)
 		bullet->getBody()->SetLinearVelocity(vel);
 		bullet->getBody()->SetTransform(playerBody->GetPosition(), angle);
 	}
+	else if (bullet->getType() == L"LAVA_BURST")
+	{
+		b2Vec2 vel = bullet->getBody()->GetLinearVelocity();
+		vel.x = 0;
+		vel.y = 0;
+		float angle = atan2f(vel.y, vel.x);
+		bullet->getBody()->SetLinearVelocity(vel);
+		bullet->getBody()->SetTransform(playerBody->GetPosition(), angle);
+	}
 	else
 	{
 		b2Vec2 vel = bullet->getBody()->GetLinearVelocity();

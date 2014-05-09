@@ -12,7 +12,10 @@ LavaBoss::LavaBoss()
 	//walkTicks = 20;
 	//lastState = "north";
 	//ticksMoved = 0;
+	health = 500;
 	type = L"LAVA_BOSS";
+	lavaBurstCooldown = 0;
+	sinkCooldown = 40;
 }
 
 
@@ -31,6 +34,44 @@ void LavaBoss::think(Game *game)
 	b2Vec2 playerPos = game->getGSM()->getSpriteManager()->getPlayer()->getBody()->GetPosition();
 	//this->getBody()->GetWorldCenter();
 	b2Vec2 bossPos = this->getBody()->GetPosition();
+
+	if ((health >= 350 && health <= 450) && sinkCooldown <= 400)
+	{
+		this->setCurrentState(L"SINK");
+
+		if (lavaBurstCooldown <= 0)
+		{
+			this->setSelectedGun(LAVA_BURST);
+			Bullet *bullet = game->getGSM()->getSpriteManager()->getBulletRecycler()->retrieveBullet(game, L"LAVA_BURST");
+			//game->getAudio()->playSound(L"data\\sounds\\laser_pro.wav", false);
+			bullet->setDamageType('P');
+			bullet->setCurrentState(L"PRIMARY_FIRE");
+			game->getGSM()->getPhyiscs()->activateEnemyBullet(bullet, this->getBody()->GetPosition().x, this->getBody()->GetPosition().y);
+			game->getGSM()->getSpriteManager()->addActiveBullet(bullet);
+			lavaBurstCooldown = 40;
+		}
+		lavaBurstCooldown--;
+		sinkCooldown++;
+		return;
+	}
+
+	if (this->getCurrentState() == L"SINK")
+	{
+		this->setCurrentState(L"RISE");
+		b2Vec2 bullPos;
+		list<Bullet*>::iterator active = game->getGSM()->getSpriteManager()->getActiveBulletsIterator();
+		while (active != game->getGSM()->getSpriteManager()->getEndOfActiveBulletsIterator())
+		{
+			Bullet *b = (*active);
+			if (b->getType() == L"LAVA_BURST")
+			{
+				bullPos = b->getBody()->GetPosition();
+				b->handleCollision(game);
+			}
+			active++;
+		}
+	}
+
 	if ((playerPos.x >= 17.538 || playerPos.x <= 14.387) && (playerPos.y < 28.49 || playerPos.y > 26.6256294))
 	{
 		if (playerPos.x < bossPos.x)

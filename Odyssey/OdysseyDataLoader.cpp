@@ -27,6 +27,7 @@
 #include "MageBoss.h"
 #include "Fireball.h"
 #include "MageBullet.h"
+#include "LavaBurst.h"
 
 // GAME OBJECT INCLUDES
 
@@ -279,6 +280,7 @@ void OdysseyDataLoader::loadWorld(Game *game, wstring levelInitFile)
 	AnimatedSpriteType *mageBulletSS = spriteManager->getSpriteType(10);
 	AnimatedSpriteType *acidSS = spriteManager->getSpriteType(11);
 	AnimatedSpriteType *test = spriteManager->getSpriteType(12);
+	AnimatedSpriteType *lavaBurstSS = spriteManager->getSpriteType(14);
 
 	ExplosionEffect *sampleExplosion = new ExplosionEffect();
 	sampleExplosion->setSpriteType(explosion);
@@ -329,6 +331,16 @@ void OdysseyDataLoader::loadWorld(Game *game, wstring levelInitFile)
 
 	bulletRecycler->registerBulletType(L"MAGE_BULLET", sampleMageBullet);
 	bulletRecycler->initRecyclableBullets(game, L"MAGE_BULLET", 40);
+
+	LavaBurst *sampleLavaBurst = new LavaBurst();
+
+	sampleLavaBurst->setSpriteType(lavaBurstSS);
+	sampleLavaBurst->setAlpha(255);
+	sampleLavaBurst->setCurrentState(PRIMARY_FIRE);
+	game->getGSM()->getPhyiscs()->initEnemyBullet(sampleLavaBurst);
+
+	bulletRecycler->registerBulletType(L"LAVA_BURST", sampleLavaBurst);
+	bulletRecycler->initRecyclableBullets(game, L"LAVA_BURST", 40);
 
 	this->loadBotsFromLua(levelInitFile, game);
 	

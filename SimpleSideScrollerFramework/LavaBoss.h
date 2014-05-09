@@ -9,9 +9,26 @@ private:
 	//string lastState;
 	//int ticksMoved;
 	SimpleMovement* movementPattern;
+	int lavaBurstCooldown;
+	int sinkCooldown;
+	int selectedGun;
 public:
 	LavaBoss();
 	~LavaBoss();
+
+	enum gunSelection
+	{
+		LAVA_BURST,
+		SWIPE,
+		ACID
+
+	};
+
+	void setSelectedGun(unsigned int x)
+	{
+		selectedGun = x;
+	}
+
 	void changeAnimationState();
 	void changeMovementType(int type) { movementPattern->changeMovementType(type); }
 	//void setWalkTicks(int wT) { walkTicks = wT; }

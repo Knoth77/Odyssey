@@ -24,6 +24,7 @@
     <ClCompile Include="Fireball.cpp" />
     <ClCompile Include="Laser.cpp" />
     <ClCompile Include="LavaBoss.cpp" />
+    <ClCompile Include="LavaBurst.cpp" />
     <ClCompile Include="MageBoss.cpp" />
     <ClCompile Include="MageBullet.cpp" />
     <ClCompile Include="MeleeBot.cpp" />
@@ -80,6 +81,7 @@
     <ClInclude Include="Hud.h" />
     <ClInclude Include="Laser.h" />
     <ClInclude Include="LavaBoss.h" />
+    <ClInclude Include="LavaBurst.h" />
     <ClInclude Include="MageBoss.h" />
     <ClInclude Include="MageBullet.h" />
     <ClInclude Include="MeleeBot.h" />
