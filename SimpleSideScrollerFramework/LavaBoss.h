@@ -12,6 +12,7 @@ private:
 	int lavaBurstCooldown;
 	int sinkCooldown;
 	int selectedGun;
+	bool invincible;
 public:
 	LavaBoss();
 	~LavaBoss();
@@ -29,6 +30,8 @@ public:
 		selectedGun = x;
 	}
 
+	void setInvincible(bool iv){ invincible = iv; }
+	bool getInvincible(){ return invincible; }
 	void changeAnimationState();
 	void changeMovementType(int type) { movementPattern->changeMovementType(type); }
 	//void setWalkTicks(int wT) { walkTicks = wT; }
