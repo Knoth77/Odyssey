@@ -234,7 +234,7 @@ void physicsManager::initMageOrb(AnimatedSprite *orb, float x, float y, Bot *m)
 		fd.density = 5.0f;
 		fd.shape = &c;
 		fd.filter.categoryBits = collisionCatagory::ENEMY;
-		fd.filter.maskBits = collisionCatagory::PLAYER_BULLET;
+		fd.filter.maskBits = collisionCatagory::PLAYER_BULLET | collisionCatagory::PLAYER;
 
 
 

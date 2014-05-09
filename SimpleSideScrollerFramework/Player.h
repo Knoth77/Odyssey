@@ -17,6 +17,7 @@ private:
 	bool isImmune;
 	Game *game;
 	AnimatedSprite *status;
+	unsigned int statusLoop;
 	
 
 public:
@@ -112,6 +113,8 @@ public:
 	{
 		return collidingWithBot;
 	}
+
+	void setStatus(wstring stat, int time);
 
 	void reset()
 	{

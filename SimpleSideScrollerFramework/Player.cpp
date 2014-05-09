@@ -14,6 +14,7 @@ Player::Player()
 	outOfHealth = false;
 	immuneCounter = 66;
 	isImmune = false;
+	statusLoop = 0;
 
 }
 
@@ -29,13 +30,33 @@ void Player::initStatusSprite()
 	status = new AnimatedSprite();
 	status->setAlpha(255);
 	status->setSpriteType(game->getGSM()->getSpriteManager()->getSpriteType(12));
-	status->setCurrentState(L"ONFIRE");
+	status->setCurrentState(L"NONE");
 	status->setBody(this->getBody());
 }
 
 void Player::updateStatus()
 {
-	status->updateSprite();
+
+	if (statusLoop == 0)
+	{
+		status->setCurrentState(L"NONE");
+	}
+	else
+	{
+		status->updateSprite();
+		int size = status->getSpriteType()->getSequenceSize(status->getCurrentState());
+		int index = status->getFrameIndex();
+		if (status->getFrameIndex() == size - 2)
+		{
+			statusLoop--;
+		}
+	}
+}
+
+void Player::setStatus(wstring stat, int time)
+{
+	statusLoop = time;
+	status->setCurrentState(stat);
 }
 
 void Player::updateSprite()
