@@ -55,7 +55,7 @@ void LavaBoss::think(Game *game)
 		return;
 	}
 
-	if (this->getCurrentState() == L"SINK")
+	if (this->getCurrentState() == L"SINK" || this->getCurrentState() == L"RISE")
 	{
 		this->setCurrentState(L"RISE");
 		b2Vec2 bullPos;
@@ -70,6 +70,11 @@ void LavaBoss::think(Game *game)
 			}
 			active++;
 		}
+		if (this->getCurrentState() == L"RISE" && this->getFrameIndex() == 14)
+		{
+			this->setCurrentState(L"IDLE_FOWARD");
+		}
+		return;
 	}
 
 	if ((playerPos.x >= 17.538 || playerPos.x <= 14.387) && (playerPos.y < 28.49 || playerPos.y > 26.6256294))
