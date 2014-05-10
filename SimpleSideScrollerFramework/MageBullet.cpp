@@ -52,7 +52,7 @@ void MageBullet::decDetonateTime()
 Bullet*	MageBullet::clone(Game *game)
 {
 	MageBullet *clone = new MageBullet();
-	game->getGSM()->getPhyiscs()->initBullet(clone);
+	game->getGSM()->getPhyiscs()->initEnemyBullet(clone);
 	clone->setSpriteType(this->getSpriteType());
 	clone->setAlpha(255);
 	clone->detonateTime = 40;
