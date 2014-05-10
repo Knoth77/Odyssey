@@ -15,4 +15,5 @@
   <sprite_type>player_status</sprite_type>
   <sprite_type>electric_orb</sprite_type>
   <sprite_type>lava_burst</sprite_type>
+  <sprite_type>darkenergy</sprite_type>
 </sprite_type_list>

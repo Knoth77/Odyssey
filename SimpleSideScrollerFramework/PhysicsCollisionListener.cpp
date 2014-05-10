@@ -7,6 +7,7 @@
 #include "Fireball.h"
 #include "Laser.h"
 #include "Rocket.h"
+#include "LavaBoss.h"
 
 
 PhysicsCollisionListener::PhysicsCollisionListener()
@@ -45,7 +46,7 @@ void PhysicsCollisionListener::BeginContact(b2Contact *contact)
 				b->handleCollision(game);
 			}
 		}
-		//BUG
+		
 		else
 		{
 			b = dynamic_cast<Bullet*>(B);
@@ -184,16 +185,26 @@ void PhysicsCollisionListener::BeginContact(b2Contact *contact)
 				if (contact->GetFixtureA()->GetFilterData().categoryBits != phy->ENEMY_BULLET)
 				{
 					Bot *bot = static_cast<Bot*>(B);
-					bot->setHealth(bot->getHealth() - a->getPrimaryDamage());
-
-					bot->setJustShot(true);
-					a->handleCollision(game);
+					if (bot->getType() == L"LAVA_BOSS")
+					{
+						LavaBoss *lavaBoss = dynamic_cast<LavaBoss*>(B);
+						if (lavaBoss->getInvincible() == false)
+							lavaBoss->setHealth(bot->getHealth() - a->getPrimaryDamage());
+						a->handleCollision(game);
+					}
+					else
+					{
+						bot->setHealth(bot->getHealth() - a->getPrimaryDamage());
+						bot->setJustShot(true);
+						a->handleCollision(game);
+					}
 				}
 				else
 				{
 					a->handleCollision(game);
 					Player *p = static_cast<Player*>(B);
 					p->decPlayerHealth(a->getPrimaryDamage());
+					game->getHud()->setHealthWidth(game->getGSM()->getSpriteManager()->getPlayer()->getPlayerHealth(), game->getGSM()->getSpriteManager()->getPlayer()->getStartingHealth());
 				}
 
 			}
@@ -203,16 +214,27 @@ void PhysicsCollisionListener::BeginContact(b2Contact *contact)
 				{
 					Bot *bot = static_cast<Bot*>(A);
 
-					bot->setHealth(bot->getHealth() - b->getPrimaryDamage());
+					if (bot->getType() == L"LAVA_BOSS")
+					{
+						LavaBoss *lavaBoss = dynamic_cast<LavaBoss*>(A);
+						if (lavaBoss->getInvincible() == false)
+							lavaBoss->setHealth(bot->getHealth() - b->getPrimaryDamage());
+						b->handleCollision(game);
+					}
+					else
+					{
+						bot->setHealth(bot->getHealth() - b->getPrimaryDamage());
 
-					bot->setJustShot(true);
-					b->handleCollision(game);
+						bot->setJustShot(true);
+						b->handleCollision(game);
+					}
 				}
 				else
 				{
 					b->handleCollision(game);
 					Player *p = static_cast<Player*>(A);
 					p->decPlayerHealth(b->getPrimaryDamage());
+					game->getHud()->setHealthWidth(game->getGSM()->getSpriteManager()->getPlayer()->getPlayerHealth(), game->getGSM()->getSpriteManager()->getPlayer()->getStartingHealth());
 				}
 
 			}

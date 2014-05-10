@@ -320,7 +320,7 @@ void physicsManager::initMageBoss(Bot *bot, int bX, int bY, int aR)
 	fixtureDef.shape = &shape;
 	fixtureDef.density = 1000.0f;
 	fixtureDef.filter.categoryBits = collisionCatagory::ENEMY;
-	uint16 mask = collisionCatagory::WALL | collisionCatagory::PLAYER | collisionCatagory::PLAYER_BULLET | collisionCatagory::ENEMY;
+	uint16 mask = collisionCatagory::WALL | collisionCatagory::PLAYER | collisionCatagory::PLAYER_BULLET;
 	fixtureDef.filter.maskBits = mask;
 
 	myBodyDef.position.Set(0, 0);

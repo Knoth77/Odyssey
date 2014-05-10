@@ -16,6 +16,7 @@ LavaBoss::LavaBoss()
 	type = L"LAVA_BOSS";
 	lavaBurstCooldown = 0;
 	sinkCooldown = 40;
+	invincible = false;
 }
 
 
@@ -38,7 +39,7 @@ void LavaBoss::think(Game *game)
 	if ((health >= 350 && health <= 450) && sinkCooldown <= 400)
 	{
 		this->setCurrentState(L"SINK");
-
+		this->setInvincible(true);
 		if (lavaBurstCooldown <= 0)
 		{
 			this->setSelectedGun(LAVA_BURST);
@@ -50,6 +51,7 @@ void LavaBoss::think(Game *game)
 			game->getGSM()->getSpriteManager()->addActiveBullet(bullet);
 			lavaBurstCooldown = 40;
 		}
+		
 		lavaBurstCooldown--;
 		sinkCooldown++;
 		return;
@@ -73,6 +75,7 @@ void LavaBoss::think(Game *game)
 		if (this->getCurrentState() == L"RISE" && this->getFrameIndex() == 14)
 		{
 			this->setCurrentState(L"IDLE_FOWARD");
+			this->setInvincible(false);
 		}
 		return;
 	}
