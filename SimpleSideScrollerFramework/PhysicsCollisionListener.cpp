@@ -46,7 +46,7 @@ void PhysicsCollisionListener::BeginContact(b2Contact *contact)
 				b->handleCollision(game);
 			}
 		}
-		//BUG
+		
 		else
 		{
 			b = dynamic_cast<Bullet*>(B);
@@ -204,6 +204,7 @@ void PhysicsCollisionListener::BeginContact(b2Contact *contact)
 					a->handleCollision(game);
 					Player *p = static_cast<Player*>(B);
 					p->decPlayerHealth(a->getPrimaryDamage());
+					game->getHud()->setHealthWidth(game->getGSM()->getSpriteManager()->getPlayer()->getPlayerHealth(), game->getGSM()->getSpriteManager()->getPlayer()->getStartingHealth());
 				}
 
 			}
@@ -232,6 +233,7 @@ void PhysicsCollisionListener::BeginContact(b2Contact *contact)
 					b->handleCollision(game);
 					Player *p = static_cast<Player*>(A);
 					p->decPlayerHealth(b->getPrimaryDamage());
+					game->getHud()->setHealthWidth(game->getGSM()->getSpriteManager()->getPlayer()->getPlayerHealth(), game->getGSM()->getSpriteManager()->getPlayer()->getStartingHealth());
 				}
 
 			}

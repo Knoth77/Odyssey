@@ -121,6 +121,7 @@ Effect* EffectRecycler::retrieveEffect(Game *game, wstring EffectType)
 		// NOW GET THE LAST ELEMENT
 		Effect* EffectToReturn = EffectsOfTypeWeNeed->back();
 		EffectsOfTypeWeNeed->pop_back();
+		EffectToReturn->reset();
 		return EffectToReturn;
 	}
 }

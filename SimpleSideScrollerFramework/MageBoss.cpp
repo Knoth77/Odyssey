@@ -181,7 +181,7 @@ void MageBoss::think(Game *game)
 					bullet->setCurrentState(L"PRIMARY_FIRE");
 					game->getGSM()->getPhyiscs()->activateEnemyBullet(bullet, this->getBody()->GetPosition().x, this->getBody()->GetPosition().y);
 					game->getGSM()->getSpriteManager()->addActiveBullet(bullet);
-					this->setFireCooldown(15);
+					this->setFireCooldown(5);
 				}
 				else
 				{
@@ -220,7 +220,9 @@ void MageBoss::think(Game *game)
 				if (this->getBulletCooldown() <= 0)
 				{
 					this->setSelectedGun(MAGE_BULLET);
-					Bullet *mageBullet = game->getGSM()->getSpriteManager()->getBulletRecycler()->retrieveBullet(game, L"MAGE_BULLET");
+					Bullet *b = game->getGSM()->getSpriteManager()->getBulletRecycler()->retrieveBullet(game, L"MAGE_BULLET");
+					MageBullet *mageBullet = dynamic_cast<MageBullet*>(b);
+					mageBullet->reset();
 					//game->getAudio()->playSound(L"data\\sounds\\laser_pro.wav", false);
 					//Bullet *bullet = game->getGSM()->getSpriteManager()->getBulletRecycler()->retrieveBullet(game, L"MAGE_BULLET");
 					mageBullet->setDamageType('P');
@@ -235,7 +237,7 @@ void MageBoss::think(Game *game)
 				{
 					this->decBulletCooldown();
 				}
-				if (fired == true)
+				/*if (fired == true)
 				{
 					if (bulletFire == 0)
 					{
@@ -255,7 +257,7 @@ void MageBoss::think(Game *game)
 					}
 					else
 						bulletFire--;
-				}
+				}*/
 
 				if (this->getFireCooldown() <= 0)
 				{
@@ -266,7 +268,7 @@ void MageBoss::think(Game *game)
 					fireBall->setCurrentState(L"PRIMARY_FIRE");
 					game->getGSM()->getPhyiscs()->activateEnemyBullet(fireBall, this->getBody()->GetPosition().x, this->getBody()->GetPosition().y);
 					game->getGSM()->getSpriteManager()->addActiveBullet(fireBall);
-					this->setFireCooldown(15);
+					this->setFireCooldown(5);
 				}
 				else
 				{

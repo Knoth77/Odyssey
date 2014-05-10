@@ -246,6 +246,9 @@
     <ClCompile Include="LavaBurst.cpp">
       <Filter>src\sssf\gsm\sprite\projectiles</Filter>
     </ClCompile>
+    <ClCompile Include="DarkEnergyEffect.cpp">
+      <Filter>src\sssf\gsm\sprite\effects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\sssf_VS\targetver.h">
@@ -449,6 +452,9 @@
     </ClInclude>
     <ClInclude Include="LavaBurst.h">
       <Filter>src\sssf\gsm\sprite\projectiles</Filter>
+    </ClInclude>
+    <ClInclude Include="DarkEnergyEffect.h">
+      <Filter>src\sssf\gsm\sprite\effects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

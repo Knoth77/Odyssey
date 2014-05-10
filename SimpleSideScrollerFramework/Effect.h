@@ -19,6 +19,7 @@ public:
 	{
 		return type;
 	}
+	void reset();
 
 	virtual Effect* clone(Game *game) = 0;
 };

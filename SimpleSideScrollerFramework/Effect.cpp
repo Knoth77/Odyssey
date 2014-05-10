@@ -11,6 +11,12 @@ Effect::~Effect()
 {
 }
 
+void Effect::reset()
+{
+	this->animationCounter = 0;
+	this->frameIndex = 0;
+}
+
 void Effect::update()
 {
 	AnimatedSprite::updateSprite();

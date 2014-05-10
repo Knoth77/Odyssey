@@ -29,6 +29,7 @@
 #include "../SimpleSideScrollerFramework/src/sssf/gui/GameGUI.h"
 #include "../SimpleSideScrollerFramework/src/sssf/gui/ScreenGUI.h"
 #include "../SimpleSideScrollerFramework/src/sssf/gui/SplashScreenGUI.h"
+#include "../../../../MageBullet.h"
 
 /*
 	addSpriteToRenderList - This method checks to see if the sprite
@@ -419,6 +420,15 @@ void SpriteManager::update(Game *game)
 					}
 					else if (bullet->getBody()->IsActive())
 					{
+
+						MageBullet *b = dynamic_cast<MageBullet*>(bullet);
+						if (b != 0)
+						{
+							b->decDetonateTime();
+							if (b->getDetonateTime() <= 0)
+								b->detonate(game);
+						}
+
 						bullet->update();
 						bulletsIt++;
 					}

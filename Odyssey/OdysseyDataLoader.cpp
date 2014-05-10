@@ -28,6 +28,7 @@
 #include "Fireball.h"
 #include "MageBullet.h"
 #include "LavaBurst.h"
+#include "DarkEnergyEffect.h"
 
 // GAME OBJECT INCLUDES
 
@@ -283,6 +284,7 @@ void OdysseyDataLoader::loadWorld(Game *game, wstring levelInitFile)
 	AnimatedSpriteType *acidSS = spriteManager->getSpriteType(11);
 	AnimatedSpriteType *test = spriteManager->getSpriteType(12);
 	AnimatedSpriteType *lavaBurstSS = spriteManager->getSpriteType(14);
+	AnimatedSpriteType *darkenergySS = spriteManager->getSpriteType(15);
 
 	ExplosionEffect *sampleExplosion = new ExplosionEffect();
 	sampleExplosion->setSpriteType(explosion);
@@ -291,6 +293,14 @@ void OdysseyDataLoader::loadWorld(Game *game, wstring levelInitFile)
 
 	effectRecycler->registerEffectType(L"EXPLOSION", sampleExplosion);
 	effectRecycler->initRecyclableEffects(game, L"EXPLOSION", 40);
+
+	DarkEnergyEffect *sampleDE = new DarkEnergyEffect();
+	sampleDE->setSpriteType(darkenergySS);
+	sampleDE->setAlpha(255);
+	sampleDE->setCurrentState(L"IDLE");
+
+	effectRecycler->registerEffectType(L"DARKENERGY", sampleDE);
+	effectRecycler->initRecyclableEffects(game, L"DARKENERGY", 40);
 
 	Laser *sampleLaser = new Laser();
 	
