@@ -1,13 +1,13 @@
-playerStartX = 128
-playerStartY = 3072
+playerStartX = 2000
+playerStartY = 2000
  
  
 
  
  botTypes = {
  
- 
-MAGE_BOSS = {bot1={x=2240,y=2240}}				
+ SKULL_BOT = {bot1={x=700,y=700}}
+--MAGE_BOSS = {bot1={x=400,y=400}}				
  --RANGE_BOT = {bot1={x=40,y=50},bot2={x=140,y=150}}
  
  }

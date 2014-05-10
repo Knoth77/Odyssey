@@ -46,6 +46,13 @@ static const wstring	W_LEVEL_TWO_SELECT3 = L"data/img/gui/buttons/level1/planet1
 static const wstring	W_LEVEL_TWO_SELECT4 = L"data/img/gui/buttons/level1/planet1_selected4.png";
 static const wstring	W_LEVEL_TWO_SELECT5 = L"data/img/gui/buttons/level1/planet1_selected5.png";
 
+static const wstring	W_LEVEL_THREE_NORMAL = L"data/img/gui/buttons/level1/planet1.png";
+static const wstring	W_LEVEL_THREE_SELECT1 = L"data/img/gui/buttons/level1/planet1_selected1.png";
+static const wstring	W_LEVEL_THREE_SELECT2 = L"data/img/gui/buttons/level1/planet1_selected2.png";
+static const wstring	W_LEVEL_THREE_SELECT3 = L"data/img/gui/buttons/level1/planet1_selected3.png";
+static const wstring	W_LEVEL_THREE_SELECT4 = L"data/img/gui/buttons/level1/planet1_selected4.png";
+static const wstring	W_LEVEL_THREE_SELECT5 = L"data/img/gui/buttons/level1/planet1_selected5.png";
+
 static const wstring	W_MELEE_BOT = L"MELEE_BOT";
 static const wstring	W_SKULL_BOT = L"SKULL_BOT";
 static const wstring	W_SPIDER_BOT = L"SPIDER_BOT";
@@ -88,6 +95,11 @@ static const wstring	W_LEVEL_2_COMMAND = L"Go To Level 2";
 static const wstring	W_LEVEL_2_DIR = L"data/levels/LevelTwo/";
 static const wstring	W_LEVEL_2_NAME = L"LevelTwo.tmx";
 static const string		LEVEL_2_LUA_PATH = "data/scripts/Level2.lua";
+
+static const wstring	W_LEVEL_3_COMMAND = L"Go To Level 3";
+static const wstring	W_LEVEL_3_DIR = L"data/levels/LevelThree/";
+static const wstring	W_LEVEL_3_NAME = L"LevelThree.tmx";
+static const string		LEVEL_3_LUA_PATH = "data/scripts/Level3.lua";
 
 static const float		MAX_VIEWPORT_AXIS_VELOCITY = 20.0f;
 static const wstring	IDLE(L"IDLE");

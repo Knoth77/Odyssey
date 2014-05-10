@@ -34,4 +34,13 @@ void OdysseyButtonEventHandler::handleButtonEvents(Game *game, wstring command)
 		game->getAudio()->stopAllAudio();
 		game->getAudio()->playSound(W_LEVEL_TWO_MUSIC_PATH, true);
 	}
+	if (command.compare(W_LEVEL_3_COMMAND) == 0)
+	{
+		game->setCurrentLevelFileName(W_LEVEL_3_NAME);
+		game->getAudio()->playSound(L"data\\sounds\\soundeff1.wav", false);
+		game->getAudio()->stopLoopingAudio();
+		game->startGame();
+		game->getAudio()->stopAllAudio();
+		game->getAudio()->playSound(W_LEVEL_TWO_MUSIC_PATH, true);
+	}
 }

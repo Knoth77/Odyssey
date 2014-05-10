@@ -200,6 +200,8 @@ void OdysseyDataLoader::loadWorld(Game *game, wstring levelInitFile)
 		tmxMapImporter.loadWorld(game, W_LEVEL_1_DIR, W_LEVEL_1_NAME);
 	else if (game->getCurrentLevelFileName() == W_LEVEL_2_NAME)
 		tmxMapImporter.loadWorld(game, W_LEVEL_2_DIR, W_LEVEL_2_NAME);
+	else if (game->getCurrentLevelFileName() == W_LEVEL_3_NAME)
+		tmxMapImporter.loadWorld(game, W_LEVEL_3_DIR, W_LEVEL_3_NAME);
 
 	game->getGSM()->getPhyiscs()->setGame(game);
 	game->getGSM()->getPhyiscs()->registerGameToListener();
@@ -357,7 +359,7 @@ void OdysseyDataLoader::loadWorld(Game *game, wstring levelInitFile)
 
 }
 
-void OdysseyDataLoader::loadBotsFromLua(wstring levelName,Game *game)
+void OdysseyDataLoader::loadBotsFromLua(wstring levelName, Game *game)
 {
 
 
@@ -394,7 +396,7 @@ void OdysseyDataLoader::loadBotsFromLua(wstring levelName,Game *game)
 				SkullBot *sampleSkullBot = new SkullBot();
 
 				sampleSkullBot->setSpriteType(botSpriteType);
-				game->getGSM()->getPhyiscs()->initMeleeBot(sampleSkullBot,32,32,25);
+				game->getGSM()->getPhyiscs()->initMeleeBot(sampleSkullBot, 32, 32, 25);
 				sampleSkullBot->setHealth(100);
 
 				recycler->registerBotType(W_SKULL_BOT, sampleSkullBot);
@@ -417,9 +419,9 @@ void OdysseyDataLoader::loadBotsFromLua(wstring levelName,Game *game)
 			{
 				botSpriteType = spriteManager->getSpriteType(7);
 				LavaBoss *sampleLavaBoss = new LavaBoss();
-				
+
 				sampleLavaBoss->setSpriteType(botSpriteType);
-				game->getGSM()->getPhyiscs()->initLavaBoss(sampleLavaBoss,192,234,50); // CHANGE VALUES LATER 
+				game->getGSM()->getPhyiscs()->initLavaBoss(sampleLavaBoss, 192, 234, 50); // CHANGE VALUES LATER 
 				sampleLavaBoss->setHealth(500);
 
 				recycler->registerBotType(W_LAVA_BOSS, sampleLavaBoss);
@@ -439,7 +441,7 @@ void OdysseyDataLoader::loadBotsFromLua(wstring levelName,Game *game)
 				recycler->initRecyclableBots(game, W_MAGE_BOSS, 2);
 			}
 
-			
+
 
 			for (LuaTableIterator it2(botType); it2; it2.Next())
 			{
@@ -451,8 +453,8 @@ void OdysseyDataLoader::loadBotsFromLua(wstring levelName,Game *game)
 
 
 				Bot *bot = recycler->retrieveBot(game, bTypeW);
-				
-				if(bTypeW == W_SKULL_BOT)
+
+				if (bTypeW == W_SKULL_BOT)
 				{
 					bot->setSpriteType(botSpriteType);
 					bot->setAlpha(255);
@@ -472,14 +474,14 @@ void OdysseyDataLoader::loadBotsFromLua(wstring levelName,Game *game)
 					bot->setCurrentState(L"IDLE");
 					SpiderBot *testBot = dynamic_cast<SpiderBot*>(bot);
 					spriteManager->addBot(testBot);
-					game->getGSM()->getPhyiscs()->activateBot(testBot, x, y);	
+					game->getGSM()->getPhyiscs()->activateBot(testBot, x, y);
 					if (position.GetByName("m").IsConvertibleToInteger())
 						testBot->changeMovementType(position.GetByName("m").GetInteger());
-					
+
 				}
 
-				 if (bTypeW == W_LAVA_BOSS)
-				 {
+				if (bTypeW == W_LAVA_BOSS)
+				{
 					bot->setSpriteType(botSpriteType);
 					bot->setAlpha(255);
 					bot->setCurrentState(L"IDLE_FOWARD");
@@ -490,22 +492,22 @@ void OdysseyDataLoader::loadBotsFromLua(wstring levelName,Game *game)
 						testBot->changeMovementType(position.GetByName("m").GetInteger());
 				}
 
-				 if (bTypeW == W_MAGE_BOSS)
-				 {
-					 bot->setSpriteType(botSpriteType);
-					 bot->setAlpha(255);
-					 bot->setCurrentState(L"IDLE");
-					 MageBoss *testBot = dynamic_cast<MageBoss *>(bot);
-					 testBot->registerGame(game);
-					 testBot->setRangeX(412);
-					 testBot->setRangeY(412);
-					 spriteManager->addBot(testBot);
-					 bot->setDefaultX(x);
-					 bot->setDefaultY(y);
-					 game->getGSM()->getPhyiscs()->activateBot(testBot, x, y);
-					 if (position.GetByName("m").IsConvertibleToInteger())
-						 testBot->changeMovementType(position.GetByName("m").GetInteger());
-				 }
+				if (bTypeW == W_MAGE_BOSS)
+				{
+					bot->setSpriteType(botSpriteType);
+					bot->setAlpha(255);
+					bot->setCurrentState(L"IDLE");
+					MageBoss *testBot = dynamic_cast<MageBoss *>(bot);
+					testBot->registerGame(game);
+					testBot->setRangeX(412);
+					testBot->setRangeY(412);
+					spriteManager->addBot(testBot);
+					bot->setDefaultX(x);
+					bot->setDefaultY(y);
+					game->getGSM()->getPhyiscs()->activateBot(testBot, x, y);
+					if (position.GetByName("m").IsConvertibleToInteger())
+						testBot->changeMovementType(position.GetByName("m").GetInteger());
+				}
 
 
 			}
@@ -523,6 +525,7 @@ void OdysseyDataLoader::loadBotsFromLua(wstring levelName,Game *game)
 		int playerY = pX.GetInteger();
 
 		gsm->getPhyiscs()->initPlayer(player, playerX, playerY);
+		gsm->getSpriteManager()->getPlayer()->initStatusSprite();
 
 		AnimatedSpriteType *botSpriteType = NULL;
 
@@ -540,7 +543,119 @@ void OdysseyDataLoader::loadBotsFromLua(wstring levelName,Game *game)
 				SkullBot *sampleSkullBot = new SkullBot();
 
 				sampleSkullBot->setSpriteType(botSpriteType);
-				game->getGSM()->getPhyiscs()->initMeleeBot(sampleSkullBot,32,32,25);
+				game->getGSM()->getPhyiscs()->initMeleeBot(sampleSkullBot, 32, 32, 25);
+				sampleSkullBot->setHealth(100);
+
+				recycler->registerBotType(W_SKULL_BOT, sampleSkullBot);
+				recycler->initRecyclableBots(game, W_SKULL_BOT, 13);
+
+			}
+
+			if (bTypeW == W_SPIDER_BOT)
+			{
+				botSpriteType = spriteManager->getSpriteType(6);
+				SpiderBot *sampleSpiderBot = new SpiderBot();
+				sampleSpiderBot->setSpriteType(botSpriteType);
+				game->getGSM()->getPhyiscs()->initMeleeBot(sampleSpiderBot, 64, 64, 60);
+				sampleSpiderBot->setHealth(200);
+
+				recycler->registerBotType(W_SPIDER_BOT, sampleSpiderBot);
+				recycler->initRecyclableBots(game, W_SPIDER_BOT, 13);
+			}
+
+			if (bTypeW == W_MAGE_BOSS)
+			{
+				botSpriteType = spriteManager->getSpriteType(8);
+				MageBoss *sampleMageBoss = new MageBoss();
+
+				sampleMageBoss->setSpriteType(botSpriteType);
+				game->getGSM()->getPhyiscs()->initMageBoss(sampleMageBoss, 84, 96, 50); // CHANGE VALUES LATER 
+				sampleMageBoss->setHealth(500);
+
+				recycler->registerBotType(W_MAGE_BOSS, sampleMageBoss);
+				recycler->initRecyclableBots(game, W_MAGE_BOSS, 2);
+			}
+
+
+
+			for (LuaTableIterator it2(botType); it2; it2.Next())
+			{
+				const char* key2 = it2.GetKey().GetString();
+				LuaObject position = botType.GetByName(key2);
+
+				int x = position.GetByName("x").GetInteger();
+				int y = position.GetByName("y").GetInteger();
+
+				Bot *bot = recycler->retrieveBot(game, bTypeW);
+
+				if (bTypeW == W_SKULL_BOT)
+				{
+					bot->setSpriteType(botSpriteType);
+					bot->setAlpha(255);
+					bot->setCurrentState(L"IDLE");
+					SkullBot *testBot = dynamic_cast<SkullBot*>(bot);
+					spriteManager->addBot(testBot);
+					game->getGSM()->getPhyiscs()->activateBot(testBot, x, y);
+					//testBot->setWalkTicks(30);
+				}
+
+				if (bTypeW == W_SPIDER_BOT)
+				{
+					bot->setSpriteType(botSpriteType);
+					bot->setAlpha(255);
+					bot->setCurrentState(L"IDLE");
+					SpiderBot *testBot = dynamic_cast<SpiderBot*>(bot);
+					spriteManager->addBot(testBot);
+					game->getGSM()->getPhyiscs()->activateBot(testBot, x, y);
+				}
+
+				if (bTypeW == W_MAGE_BOSS)
+				{
+					bot->setSpriteType(botSpriteType);
+					bot->setAlpha(255);
+					bot->setCurrentState(L"IDLE");
+					MageBoss *testBot = dynamic_cast<MageBoss *>(bot);
+					testBot->registerGame(game);
+					spriteManager->addBot(testBot);
+					testBot->setRangeX(412);
+					testBot->setRangeY(412);
+					bot->setDefaultX(x);
+					bot->setDefaultY(y);
+					game->getGSM()->getPhyiscs()->activateBot(testBot, x, y);
+				}
+			}
+		}
+
+	}
+	else if (levelName == W_LEVEL_3_NAME)
+	{
+		int result = luaPState->DoFile(LEVEL_3_LUA_PATH.c_str());
+		LuaObject botTable = luaPState->GetGlobal("botTypes");
+		LuaObject pX = luaPState->GetGlobal("playerStartX");
+		LuaObject pY = luaPState->GetGlobal("playerStartY");
+		int playerX = pX.GetInteger();
+		int playerY = pX.GetInteger();
+
+		gsm->getPhyiscs()->initPlayer(player, playerX, playerY);
+		gsm->getSpriteManager()->getPlayer()->initStatusSprite();
+
+		AnimatedSpriteType *botSpriteType = NULL;
+
+		for (LuaTableIterator it(botTable); it; it.Next())
+		{
+			const char* key = it.GetKey().GetString();
+			LuaObject botType = botTable.GetByName(key);
+
+			string bType(key);
+			wstring bTypeW(bType.begin(), bType.end());
+
+			if (bTypeW == W_SKULL_BOT)
+			{
+				botSpriteType = spriteManager->getSpriteType(3);
+				SkullBot *sampleSkullBot = new SkullBot();
+
+				sampleSkullBot->setSpriteType(botSpriteType);
+				game->getGSM()->getPhyiscs()->initMeleeBot(sampleSkullBot, 32, 32, 25);
 				sampleSkullBot->setHealth(100);
 
 				recycler->registerBotType(W_SKULL_BOT, sampleSkullBot);
@@ -624,21 +739,19 @@ void OdysseyDataLoader::loadBotsFromLua(wstring levelName,Game *game)
 		}
 
 
+		//Hard coded movement patterns
+		/*list<Bot*>::iterator botIterator;
+		botIterator = game->getGSM()->getSpriteManager()->getBotsIterator();
+		Bot *bot = (*botIterator);
+		SkullBot* skBot = dynamic_cast<SkullBot*>(bot);
+		skBot->changeMovementType(SimpleMovement::LINEAR_HORIZONTAL);
+		botIterator++;
+		bot = (*botIterator);
+		skBot = dynamic_cast<SkullBot*>(bot);
+		skBot->changeMovementType(SimpleMovement::LINEAR_VERTICAL);*/
+
 	}
-
-	//Hard coded movement patterns
-	/*list<Bot*>::iterator botIterator;	
-	botIterator = game->getGSM()->getSpriteManager()->getBotsIterator();
-	Bot *bot = (*botIterator);
-	SkullBot* skBot = dynamic_cast<SkullBot*>(bot);
-	skBot->changeMovementType(SimpleMovement::LINEAR_HORIZONTAL);
-	botIterator++;
-	bot = (*botIterator);
-	skBot = dynamic_cast<SkullBot*>(bot);
-	skBot->changeMovementType(SimpleMovement::LINEAR_VERTICAL);*/
-
 }
-
 // THESE ARE HARD-CODED EXAMPLES OF GUI DATA LOADING
 void OdysseyDataLoader::hardCodedLoadGUIExample(Game *game)
 {
@@ -898,6 +1011,19 @@ void OdysseyDataLoader::initLevelSelectScreen(Game *game, GameGUI *gui, DirectXT
 
 	buttonToAdd = new Button();
 	buttonToAdd->initButton(planet2Normal, ids2, 5, 500, 500, 0, 256, 300, 300, true, W_LEVEL_2_COMMAND);
+	levelSelectGUI->addButton(buttonToAdd);
+
+	unsigned int planet3Normal = guiTextureManager->loadTexture(W_LEVEL_THREE_NORMAL);
+	unsigned int planet3Select1 = guiTextureManager->loadTexture(W_LEVEL_THREE_SELECT1);
+	unsigned int planet3Select2 = guiTextureManager->loadTexture(W_LEVEL_THREE_SELECT2);
+	unsigned int planet3Select3 = guiTextureManager->loadTexture(W_LEVEL_THREE_SELECT3);
+	unsigned int planet3Select4 = guiTextureManager->loadTexture(W_LEVEL_THREE_SELECT4);
+	unsigned int planet3Select5 = guiTextureManager->loadTexture(W_LEVEL_THREE_SELECT5);
+
+	int ids3[5] = { planet3Select1, planet3Select2, planet3Select3, planet3Select4, planet3Select5 };
+
+	buttonToAdd = new Button();
+	buttonToAdd->initButton(planet2Normal, ids3, 5, 700, 10, 0, 256, 300, 300, true, W_LEVEL_3_COMMAND);
 	levelSelectGUI->addButton(buttonToAdd);
 
 
