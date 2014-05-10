@@ -223,7 +223,6 @@ void PhysicsCollisionListener::BeginContact(b2Contact *contact)
 					else
 					{
 						bot->setHealth(bot->getHealth() - b->getPrimaryDamage());
-
 						bot->setJustShot(true);
 						b->handleCollision(game);
 					}
