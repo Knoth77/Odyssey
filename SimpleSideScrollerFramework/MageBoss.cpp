@@ -181,7 +181,7 @@ void MageBoss::think(Game *game)
 					bullet->setCurrentState(L"PRIMARY_FIRE");
 					game->getGSM()->getPhyiscs()->activateEnemyBullet(bullet, this->getBody()->GetPosition().x, this->getBody()->GetPosition().y);
 					game->getGSM()->getSpriteManager()->addActiveBullet(bullet);
-					this->setFireCooldown(15);
+					this->setFireCooldown(5);
 				}
 				else
 				{
@@ -266,7 +266,7 @@ void MageBoss::think(Game *game)
 					fireBall->setCurrentState(L"PRIMARY_FIRE");
 					game->getGSM()->getPhyiscs()->activateEnemyBullet(fireBall, this->getBody()->GetPosition().x, this->getBody()->GetPosition().y);
 					game->getGSM()->getSpriteManager()->addActiveBullet(fireBall);
-					this->setFireCooldown(15);
+					this->setFireCooldown(5);
 				}
 				else
 				{
