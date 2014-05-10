@@ -400,7 +400,7 @@ void physicsManager::initMeleeBot(Bot *bot, int bX, int bY, int aR)
 	detectFixture.shape = &detector;
 	detectFixture.isSensor = true;
 	detectFixture.filter.categoryBits = collisionCatagory::BOT_DETECTOR;
-	uint16 mask1 = collisionCatagory::PLAYER | collisionCatagory::PLAYER_BULLET;
+	uint16 mask1 = collisionCatagory::PLAYER;
 	detectFixture.filter.maskBits = mask1;
 
 
@@ -461,7 +461,7 @@ void physicsManager::initPlayer(Player *player, float x, float y)
 
 	fixtureDef.filter.categoryBits = collisionCatagory::PLAYER;
 
-	uint16 mask = collisionCatagory::ENEMY | collisionCatagory::WALL | collisionCatagory::ENEMY_BULLET;
+	uint16 mask = collisionCatagory::ENEMY | collisionCatagory::WALL | collisionCatagory::ENEMY_BULLET | collisionCatagory::BOT_DAMAGE_RADIUS | collisionCatagory::BOT_DETECTOR;
 
 	fixtureDef.filter.maskBits = mask;
 
@@ -554,6 +554,8 @@ void physicsManager::gameWorldStep()
 	{
 		playerV.y = -2;
 	}
+	
+
 
 	//if (p->isCollidingWithBot())
 	//	playerV = playerBody->GetLinearVelocity();
@@ -806,8 +808,8 @@ void physicsManager::activateEnemyBullet(Bullet *bullet, float x, float y)
 		bullet->getBody()->SetLinearVelocity(vel);
 
 		b2Vec2 newPos;
-		newPos.x = (playerBody->GetPosition().x) - (33 * pixelScaling);
-		newPos.y = (playerBody->GetPosition().y) - (33 * pixelScaling);
+		newPos.x = (playerBody->GetPosition().x) + (x * pixelScaling);
+		newPos.y = (playerBody->GetPosition().y) + (y * pixelScaling);
 
 		bullet->getBody()->SetTransform(newPos, bullet->getBody()->GetAngle());
 

@@ -317,28 +317,56 @@ void OdysseyKeyEventHandler::handleKeyEvents(Game *game)
 		if (viewportMoved)
 			viewport->moveViewport((int)floor(viewportVx + 0.5f), (int)floor(viewportVy + 0.5f), game->getGSM()->getWorld()->getWorldWidth(), game->getGSM()->getWorld()->getWorldHeight());
 
+		bool move = false;
+
 		if (input->isKeyDown(W_KEY))
 		{
 			game->getGSM()->getPhyiscs()->movePlayerDown();
 			game->getGSM()->getSpriteManager()->getPlayer()->setCurrentState(L"WALKING_NORTH");
+			move = true;
 		}
-		else if (input->isKeyDown(A_KEY))
+		if (input->isKeyDown(A_KEY))
 		{
 			game->getGSM()->getPhyiscs()->movePlayerLeft();
 			game->getGSM()->getSpriteManager()->getPlayer()->setCurrentState(L"WALKING_WEST_GREEN");
+			move = true;
 		}
-		else if (input->isKeyDown(S_KEY))
+		if (input->isKeyDown(S_KEY))
 		{
 			game->getGSM()->getPhyiscs()->movePlayerUp();
 			game->getGSM()->getSpriteManager()->getPlayer()->setCurrentState(L"WALKING_SOUTH_GREEN");
+			move = true;
 		}
-		else if (input->isKeyDown(D_KEY))
+		if (input->isKeyDown(D_KEY))
 		{
 			game->getGSM()->getPhyiscs()->movePlayerRight();
 			game->getGSM()->getSpriteManager()->getPlayer()->setCurrentState(L"WALKING_EAST_GREEN");
-			
+			move = true;
 		}
-		else
+
+
+		if (input->isKeyDown(W_KEY) && input->isKeyDown(D_KEY))
+		{
+			if (game->getGSM()->getSpriteManager()->getPlayer()->getCurrentState() != L"WALKING_EAST_GREEN")
+			game->getGSM()->getSpriteManager()->getPlayer()->setCurrentState(L"WALKING_EAST_GREEN");
+		}
+		if (input->isKeyDown(W_KEY) && input->isKeyDown(A_KEY))
+		{
+			if (game->getGSM()->getSpriteManager()->getPlayer()->getCurrentState() != L"WALKING_WEST_GREEN")
+			game->getGSM()->getSpriteManager()->getPlayer()->setCurrentState(L"WALKING_WEST_GREEN");
+		}
+		if (input->isKeyDown(S_KEY) && input->isKeyDown(D_KEY))
+		{
+			if (game->getGSM()->getSpriteManager()->getPlayer()->getCurrentState() != L"WALKING_EAST_GREEN")
+			game->getGSM()->getSpriteManager()->getPlayer()->setCurrentState(L"WALKING_EAST_GREEN");
+		}
+		if (input->isKeyDown(S_KEY) && input->isKeyDown(A_KEY))
+		{
+			if (game->getGSM()->getSpriteManager()->getPlayer()->getCurrentState() != L"WALKING_WEST_GREEN")
+			game->getGSM()->getSpriteManager()->getPlayer()->setCurrentState(L"WALKING_WEST_GREEN");
+		}
+		
+		if (!move)
 			game->getGSM()->getSpriteManager()->getPlayer()->setCurrentState(L"IDLE_GREEN");
 
 

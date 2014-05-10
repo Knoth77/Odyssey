@@ -18,6 +18,7 @@
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="BulletRecycler.cpp" />
     <ClCompile Include="DarkEnergyEffect.cpp" />
+    <ClCompile Include="DarkEnergyRayCast.cpp" />
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="EffectRecycler.cpp" />
     <ClCompile Include="ExplosionEffect.cpp" />
@@ -75,6 +76,7 @@
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="BulletRecycler.h" />
     <ClInclude Include="DarkEnergyEffect.h" />
+    <ClInclude Include="DarkEnergyRayCast.h" />
     <ClInclude Include="Effect.h" />
     <ClInclude Include="EffectRecycler.h" />
     <ClInclude Include="ExplosionEffect.h" />

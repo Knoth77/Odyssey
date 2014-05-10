@@ -72,6 +72,7 @@ void Player::updateSprite()
 		playerHealth = playerStartingHealth;
 		playerLives--;
 		outOfHealth = false;
+		game->getHud()->setHealthWidth(playerHealth, playerStartingHealth);
 	}
 }
 

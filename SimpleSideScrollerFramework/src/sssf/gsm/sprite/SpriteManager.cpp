@@ -83,6 +83,12 @@ void SpriteManager::addSpriteToRenderList(AnimatedSprite *sprite,
 			x = 1532;
 			y = 2598;
 		}
+
+		if (sprite->getSpriteType() == this->getSpriteType(10))
+		{
+			x = x + 10;
+			y = y + 10;
+		}
 		
 	}
 
@@ -439,51 +445,7 @@ void SpriteManager::update(Game *game)
 			bulletsIt++;
 		}
 
-	//here
-	/*list<Bullet*>::iterator enemyBulletsIt;
-	enemyBulletsIt = activeEnemyBullets.begin();
 
-	while (enemyBulletsIt != activeEnemyBullets.end())
-	{
-		Bullet* bullet = (*enemyBulletsIt);
-		if (bullet->getBody() != NULL)
-		{
-			b2Vec2 bP = bullet->getBody()->GetPosition();
-			float32 bX = bP.x * 100;
-			float32 bY = bP.y * 100;
-			int viewX = (game->getGUI()->getViewport()->getViewportX());
-			int viewY = (game->getGUI()->getViewport()->getViewportY());
-			int viewH = game->getGUI()->getViewport()->getViewportHeight();
-			int viewW = game->getGUI()->getViewport()->getViewportWidth();
-
-			if ((bX < viewX || bY < viewY) || (bY >(viewY + viewH) || bX >(viewX + viewW)))
-			{
-				game->getGSM()->getPhyiscs()->deactivateBullet(bullet);
-				bulletRecycler.recycleBullet(bullet->getType(), bullet);
-				activeEnemyBullets.erase(enemyBulletsIt++);
-			}
-			else
-			{
-				if (bullet->hasCollided())
-				{
-					// THE BULLET IS NO LONGER AN ACTIVE BULLET SO RECYCLE IT
-					game->getGSM()->getPhyiscs()->deactivateBullet(bullet);
-					bulletRecycler.recycleBullet(bullet->getType(), bullet);
-					//	bullets.push_front(bullet);
-
-					activeEnemyBullets.erase(enemyBulletsIt++);
-				}
-				else if (bullet->getBody()->IsActive())
-				{
-					bullet->update();
-					enemyBulletsIt++;
-				}
-
-			}
-		}
-		else
-			enemyBulletsIt++;
-	}*/
 
 
 

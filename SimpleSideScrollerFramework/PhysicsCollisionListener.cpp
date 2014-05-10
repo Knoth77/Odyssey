@@ -123,8 +123,14 @@ void PhysicsCollisionListener::BeginContact(b2Contact *contact)
 		else
 		{
 
-			bool sensA = contact->GetFixtureA()->IsSensor();
+     		bool sensA = contact->GetFixtureA()->IsSensor();
 			bool sensB = contact->GetFixtureB()->IsSensor();
+
+			// FOR SOME REASONS BULLETS ARE COLLIDING SO THIS SHOULDNT HAPPEN
+			if (a != 0 && b != 0)
+			{
+				return;
+			}
 
 			if (sensA)
 			{

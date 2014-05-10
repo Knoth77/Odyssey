@@ -80,7 +80,7 @@ public:
 
 	void resetHud()
 	{
-		currentLivesBarState = 4;
+		currentLivesBarState = 3;
 		healthWidth = 300;
 		if (healthBar != NULL)
 			healthBar->width = 300;
