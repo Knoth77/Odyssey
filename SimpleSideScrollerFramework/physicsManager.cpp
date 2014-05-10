@@ -729,7 +729,7 @@ void physicsManager::initBullet(Bullet *bullet)
 	fixtureDef.isSensor = false;
 	fixtureDef.filter.categoryBits = collisionCatagory::PLAYER_BULLET;
 
-	uint16 mask = collisionCatagory::ENEMY | collisionCatagory::WALL;
+	uint16 mask = collisionCatagory::ENEMY | collisionCatagory::WALL | collisionCatagory::BOT_DODGE;
 
 	fixtureDef.filter.maskBits = mask;
 
