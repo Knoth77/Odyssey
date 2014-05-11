@@ -28,6 +28,8 @@ private:
 	bool playerMoveUp;
 	bool playerMoveDown;
 	bool viewportMoved;
+	bool lavaBossHealth;
+	bool lavaBossFight;
 
 	b2Body *playerBody;
 
@@ -112,7 +114,7 @@ public:
 	void initBullet(Bullet *sprite);
 
 	void initEnemyBullet(Bullet *sprite);
-
+	void initLavaBullet(Bullet *sprite);
 	void activateBullet(Bullet *sprite);
 	void activateEnemyBullet(Bullet *sprite, float x, float y);
 

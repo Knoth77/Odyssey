@@ -184,11 +184,12 @@ int AudioWrapper::playPCM(IXAudio2* audioEngine, WCHAR *path, bool infiniteLoop)
 			buffer.pAudioData = pbWaveData;
 			buffer.Flags = XAUDIO2_END_OF_STREAM;  // tell the source voice not to expect any data after this buffer
 			buffer.AudioBytes = cbWaveSize;
-
+			
 			if (infiniteLoop)
 			{
 				buffer.LoopCount = XAUDIO2_MAX_LOOP_COUNT;
 				loopingVoices.push_back(i);
+				sourceVoices[i]->SetVolume(0.45f);//half volume for music
 			}
 
 			sourceVoices[i]->SubmitSourceBuffer(&buffer);
@@ -219,6 +220,7 @@ int AudioWrapper::playPCM(IXAudio2* audioEngine, WCHAR *path, bool infiniteLoop)
 				{
 					buffer.LoopCount = XAUDIO2_MAX_LOOP_COUNT;
 					loopingVoices.push_back(i);
+
 				}
 
 				memoryFix.insert({ i, pbWaveData });

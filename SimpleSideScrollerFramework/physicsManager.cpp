@@ -43,6 +43,8 @@ void physicsManager::initGameWorld()
 	positionIterations = 3;
 	pixelScaling = 0.009765625;
 	viewportConverter = 3.102;
+	lavaBossHealth = true;
+	lavaBossFight = false;
 }
 
 void physicsManager::deleteSpriteBody(AnimatedSprite *sprite)
@@ -75,14 +77,14 @@ void physicsManager::clearGameWorld()
 
 		//{
 
-			gameWorld->DestroyBody(b);
-			counter++;
+		gameWorld->DestroyBody(b);
+		counter++;
 
 		//}
 	}
 
 	int c = counter;
-	
+
 }
 
 void physicsManager::registerGameToListener()
@@ -137,10 +139,10 @@ void physicsManager::initSpriteBodyForLevelSelect(AnimatedSprite *sprite, float 
 	myBodyDef.position.Set(x*pixelScaling, y*pixelScaling);
 
 	sprite->setBody(levelSelectWorld->CreateBody(&myBodyDef));
-	sprite->getBody()->ApplyForce(b2Vec2(-420, 405), sprite->getBody()->GetWorldCenter(),true);
+	sprite->getBody()->ApplyForce(b2Vec2(-420, 405), sprite->getBody()->GetWorldCenter(), true);
 	sprite->getBody()->CreateFixture(&fixtureDef);
 	sprite->getBody()->SetTransform(sprite->getBody()->GetPosition(), 220 * DEGTORAD);
-	
+
 }
 
 void physicsManager::initRangeBot(Bot *bot, int bX, int bY, int aR)
@@ -178,7 +180,7 @@ void physicsManager::initRangeBot(Bot *bot, int bX, int bY, int aR)
 	b2FixtureDef fixtureDef;
 	fixtureDef.shape = &shape;
 	fixtureDef.density = 1.0f;
-//	fixtureDef.isSensor = false;
+	//	fixtureDef.isSensor = false;
 	fixtureDef.filter.categoryBits = collisionCatagory::ENEMY;
 	uint16 mask = collisionCatagory::WALL | collisionCatagory::PLAYER | collisionCatagory::PLAYER_BULLET | collisionCatagory::ENEMY;
 	fixtureDef.filter.maskBits = mask;
@@ -256,7 +258,7 @@ void physicsManager::initMageOrb(AnimatedSprite *orb, float x, float y, Bot *m)
 		m_ropeDef.localAnchorB.SetZero();
 
 		m_rope = gameWorld->CreateJoint(&m_ropeDef);
-		
+
 	}
 }
 
@@ -426,7 +428,7 @@ void physicsManager::initMeleeBot(Bot *bot, int bX, int bY, int aR)
 	bot->getBody()->CreateFixture(&fixtureDef);
 	bot->getBody()->CreateFixture(&detectFixture);
 	bot->getBody()->CreateFixture(&damageFixture);
-	
+
 
 }
 
@@ -441,7 +443,7 @@ void physicsManager::deactivateBot(Bot *bot)
 
 void physicsManager::initPlayer(Player *player, float x, float y)
 {
-    playerMoveLeft = false;
+	playerMoveLeft = false;
 	playerMoveRight = false;
 	playerMoveUp = false;
 	playerMoveDown = false;
@@ -453,7 +455,7 @@ void physicsManager::initPlayer(Player *player, float x, float y)
 	myBodyDef.bullet = true;
 
 	b2PolygonShape shape;
-	shape.SetAsBox((32 * pixelScaling)/2, (32 * pixelScaling)/2);
+	shape.SetAsBox((32 * pixelScaling) / 2, (32 * pixelScaling) / 2);
 
 	b2FixtureDef fixtureDef;
 	fixtureDef.shape = &shape;
@@ -496,7 +498,7 @@ void physicsManager::levelSelectWorldStep()
 		//float x = b->GetLinearVelocity().x;
 		//float y = b->GetLinearVelocity().y;
 
-		
+
 
 	}
 }
@@ -527,11 +529,10 @@ void physicsManager::viewportM()
 }
 void physicsManager::gameWorldStep()
 {
-	
-	
+
+
 	b2Vec2 playerV = playerBody->GetLinearVelocity();
 	Viewport *viewport = game->getGUI()->getViewport();
-
 	AnimatedSprite *a = static_cast<AnimatedSprite*>(playerBody->GetUserData());
 	Player *p = dynamic_cast<Player*>(a);
 
@@ -554,7 +555,7 @@ void physicsManager::gameWorldStep()
 	{
 		playerV.y = -2;
 	}
-	
+
 
 
 	//if (p->isCollidingWithBot())
@@ -576,9 +577,97 @@ void physicsManager::gameWorldStep()
 	//b2Vec2 playerPos = game->getGSM()->getPhyiscs()->getPlayerBody()->GetPosition();
 	int playerX = (playerPos.x / pixelScaling) - viewport->getViewportX();
 	int playerY = (playerPos.y / pixelScaling) - viewport->getViewportY();
+	int realX = (playerPos.x / pixelScaling);
+	int realY = (playerPos.y / pixelScaling);
 	boolean outsideX;
 	boolean outsideY;
 
+	if (lavaBossHealth == true)
+	{
+		if ((realX >= 1440 && realX <= 1630) && (realY >= 2912 && realY <= 3168 && lavaBossFight == false))
+		{
+			playerBody->SetLinearVelocity(playerV);
+			list<Bot*>::iterator active = game->getGSM()->getSpriteManager()->getBotsIterator();
+			if (viewport->getScrollSpeedX() > 0)
+			{
+				while (active != game->getGSM()->getSpriteManager()->getEndOfBotsIterator())
+				{
+					Bot *b = (*active);
+					if (b->getType() == L"LAVA_BOSS")
+					{
+						b->setCurrentState(L"RISE");
+						if (b->getFrameIndex() == 14)
+						{
+							viewport->setScrollSpeedX(0);
+							viewport->moveViewport(0, 0, 3200, 3200);
+							lavaBossFight = true;
+						}
+						else
+						{
+							viewport->setScrollSpeedX(viewportConverter * -1);
+							viewport->moveViewport(viewportConverter * -1, 0, 3200, 3200);
+						}
+					}
+					active++;
+				}
+				return;
+			}
+			else if (viewport->getScrollSpeedX() < 0)
+			{
+				while (active != game->getGSM()->getSpriteManager()->getEndOfBotsIterator())
+				{
+					Bot *b = (*active);
+					if (b->getType() == L"LAVA_BOSS")
+					{
+						b->setCurrentState(L"RISE");
+						if (b->getFrameIndex() == 14)
+						{
+							viewport->setScrollSpeedX(0);
+							viewport->moveViewport(0, 0, 3200, 3200);
+							lavaBossFight = true;
+						}
+						else
+						{
+							viewport->setScrollSpeedX(viewportConverter * 1);
+							viewport->moveViewport(viewportConverter * 1, 0, 3200, 3200);
+						}
+					}
+					active++;
+				}
+				return;
+			}
+		}
+		else if (lavaBossFight == true)
+		{
+			playerBody->SetLinearVelocity(playerV);
+			gameWorld->Step(timeStep, velocityIterations, positionIterations);
+			gameWorld->ClearForces();
+			playerMoveLeft = false;
+			playerMoveRight = false;
+			playerMoveUp = false;
+			playerMoveDown = false;
+			viewportMoved = false;
+			mouseClicked = false;
+
+			list<Bot*>::iterator active = game->getGSM()->getSpriteManager()->getBotsIterator();
+			while (active != game->getGSM()->getSpriteManager()->getEndOfBotsIterator())
+			{
+				Bot *b = (*active);
+				if (b->getType() == L"LAVA_BOSS")
+				{
+					if (b->getCurrentState() == L"DEAD")
+					{
+						viewport->setScrollSpeedX(0);
+						viewport->moveViewport(0, 0, 3200, 3200);
+						lavaBossFight = false;
+					}
+				}
+				active++;
+			}
+
+			return;
+		}
+	}
 	if ((viewport->getViewportX() <= 0.0f || viewport->getViewportX() >= 3200))
 		outsideX = false;
 	else if (playerX >= 492 && playerX <= 532)
@@ -593,22 +682,9 @@ void physicsManager::gameWorldStep()
 	else
 		outsideY = true;
 
-	//if (outsideX == true)
-	//{
-	//	if (playerX <= 512 || playerX >= 517)
-	//	{
-	//		viewport->setScrollSpeedX(viewportConverter * playerBody->GetLinearVelocity().x);
-	//		viewportMoved = true;
-	//	}
-	//}
-	//else if (outsideY == true)
-	//{
-	//		viewport->setScrollSpeedX(viewportConverter * playerBody->GetLinearVelocity().y);
-	//		viewportMoved = true;
-	//}
 	if (viewport->getViewportX() <= 0.0f || viewport->getViewportX() >= 3200)
 	{
-		if (playerX >= 507 &&  playerX <=512)
+		if (playerX >= 507 && playerX <= 512)
 		{
 			if (game->getGSM()->getPhyiscs()->getPlayerBody()->GetLinearVelocity().x != 0)
 			{
@@ -619,18 +695,18 @@ void physicsManager::gameWorldStep()
 	}
 
 	else if (playerX >= 472 && playerX <= 552)
+	{
+		if (game->getGSM()->getPhyiscs()->getPlayerBody()->GetLinearVelocity().x != 0)
 		{
-			if (game->getGSM()->getPhyiscs()->getPlayerBody()->GetLinearVelocity().x != 0)
-			{
-				viewport->setScrollSpeedX(viewportConverter * playerBody->GetLinearVelocity().x);
-				viewportMoved = true;
-			}
-			
+			viewport->setScrollSpeedX(viewportConverter * playerBody->GetLinearVelocity().x);
+			viewportMoved = true;
 		}
-		else
-		{
-			viewport->setScrollSpeedX(0.0f);
-		}
+
+	}
+	else
+	{
+		viewport->setScrollSpeedX(0.0f);
+	}
 
 	if (viewport->getViewportY() <= 0.0f || viewport->getViewportY() >= 3200)
 	{
@@ -644,23 +720,23 @@ void physicsManager::gameWorldStep()
 		}
 	}
 	else if (playerY >= 344 && playerY <= 424)
+	{
+		if (game->getGSM()->getPhyiscs()->getPlayerBody()->GetLinearVelocity().y != 0)
 		{
-			if (game->getGSM()->getPhyiscs()->getPlayerBody()->GetLinearVelocity().y != 0)
-			{
-				viewport->setScrollSpeedY(viewportConverter * playerBody->GetLinearVelocity().y);
-				viewportMoved = true;
-			}
+			viewport->setScrollSpeedY(viewportConverter * playerBody->GetLinearVelocity().y);
+			viewportMoved = true;
 		}
-		else
-		{
-			viewport->setScrollSpeedY(0.0f);
-		}
+	}
+	else
+	{
+		viewport->setScrollSpeedY(0.0f);
+	}
 
 	b2Vec2 rot;
 	rot.x = (mouseLoc.x - playerBody->GetPosition().x);
 	rot.y = (mouseLoc.y - playerBody->GetPosition().y);
 	float angle = atan2f(rot.y, rot.x);
-	
+
 
 	playerBody->SetLinearVelocity(playerV);
 	if (game->getGSM()->getPhyiscs()->getPlayerBody()->GetLinearVelocity().x == 0)
@@ -669,7 +745,9 @@ void physicsManager::gameWorldStep()
 		viewport->setScrollSpeedY(0);
 
 	if (viewportMoved == true)
+	{
 		viewport->moveViewport(viewport->getScrollSpeedX(), viewport->getScrollSpeedY(), 3200, 3200);
+	}
 	else if (outsideX || outsideY)
 	{
 		if (playerX < 510)
@@ -696,9 +774,8 @@ void physicsManager::gameWorldStep()
 		game->getGSM()->goToDeathScreen();
 	}
 
-
-
-
+	/*if (playerBody->GetAngularVelocity() != 0)
+		playerBody->SetAngularVelocity(playerBody->GetAngularVelocity()/2);*/
 	gameWorld->Step(timeStep, velocityIterations, positionIterations);
 	gameWorld->ClearForces();
 	playerMoveLeft = false;
@@ -730,6 +807,43 @@ void physicsManager::initBullet(Bullet *bullet)
 	fixtureDef.filter.categoryBits = collisionCatagory::PLAYER_BULLET;
 
 	uint16 mask = collisionCatagory::ENEMY | collisionCatagory::WALL | collisionCatagory::BOT_DODGE;
+
+	fixtureDef.filter.maskBits = mask;
+
+	//myBodyDef.position.Set(x*pixelScaling, y*pixelScaling);
+
+	bullet->setBody(gameWorld->CreateBody(&myBodyDef));
+	b2Vec2 vel = bullet->getBody()->GetLinearVelocity();
+	vel.x = 0;
+	vel.y = 0;
+	bullet->getBody()->SetLinearVelocity(vel);
+	bullet->getBody()->CreateFixture(&fixtureDef);
+
+
+	//sprite->getBody()->SetTransform(sprite->getBody()->GetPosition(), 220 * DEGTORAD);
+}
+
+void physicsManager::initLavaBullet(Bullet *bullet)
+{
+	b2BodyDef myBodyDef;
+	myBodyDef.userData = bullet;
+	myBodyDef.type = b2_dynamicBody;
+	myBodyDef.fixedRotation = true;
+
+	myBodyDef.bullet = true;
+	myBodyDef.active = false;
+
+
+	b2PolygonShape shape;
+	shape.SetAsBox((75 * pixelScaling) / 2, (75 * pixelScaling) / 2);
+
+	b2FixtureDef fixtureDef;
+	fixtureDef.shape = &shape;
+	fixtureDef.density = 0.001f;
+	fixtureDef.isSensor = false;
+	fixtureDef.filter.categoryBits = collisionCatagory::ENEMY_BULLET;
+
+	uint16 mask = collisionCatagory::PLAYER | collisionCatagory::WALL;
 
 	fixtureDef.filter.maskBits = mask;
 
@@ -787,7 +901,7 @@ void physicsManager::activateEnemyBullet(Bullet *bullet, float x, float y)
 {
 	bullet->getBody()->SetActive(true);
 
-	
+
 
 	b2Vec2 posBoss;
 	posBoss.x = x;
@@ -824,7 +938,7 @@ void physicsManager::activateEnemyBullet(Bullet *bullet, float x, float y)
 		float angle = atan2f(vel.y, vel.x);
 		bullet->getBody()->SetLinearVelocity(vel);
 
-		
+
 
 		bullet->getBody()->SetTransform(playerBody->GetPosition(), angle);
 	}
@@ -844,36 +958,36 @@ void physicsManager::activateEnemyBullet(Bullet *bullet, float x, float y)
 
 void physicsManager::activateBullet(Bullet *bullet)
 {
-	
-		bullet->getBody()->SetActive(true);
 
-		// fix y
-		float xOffset = 1;
-		float yOffset = 1;
+	bullet->getBody()->SetActive(true);
 
-		if (clickedPoint.x < 0)
-			xOffset = xOffset*-1.0;
+	// fix y
+	float xOffset = 1;
+	float yOffset = 1;
 
-		if (clickedPoint.y < 0)
-			yOffset = yOffset*-1.0;
+	if (clickedPoint.x < 0)
+		xOffset = xOffset*-1.0;
 
-		b2Vec2 pos;
-		pos.x = playerBody->GetPosition().x * xOffset;
-		pos.y = playerBody->GetPosition().y * yOffset;
+	if (clickedPoint.y < 0)
+		yOffset = yOffset*-1.0;
 
-		bullet->getBody()->SetTransform(pos, 0.0);
+	b2Vec2 pos;
+	pos.x = playerBody->GetPosition().x * xOffset;
+	pos.y = playerBody->GetPosition().y * yOffset;
 
-		b2Vec2 vel = bullet->getBody()->GetLinearVelocity();
-		vel.x = (clickedPoint.x - playerBody->GetPosition().x);
-		vel.y = (clickedPoint.y - playerBody->GetPosition().y);
-		float angle = atan2f(vel.y, vel.x);
-		vel.Normalize();
-		vel *= bullet->getSpeed();
-		bullet->getBody()->SetLinearVelocity(vel);
+	bullet->getBody()->SetTransform(pos, 0.0);
+
+	b2Vec2 vel = bullet->getBody()->GetLinearVelocity();
+	vel.x = (clickedPoint.x - playerBody->GetPosition().x);
+	vel.y = (clickedPoint.y - playerBody->GetPosition().y);
+	float angle = atan2f(vel.y, vel.x);
+	vel.Normalize();
+	vel *= bullet->getSpeed();
+	bullet->getBody()->SetLinearVelocity(vel);
 
 
-		bullet->getBody()->SetTransform(bullet->getBody()->GetPosition(), angle);
-	
+	bullet->getBody()->SetTransform(bullet->getBody()->GetPosition(), angle);
+
 
 
 }
@@ -966,16 +1080,16 @@ void physicsManager::initTriangleWallForGame(b2Vec2 verts[], int32 count)
 
 	/*for (int i = 0; i < count; i++)
 	{
-		float x = verts[i].x;
-		float y = verts[i].y;
+	float x = verts[i].x;
+	float y = verts[i].y;
 
-		verts[i].x = x * pixelScaling;
-		verts[i].y = y * pixelScaling;
+	verts[i].x = x * pixelScaling;
+	verts[i].y = y * pixelScaling;
 	}*/
 
 	b2BodyDef myBodyDef;
 	myBodyDef.type = b2_staticBody;
-	
+
 	b2Vec2 vertices[3];
 	vertices[0].Set(0.0f, 0.0f);
 	vertices[1].Set(0.5f, 0.0f);
@@ -1022,8 +1136,8 @@ void physicsManager::initWallForGame(float x, float y)
 
 	myFixtureDef.filter.categoryBits = collisionCatagory::WALL;
 
-	
-	polygonShape.SetAsBox(width/4, (height)/4);
+
+	polygonShape.SetAsBox(width / 4, (height) / 4);
 	staticBody->CreateFixture(&myFixtureDef);
 
 

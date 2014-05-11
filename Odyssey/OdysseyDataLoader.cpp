@@ -29,6 +29,7 @@
 #include "MageBullet.h"
 #include "LavaBurst.h"
 #include "DarkEnergyEffect.h"
+#include "LavaBall.h"
 
 // GAME OBJECT INCLUDES
 
@@ -285,6 +286,7 @@ void OdysseyDataLoader::loadWorld(Game *game, wstring levelInitFile)
 	AnimatedSpriteType *test = spriteManager->getSpriteType(12);
 	AnimatedSpriteType *lavaBurstSS = spriteManager->getSpriteType(14);
 	AnimatedSpriteType *darkenergySS = spriteManager->getSpriteType(15);
+	AnimatedSpriteType *lavaBallSS = spriteManager->getSpriteType(17);
 
 	ExplosionEffect *sampleExplosion = new ExplosionEffect();
 	sampleExplosion->setSpriteType(explosion);
@@ -354,6 +356,19 @@ void OdysseyDataLoader::loadWorld(Game *game, wstring levelInitFile)
 	bulletRecycler->registerBulletType(L"LAVA_BURST", sampleLavaBurst);
 	bulletRecycler->initRecyclableBullets(game, L"LAVA_BURST", 40);
 
+	LavaBall *sampleLavaBall = new LavaBall();
+
+	sampleLavaBall->setSpriteType(lavaBallSS);
+	sampleLavaBall->setAlpha(255);
+	sampleLavaBall->setCurrentState(PRIMARY_FIRE);
+	game->getGSM()->getPhyiscs()->initLavaBullet(sampleLavaBall);
+
+	bulletRecycler->registerBulletType(L"LAVA_BALL", sampleLavaBall);
+	bulletRecycler->initRecyclableBullets(game, L"LAVA_BALL", 40);
+
+
+
+
 	this->loadBotsFromLua(levelInitFile, game);
 	
 
@@ -422,7 +437,7 @@ void OdysseyDataLoader::loadBotsFromLua(wstring levelName, Game *game)
 
 				sampleLavaBoss->setSpriteType(botSpriteType);
 				game->getGSM()->getPhyiscs()->initLavaBoss(sampleLavaBoss, 192, 234, 50); // CHANGE VALUES LATER 
-				sampleLavaBoss->setHealth(500);
+				sampleLavaBoss->setHealth(5000);
 
 				recycler->registerBotType(W_LAVA_BOSS, sampleLavaBoss);
 				recycler->initRecyclableBots(game, W_LAVA_BOSS, 2);
@@ -484,7 +499,7 @@ void OdysseyDataLoader::loadBotsFromLua(wstring levelName, Game *game)
 				{
 					bot->setSpriteType(botSpriteType);
 					bot->setAlpha(255);
-					bot->setCurrentState(L"IDLE_FOWARD");
+					bot->setCurrentState(L"SUBMERGE");
 					LavaBoss *testBot = dynamic_cast<LavaBoss *>(bot);
 					spriteManager->addBot(testBot);
 					game->getGSM()->getPhyiscs()->activateBot(testBot, x, y);

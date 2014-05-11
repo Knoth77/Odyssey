@@ -3,8 +3,15 @@
 
 # User-specific files
 *.suo
-*.user
+#*.user -- This is where $(OutDir) is saved
 *.sln.docstates
+
+#Frankie added this
+*.exe
+
+#Ignore Backups we make, extra luggage
+*.rar 
+*.zip
 
 # Build results
 
@@ -14,6 +21,7 @@ x64/
 build/
 [Bb]in/
 [Oo]bj/
+[C]ommon/
 
 # Enable "build/" folder in the NuGet Packages folder since NuGet packages use it for MSBuild targets
 !packages/*/build/

@@ -196,6 +196,7 @@ void PhysicsCollisionListener::BeginContact(b2Contact *contact)
 						LavaBoss *lavaBoss = dynamic_cast<LavaBoss*>(B);
 						if (lavaBoss->getInvincible() == false)
 							lavaBoss->setHealth(bot->getHealth() - a->getPrimaryDamage());
+						bot->setJustShot(true);
 						a->handleCollision(game);
 					}
 					else
@@ -225,6 +226,7 @@ void PhysicsCollisionListener::BeginContact(b2Contact *contact)
 						LavaBoss *lavaBoss = dynamic_cast<LavaBoss*>(A);
 						if (lavaBoss->getInvincible() == false)
 							lavaBoss->setHealth(bot->getHealth() - b->getPrimaryDamage());
+						bot->setJustShot(true);
 						b->handleCollision(game);
 					}
 					else

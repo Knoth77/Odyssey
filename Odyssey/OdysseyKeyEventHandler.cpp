@@ -293,81 +293,62 @@ void OdysseyKeyEventHandler::handleKeyEvents(Game *game)
 		bool viewportMoved = false;
 		float viewportVx = 0.0f;
 		float viewportVy = 0.0f;
-		//if (input->isKeyDown(UP_KEY))
-		//{
-		////	viewportVy -= MAX_VIEWPORT_AXIS_VELOCITY;
-		////	viewportMoved = true;
-		//}
-		//if (input->isKeyDown(DOWN_KEY))
-		//{
-		////	viewportVy += MAX_VIEWPORT_AXIS_VELOCITY;
-		////	viewportMoved = true;
-		//}
-		//if (input->isKeyDown(LEFT_KEY))
-		//{
-		////	viewportVx -= MAX_VIEWPORT_AXIS_VELOCITY;
-		////	viewportMoved = true;
-		//}
-		//if (input->isKeyDown(RIGHT_KEY))
-		//{
-		////	viewportVx += MAX_VIEWPORT_AXIS_VELOCITY;
-		////	viewportMoved = true;
-		//}
+
 		Viewport *viewport = game->getGUI()->getViewport();
 		if (viewportMoved)
 			viewport->moveViewport((int)floor(viewportVx + 0.5f), (int)floor(viewportVy + 0.5f), game->getGSM()->getWorld()->getWorldWidth(), game->getGSM()->getWorld()->getWorldHeight());
 
+		
 		bool move = false;
-
+		
+		
 		if (input->isKeyDown(W_KEY))
 		{
 			game->getGSM()->getPhyiscs()->movePlayerDown();
-			game->getGSM()->getSpriteManager()->getPlayer()->setCurrentState(L"WALKING_NORTH");
+			if (!input->isKeyDown(A_KEY) && !input->isKeyDown(D_KEY))//Hoverstate
+				game->getGSM()->getSpriteManager()->getPlayer()->setCurrentState(L"WALKING_NORTH");
 			move = true;
 		}
 		if (input->isKeyDown(A_KEY))
 		{
 			game->getGSM()->getPhyiscs()->movePlayerLeft();
+			if (!input->isKeyDown(W_KEY) && !input->isKeyDown(S_KEY))//Hoverstate
 			game->getGSM()->getSpriteManager()->getPlayer()->setCurrentState(L"WALKING_WEST_GREEN");
 			move = true;
 		}
 		if (input->isKeyDown(S_KEY))
 		{
 			game->getGSM()->getPhyiscs()->movePlayerUp();
-			game->getGSM()->getSpriteManager()->getPlayer()->setCurrentState(L"WALKING_SOUTH_GREEN");
+			if (!input->isKeyDown(A_KEY) && !input->isKeyDown(D_KEY))//Hoverstate
+				game->getGSM()->getSpriteManager()->getPlayer()->setCurrentState(L"WALKING_SOUTH_GREEN");
 			move = true;
 		}
 		if (input->isKeyDown(D_KEY))
 		{
 			game->getGSM()->getPhyiscs()->movePlayerRight();
-			game->getGSM()->getSpriteManager()->getPlayer()->setCurrentState(L"WALKING_EAST_GREEN");
+			if (!input->isKeyDown(W_KEY) && !input->isKeyDown(S_KEY))//Hoverstate
+				game->getGSM()->getSpriteManager()->getPlayer()->setCurrentState(L"WALKING_EAST_GREEN");
 			move = true;
 		}
-
+		if (!move)
+			game->getGSM()->getSpriteManager()->getPlayer()->setCurrentState(L"IDLE_GREEN");
 
 		if (input->isKeyDown(W_KEY) && input->isKeyDown(D_KEY))
 		{
-			if (game->getGSM()->getSpriteManager()->getPlayer()->getCurrentState() != L"WALKING_EAST_GREEN")
-			game->getGSM()->getSpriteManager()->getPlayer()->setCurrentState(L"WALKING_EAST_GREEN");
+			game->getGSM()->getSpriteManager()->getPlayer()->setCurrentState(L"HOVERING_EAST");
 		}
 		if (input->isKeyDown(W_KEY) && input->isKeyDown(A_KEY))
 		{
-			if (game->getGSM()->getSpriteManager()->getPlayer()->getCurrentState() != L"WALKING_WEST_GREEN")
-			game->getGSM()->getSpriteManager()->getPlayer()->setCurrentState(L"WALKING_WEST_GREEN");
+			game->getGSM()->getSpriteManager()->getPlayer()->setCurrentState(L"HOVERING_WEST");
 		}
 		if (input->isKeyDown(S_KEY) && input->isKeyDown(D_KEY))
 		{
-			if (game->getGSM()->getSpriteManager()->getPlayer()->getCurrentState() != L"WALKING_EAST_GREEN")
-			game->getGSM()->getSpriteManager()->getPlayer()->setCurrentState(L"WALKING_EAST_GREEN");
+			game->getGSM()->getSpriteManager()->getPlayer()->setCurrentState(L"HOVERING_EAST");
 		}
 		if (input->isKeyDown(S_KEY) && input->isKeyDown(A_KEY))
 		{
-			if (game->getGSM()->getSpriteManager()->getPlayer()->getCurrentState() != L"WALKING_WEST_GREEN")
-			game->getGSM()->getSpriteManager()->getPlayer()->setCurrentState(L"WALKING_WEST_GREEN");
+			game->getGSM()->getSpriteManager()->getPlayer()->setCurrentState(L"HOVERING_WEST");
 		}
-		
-		if (!move)
-			game->getGSM()->getSpriteManager()->getPlayer()->setCurrentState(L"IDLE_GREEN");
 
 
 		if (input->isKeyDown(ONE_KEY))
