@@ -286,7 +286,7 @@ void OdysseyDataLoader::loadWorld(Game *game, wstring levelInitFile)
 	AnimatedSpriteType *test = spriteManager->getSpriteType(12);
 	AnimatedSpriteType *lavaBurstSS = spriteManager->getSpriteType(14);
 	AnimatedSpriteType *darkenergySS = spriteManager->getSpriteType(15);
-	AnimatedSpriteType *lavaBallSS = spriteManager->getSpriteType(17);
+	AnimatedSpriteType *lavaBallSS = spriteManager->getSpriteType(16);
 
 	ExplosionEffect *sampleExplosion = new ExplosionEffect();
 	sampleExplosion->setSpriteType(explosion);

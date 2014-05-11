@@ -4,7 +4,6 @@
 #include "src\sssf\gsm\state\GameStateManager.h"
 #include "src\sssf\gsm\sprite\AnimatedSprite.h"
 #include "Player.h"
-#include "LavaBall.h"
 
 
 LavaBoss::LavaBoss()
@@ -18,7 +17,6 @@ LavaBoss::LavaBoss()
 	lavaBurstCooldown = 0;
 	sinkCooldown = 40;
 	invincible = false;
-	ballCooldown = 5;
 }
 
 
@@ -64,7 +62,7 @@ void LavaBoss::think(Game *game)
 		lavaBurstCooldown--;
 		sinkCooldown++;
 		return;
-	}
+	} 
 	else if (health >= 2475 && health <= 2525)
 	{
 		if (sinkCooldown <= 400)
@@ -144,29 +142,6 @@ void LavaBoss::think(Game *game)
 		return;
 	}
 
-
-	if (this->isPlayerInRadius() || this->wasJustShot())
-	{
-
-		if (ballCooldown <= 0)
-		{
-			this->setSelectedGun(LAVABALL);
-			this->setCurrentState(L"SWIPE_FOWARD");
-			Bullet *bullet = game->getGSM()->getSpriteManager()->getBulletRecycler()->retrieveBullet(game, L"LAVA_BALL");
-			//game->getAudio()->playSound(L"data\\sounds\\laser_pro.wav", false);
-			bullet->setDamageType('P');
-			bullet->setCurrentState(L"PRIMARY_FIRE");
-			game->getGSM()->getPhyiscs()->activateEnemyBullet(bullet, (this->getBody()->GetPosition().x), (this->getBody()->GetPosition().y));
-			game->getGSM()->getSpriteManager()->addActiveBullet(bullet);
-			ballCooldown = 10;
-		}
-		else
-		{
-			ballCooldown--;
-		}
-		return;
-	}
-
 	if (this->getCurrentState() != L"SUBMERGE")
 	{
 		if ((playerPos.x >= 17.538 || playerPos.x <= 14.387) && (playerPos.y < 28.49 || playerPos.y > 26.6256294))
@@ -185,7 +160,6 @@ void LavaBoss::think(Game *game)
 	}
 	else
 		this->setInvincible(true);
-
 }
 
 Bot* LavaBoss::clone(Game *game)
