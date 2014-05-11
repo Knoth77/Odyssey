@@ -13,14 +13,15 @@ private:
 	int sinkCooldown;
 	int selectedGun;
 	bool invincible;
+	int ballCooldown;
 public:
 	LavaBoss();
 	~LavaBoss();
 
 	enum gunSelection
 	{
+		LAVABALL,
 		LAVA_BURST,
-		SWIPE,
 		ACID
 
 	};
