@@ -26,7 +26,7 @@ void LavaBall::handleCollision(Game *game)
 Bullet*	LavaBall::clone(Game *game)
 {
 	LavaBall *clone = new LavaBall();
-	game->getGSM()->getPhyiscs()->initEnemyBullet(clone);
+	game->getGSM()->getPhyiscs()->initLavaBullet(clone);
 	clone->setSpriteType(this->getSpriteType());
 	clone->setAlpha(255);
 	return clone;

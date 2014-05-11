@@ -361,7 +361,7 @@ void OdysseyDataLoader::loadWorld(Game *game, wstring levelInitFile)
 	sampleLavaBall->setSpriteType(lavaBallSS);
 	sampleLavaBall->setAlpha(255);
 	sampleLavaBall->setCurrentState(PRIMARY_FIRE);
-	game->getGSM()->getPhyiscs()->initEnemyBullet(sampleLavaBall);
+	game->getGSM()->getPhyiscs()->initLavaBullet(sampleLavaBall);
 
 	bulletRecycler->registerBulletType(L"LAVA_BALL", sampleLavaBall);
 	bulletRecycler->initRecyclableBullets(game, L"LAVA_BALL", 40);

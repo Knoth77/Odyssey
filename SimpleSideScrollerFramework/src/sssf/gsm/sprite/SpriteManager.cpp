@@ -89,6 +89,11 @@ void SpriteManager::addSpriteToRenderList(AnimatedSprite *sprite,
 			x = x + 10;
 			y = y + 10;
 		}
+
+		if (sprite->getSpriteType() == this->getSpriteType(17))
+		{
+			x = x - 126;
+		}
 		
 	}
 

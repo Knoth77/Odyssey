@@ -823,6 +823,43 @@ void physicsManager::initBullet(Bullet *bullet)
 	//sprite->getBody()->SetTransform(sprite->getBody()->GetPosition(), 220 * DEGTORAD);
 }
 
+void physicsManager::initLavaBullet(Bullet *bullet)
+{
+	b2BodyDef myBodyDef;
+	myBodyDef.userData = bullet;
+	myBodyDef.type = b2_dynamicBody;
+	myBodyDef.fixedRotation = true;
+
+	myBodyDef.bullet = true;
+	myBodyDef.active = false;
+
+
+	b2PolygonShape shape;
+	shape.SetAsBox((75 * pixelScaling) / 2, (75 * pixelScaling) / 2);
+
+	b2FixtureDef fixtureDef;
+	fixtureDef.shape = &shape;
+	fixtureDef.density = 0.001f;
+	fixtureDef.isSensor = false;
+	fixtureDef.filter.categoryBits = collisionCatagory::ENEMY_BULLET;
+
+	uint16 mask = collisionCatagory::PLAYER | collisionCatagory::WALL;
+
+	fixtureDef.filter.maskBits = mask;
+
+	//myBodyDef.position.Set(x*pixelScaling, y*pixelScaling);
+
+	bullet->setBody(gameWorld->CreateBody(&myBodyDef));
+	b2Vec2 vel = bullet->getBody()->GetLinearVelocity();
+	vel.x = 0;
+	vel.y = 0;
+	bullet->getBody()->SetLinearVelocity(vel);
+	bullet->getBody()->CreateFixture(&fixtureDef);
+
+
+	//sprite->getBody()->SetTransform(sprite->getBody()->GetPosition(), 220 * DEGTORAD);
+}
+
 void physicsManager::initEnemyBullet(Bullet *bullet)
 {
 	b2BodyDef myBodyDef;
