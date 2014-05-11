@@ -223,12 +223,30 @@ void MageBoss::think(Game *game)
 					Bullet *b = game->getGSM()->getSpriteManager()->getBulletRecycler()->retrieveBullet(game, L"MAGE_BULLET");
 					MageBullet *mageBullet = dynamic_cast<MageBullet*>(b);
 					mageBullet->reset();
-					//game->getAudio()->playSound(L"data\\sounds\\laser_pro.wav", false);
-					//Bullet *bullet = game->getGSM()->getSpriteManager()->getBulletRecycler()->retrieveBullet(game, L"MAGE_BULLET");
 					mageBullet->setDamageType('P');
 					mageBullet->setCurrentState(L"PRIMARY_FIRE");
-					game->getGSM()->getPhyiscs()->activateEnemyBullet(mageBullet, this->getBody()->GetPosition().x, this->getBody()->GetPosition().y);
+
+					Bullet *b1 = game->getGSM()->getSpriteManager()->getBulletRecycler()->retrieveBullet(game, L"MAGE_BULLET");
+					MageBullet *mageBullet1 = dynamic_cast<MageBullet*>(b1);
+					mageBullet1->reset();
+					mageBullet1->setDamageType('P');
+					mageBullet1->setCurrentState(L"PRIMARY_FIRE");
+
+					Bullet *b2 = game->getGSM()->getSpriteManager()->getBulletRecycler()->retrieveBullet(game, L"MAGE_BULLET");
+					MageBullet *mageBullet2 = dynamic_cast<MageBullet*>(b2);
+					mageBullet2->reset();
+					mageBullet2->setDamageType('P');
+					mageBullet2->setCurrentState(L"PRIMARY_FIRE");
+
+					//game->getAudio()->playSound(L"data\\sounds\\laser_pro.wav", false);
+					//Bullet *bullet = game->getGSM()->getSpriteManager()->getBulletRecycler()->retrieveBullet(game, L"MAGE_BULLET");
+
+					game->getGSM()->getPhyiscs()->activateEnemyBullet(mageBullet,0,-50);
+					game->getGSM()->getPhyiscs()->activateEnemyBullet(mageBullet1,-30,30);
+					game->getGSM()->getPhyiscs()->activateEnemyBullet(mageBullet2,30,-30);
 					game->getGSM()->getSpriteManager()->addActiveBullet(mageBullet);
+					game->getGSM()->getSpriteManager()->addActiveBullet(mageBullet1);
+					game->getGSM()->getSpriteManager()->addActiveBullet(mageBullet2);
 					this->setBulletCooldown(40);
 					bulletFire = 10;
 					fired = true;

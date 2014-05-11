@@ -400,7 +400,7 @@ void physicsManager::initMeleeBot(Bot *bot, int bX, int bY, int aR)
 	detectFixture.shape = &detector;
 	detectFixture.isSensor = true;
 	detectFixture.filter.categoryBits = collisionCatagory::BOT_DETECTOR;
-	uint16 mask1 = collisionCatagory::PLAYER | collisionCatagory::PLAYER_BULLET;
+	uint16 mask1 = collisionCatagory::PLAYER;
 	detectFixture.filter.maskBits = mask1;
 
 
@@ -461,7 +461,7 @@ void physicsManager::initPlayer(Player *player, float x, float y)
 
 	fixtureDef.filter.categoryBits = collisionCatagory::PLAYER;
 
-	uint16 mask = collisionCatagory::ENEMY | collisionCatagory::WALL | collisionCatagory::ENEMY_BULLET;
+	uint16 mask = collisionCatagory::ENEMY | collisionCatagory::WALL | collisionCatagory::ENEMY_BULLET | collisionCatagory::BOT_DAMAGE_RADIUS | collisionCatagory::BOT_DETECTOR;
 
 	fixtureDef.filter.maskBits = mask;
 
@@ -554,6 +554,8 @@ void physicsManager::gameWorldStep()
 	{
 		playerV.y = -2;
 	}
+	
+
 
 	//if (p->isCollidingWithBot())
 	//	playerV = playerBody->GetLinearVelocity();
@@ -727,7 +729,7 @@ void physicsManager::initBullet(Bullet *bullet)
 	fixtureDef.isSensor = false;
 	fixtureDef.filter.categoryBits = collisionCatagory::PLAYER_BULLET;
 
-	uint16 mask = collisionCatagory::ENEMY | collisionCatagory::WALL;
+	uint16 mask = collisionCatagory::ENEMY | collisionCatagory::WALL | collisionCatagory::BOT_DODGE;
 
 	fixtureDef.filter.maskBits = mask;
 
@@ -792,19 +794,27 @@ void physicsManager::activateEnemyBullet(Bullet *bullet, float x, float y)
 	posBoss.y = y;
 
 	b2Vec2 posPlayer;
-	posPlayer.x = playerBody->GetPosition().x;
-	posPlayer.y = playerBody->GetPosition().y;
+	posPlayer.x = (playerBody->GetPosition().x);
+	posPlayer.y = (playerBody->GetPosition().y);
 
 	bullet->getBody()->SetTransform(posBoss, 0.0);
 
 	if (bullet->getType() == L"MAGE_BULLET")
 	{
 		b2Vec2 vel = bullet->getBody()->GetLinearVelocity();
-		vel.x = 0;
-		vel.y = 0;
-		float angle = atan2f(vel.y, vel.x);
+		vel.x = 0.0;
+		vel.y = 0.0;
+		//float angle = atan2f(vel.y, vel.x);
 		bullet->getBody()->SetLinearVelocity(vel);
-		bullet->getBody()->SetTransform(playerBody->GetPosition(), angle);
+
+		b2Vec2 newPos;
+		newPos.x = (playerBody->GetPosition().x) + (x * pixelScaling);
+		newPos.y = (playerBody->GetPosition().y) + (y * pixelScaling);
+
+		bullet->getBody()->SetTransform(newPos, bullet->getBody()->GetAngle());
+
+		float dX = posPlayer.x - bullet->getBody()->GetPosition().x;
+		float dY = posPlayer.y - bullet->getBody()->GetPosition().y;
 	}
 	else if (bullet->getType() == L"LAVA_BURST")
 	{
@@ -813,6 +823,9 @@ void physicsManager::activateEnemyBullet(Bullet *bullet, float x, float y)
 		vel.y = 0;
 		float angle = atan2f(vel.y, vel.x);
 		bullet->getBody()->SetLinearVelocity(vel);
+
+		
+
 		bullet->getBody()->SetTransform(playerBody->GetPosition(), angle);
 	}
 	else
