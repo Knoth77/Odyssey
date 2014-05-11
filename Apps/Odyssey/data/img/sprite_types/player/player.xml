@@ -36,6 +36,15 @@
   <image_file id="29"  file_name="Lime Visor/player_img8.png"/>
   <image_file id="30"  file_name="Lime Visor/player_img9.png"/>
   
+  <image_file id="31"  file_name="Lime Visor/Death/Death1.png"/>
+  <image_file id="32"  file_name="Lime Visor/Death/Death2.png"/>
+  <image_file id="33"  file_name="Lime Visor/Death/Death3.png"/>
+  <image_file id="34"  file_name="Lime Visor/Death/Death4.png"/>
+  <image_file id="35"  file_name="Lime Visor/Death/Death5.png"/>
+  <image_file id="36"  file_name="Lime Visor/Death/Death6.png"/>
+  <image_file id="37"  file_name="Lime Visor/Death/Death7.png"/>
+  <image_file id="38"  file_name="Lime Visor/Death/Death8.png"/>
+  
  </images_list>
  <animations_list>
 
@@ -148,6 +157,27 @@
     <pose image_id="25" duration="4"/>
 	<pose image_id="26" duration="4"/>
 	<pose image_id="27" duration="4"/>
+   </animation_sequence>
+  </animation_state>
+  
+  <animation_state>
+  <state>DYING</state>
+   <animation_sequence>
+    <pose image_id="31" duration="8"/>
+	<pose image_id="32" duration="8"/>
+	<pose image_id="33" duration="8"/>
+	<pose image_id="34" duration="8"/>
+	<pose image_id="35" duration="8"/>
+	<pose image_id="36" duration="8"/>
+	<pose image_id="37" duration="8"/>
+	<pose image_id="38" duration="8"/>
+   </animation_sequence>
+  </animation_state>
+  
+   <animation_state>
+  <state>DEATH</state>
+   <animation_sequence>
+    <pose image_id="38" duration="4"/>
    </animation_sequence>
   </animation_state>
   

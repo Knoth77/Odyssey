@@ -28,6 +28,9 @@ void OdysseyKeyEventHandler::handleKeyEvents(Game *game)
 	GameTimer* timer = game->getTimer();
 	SplashScreenGUI* splash = (SplashScreenGUI*)(game->getGUI()->getScreen(GS_SPLASH_SCREEN));
 
+
+	//if (input->isKeyDown())
+
 	if (input->isKeyDown(VK_CONTROL) && input->isKeyDownForFirstTime('1'))
 	{
 		if (game->getCurrentLevelFileName().empty() == true)
@@ -339,7 +342,7 @@ void OdysseyKeyEventHandler::handleKeyEvents(Game *game)
 			
 		}
 		else
-			game->getGSM()->getSpriteManager()->getPlayer()->setCurrentState(L"IDLE_GREEN");
+			game->getGSM()->getSpriteManager()->getPlayer()->setCurrentState(L"IDLE_GREEN");//IDLE_GREEN
 
 
 		if (input->isKeyDown(ONE_KEY))
