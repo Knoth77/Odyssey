@@ -252,6 +252,9 @@
     <ClCompile Include="DarkEnergyRayCast.cpp">
       <Filter>src\sssf\gsm\box2dmanager</Filter>
     </ClCompile>
+    <ClCompile Include="LavaBall.cpp">
+      <Filter>src\sssf\gsm\sprite\projectiles</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\sssf_VS\targetver.h">
@@ -461,6 +464,9 @@
     </ClInclude>
     <ClInclude Include="DarkEnergyRayCast.h">
       <Filter>src\sssf\gsm\box2dmanager</Filter>
+    </ClInclude>
+    <ClInclude Include="LavaBall.h">
+      <Filter>src\sssf\gsm\sprite\projectiles</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

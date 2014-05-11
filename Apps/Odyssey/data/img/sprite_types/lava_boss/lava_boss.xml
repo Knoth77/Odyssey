@@ -110,6 +110,13 @@
    </animation_sequence>
   </animation_state>
   
+  <animation_state>
+  <state>SUBMERGE</state>
+   <animation_sequence>
+    <pose image_id="20" duration="20"/>
+   </animation_sequence>
+  </animation_state>
+  
    <animation_state>
   <state>RISE</state>
    <animation_sequence>

@@ -24,7 +24,7 @@ SPIDER_BOT = {bot1={x=360,y=1000},bot2={x=256,y=1248},bot3={x=500,y=1248},
 			  bot10={x=2060,y=876},bot11={x=2060,y=1176},bot12={x=2240,y=2240}},			  
  
 
- LAVA_BOSS = {bot13={x=1632, y = 2698}},
+ LAVA_BOSS = {bot13={x=1632, y = 2570}},
  MAGE_BOSS = {bot1={x=2240,y=640}}
  
  }

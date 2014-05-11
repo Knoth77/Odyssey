@@ -28,6 +28,8 @@ private:
 	bool playerMoveUp;
 	bool playerMoveDown;
 	bool viewportMoved;
+	bool lavaBossHealth;
+	bool lavaBossFight;
 
 	b2Body *playerBody;
 
