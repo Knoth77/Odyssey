@@ -12,6 +12,7 @@ private:
 	int lavaBurstCooldown;
 	int sinkCooldown;
 	int selectedGun;
+	int ballCooldown;
 	bool invincible;
 public:
 	LavaBoss();
@@ -19,8 +20,8 @@ public:
 
 	enum gunSelection
 	{
+		LAVA_BALL,
 		LAVA_BURST,
-		SWIPE,
 		ACID
 
 	};

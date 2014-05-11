@@ -85,9 +85,9 @@
  <animation_state>
   <state>SWIPE_FOWARD</state>
    <animation_sequence>
-    <pose image_id="11" duration="20"/>
-	<pose image_id="12" duration="20"/>
-	<pose image_id="13" duration="20"/>
+    <pose image_id="11" duration="4"/>
+	<pose image_id="12" duration="4"/>
+	<pose image_id="13" duration="4"/>
    </animation_sequence>
   </animation_state>
   

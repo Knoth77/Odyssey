@@ -16,6 +16,7 @@ LavaBoss::LavaBoss()
 	type = L"LAVA_BOSS";
 	lavaBurstCooldown = 0;
 	sinkCooldown = 40;
+	ballCooldown = 10;
 	invincible = false;
 }
 
@@ -119,6 +120,8 @@ void LavaBoss::think(Game *game)
 		return;
 	}
 
+
+
 	if (this->getCurrentState() == L"SINK" || this->getCurrentState() == L"RISE")
 	{
 		this->setCurrentState(L"RISE");
@@ -141,6 +144,29 @@ void LavaBoss::think(Game *game)
 		}
 		return;
 	}
+
+	if (this->isPlayerInRadius() || this->wasJustShot())
+	{
+
+		if (ballCooldown <= 0)
+		{
+			this->setSelectedGun(LAVA_BALL);
+			this->setCurrentState(L"SWIPE_FOWARD");
+			Bullet *bullet = game->getGSM()->getSpriteManager()->getBulletRecycler()->retrieveBullet(game, L"LAVA_BALL");
+			//game->getAudio()->playSound(L"data\\sounds\\laser_pro.wav", false);
+			bullet->setDamageType('P');
+			bullet->setCurrentState(L"PRIMARY_FIRE");
+			game->getGSM()->getPhyiscs()->activateEnemyBullet(bullet, this->getBody()->GetPosition().x, this->getBody()->GetPosition().y);
+			game->getGSM()->getSpriteManager()->addActiveBullet(bullet);
+			ballCooldown = 10;
+		}
+		else
+		{
+			ballCooldown--;
+		}
+		return;
+	}
+
 
 	if (this->getCurrentState() != L"SUBMERGE")
 	{
