@@ -45,6 +45,11 @@
   <image_file id="37"  file_name="Lime Visor/Death/Death7.png"/>
   <image_file id="38"  file_name="Lime Visor/Death/Death8.png"/>
   
+  <image_file id="39"  file_name="Lime Visor/Hover_West/Hover_West1.png"/>
+  <image_file id="40"  file_name="Lime Visor/Hover_West/Hover_West2.png"/>
+  <image_file id="41"  file_name="Lime Visor/Hover_East/Hover_East1.png"/>
+  <image_file id="42"  file_name="Lime Visor/Hover_East/Hover_East2.png"/>
+  
  </images_list>
  <animations_list>
 
@@ -178,6 +183,22 @@
   <state>DEATH</state>
    <animation_sequence>
     <pose image_id="38" duration="4"/>
+   </animation_sequence>
+  </animation_state>
+  
+  <animation_state>
+  <state>HOVERING_WEST</state>
+   <animation_sequence>
+    <pose image_id="39" duration="4"/>
+	<pose image_id="40" duration="4"/>
+   </animation_sequence>
+  </animation_state>
+ 
+   <animation_state>
+  <state>HOVERING_EAST</state>
+   <animation_sequence>
+    <pose image_id="41" duration="4"/>
+	<pose image_id="42" duration="4"/>
    </animation_sequence>
   </animation_state>
   

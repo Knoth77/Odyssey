@@ -11,6 +11,10 @@
 *.lib
 # The lib may be problematic, probably not though
 
+#Ignore Backups we make, extra luggage
+*.rar 
+*.zip
+
 # Build results
 
 [Dd]ebug/
