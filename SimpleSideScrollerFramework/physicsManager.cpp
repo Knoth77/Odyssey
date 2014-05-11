@@ -1022,7 +1022,7 @@ void physicsManager::initWallForGame(float x, float y)
 
 	myFixtureDef.filter.categoryBits = collisionCatagory::WALL;
 
-
+	
 	polygonShape.SetAsBox(width/4, (height)/4);
 	staticBody->CreateFixture(&myFixtureDef);
 
