@@ -648,61 +648,69 @@ void physicsManager::gameWorldStep()
 			playerMoveDown = false;
 			viewportMoved = false;
 			mouseClicked = false;
+
+			list<Bot*>::iterator active = game->getGSM()->getSpriteManager()->getBotsIterator();
+			while (active != game->getGSM()->getSpriteManager()->getEndOfBotsIterator())
+			{
+				Bot *b = (*active);
+				if (b->getType() == L"LAVA_BOSS")
+				{
+					if (b->getCurrentState() == L"DEAD")
+					{
+						viewport->setScrollSpeedX(0);
+						viewport->moveViewport(0, 0, 3200, 3200);
+						lavaBossFight = false;
+					}
+				}
+				active++;
+			}
+
 			return;
 		}
 	}
-		if ((viewport->getViewportX() <= 0.0f || viewport->getViewportX() >= 3200))
-			outsideX = false;
-		else if (playerX >= 492 && playerX <= 532)
-			outsideX = false;
-		else
-			outsideX = true;
+	if ((viewport->getViewportX() <= 0.0f || viewport->getViewportX() >= 3200))
+		outsideX = false;
+	else if (playerX >= 492 && playerX <= 532)
+		outsideX = false;
+	else
+		outsideX = true;
 
-		if ((viewport->getViewportY() <= 0.0f || viewport->getViewportY() >= 3200))
-			outsideY = false;
-		else if (playerY >= 492 && playerY <= 532)
-			outsideY = false;
-		else
-			outsideY = true;
+	if ((viewport->getViewportY() <= 0.0f || viewport->getViewportY() >= 3200))
+		outsideY = false;
+	else if (playerY >= 492 && playerY <= 532)
+		outsideY = false;
+	else
+		outsideY = true;
 
-		if (viewport->getViewportX() <= 0.0f || viewport->getViewportX() >= 3200)
-		{
-			if (playerX >= 507 && playerX <= 512)
-			{
-				if (game->getGSM()->getPhyiscs()->getPlayerBody()->GetLinearVelocity().x != 0)
-				{
-					viewport->setScrollSpeedX(viewportConverter * playerBody->GetLinearVelocity().x);
-					viewportMoved = true;
-				}
-			}
-		}
-
-		else if (playerX >= 472 && playerX <= 552)
+	if (viewport->getViewportX() <= 0.0f || viewport->getViewportX() >= 3200)
+	{
+		if (playerX >= 507 && playerX <= 512)
 		{
 			if (game->getGSM()->getPhyiscs()->getPlayerBody()->GetLinearVelocity().x != 0)
 			{
 				viewport->setScrollSpeedX(viewportConverter * playerBody->GetLinearVelocity().x);
 				viewportMoved = true;
 			}
+		}
+	}
 
-		}
-		else
+	else if (playerX >= 472 && playerX <= 552)
+	{
+		if (game->getGSM()->getPhyiscs()->getPlayerBody()->GetLinearVelocity().x != 0)
 		{
-			viewport->setScrollSpeedX(0.0f);
+			viewport->setScrollSpeedX(viewportConverter * playerBody->GetLinearVelocity().x);
+			viewportMoved = true;
 		}
 
-		if (viewport->getViewportY() <= 0.0f || viewport->getViewportY() >= 3200)
-		{
-			if (playerY >= 379 && playerY <= 389)
-			{
-				if (game->getGSM()->getPhyiscs()->getPlayerBody()->GetLinearVelocity().y != 0)
-				{
-					viewport->setScrollSpeedY(viewportConverter * playerBody->GetLinearVelocity().y);
-					viewportMoved = true;
-				}
-			}
-		}
-		else if (playerY >= 344 && playerY <= 424)
+	}
+	else
+	{
+		viewport->setScrollSpeedX(0.0f);
+	}
+
+	if (viewport->getViewportY() <= 0.0f || viewport->getViewportY() >= 3200)
+	{
+		if (playerY >= 379 && playerY <= 389)
 		{
 			if (game->getGSM()->getPhyiscs()->getPlayerBody()->GetLinearVelocity().y != 0)
 			{
@@ -710,55 +718,64 @@ void physicsManager::gameWorldStep()
 				viewportMoved = true;
 			}
 		}
+	}
+	else if (playerY >= 344 && playerY <= 424)
+	{
+		if (game->getGSM()->getPhyiscs()->getPlayerBody()->GetLinearVelocity().y != 0)
+		{
+			viewport->setScrollSpeedY(viewportConverter * playerBody->GetLinearVelocity().y);
+			viewportMoved = true;
+		}
+	}
+	else
+	{
+		viewport->setScrollSpeedY(0.0f);
+	}
+
+	b2Vec2 rot;
+	rot.x = (mouseLoc.x - playerBody->GetPosition().x);
+	rot.y = (mouseLoc.y - playerBody->GetPosition().y);
+	float angle = atan2f(rot.y, rot.x);
+
+
+	playerBody->SetLinearVelocity(playerV);
+	if (game->getGSM()->getPhyiscs()->getPlayerBody()->GetLinearVelocity().x == 0)
+		viewport->setScrollSpeedX(0);
+	if (game->getGSM()->getPhyiscs()->getPlayerBody()->GetLinearVelocity().y == 0)
+		viewport->setScrollSpeedY(0);
+
+	if (viewportMoved == true)
+	{
+		viewport->moveViewport(viewport->getScrollSpeedX(), viewport->getScrollSpeedY(), 3200, 3200);
+	}
+	else if (outsideX || outsideY)
+	{
+		if (playerX < 510)
+			viewport->setScrollSpeedX(viewportConverter * -2);
+		else if (playerX > 520)
+			viewport->setScrollSpeedX(viewportConverter * 2);
+		else
+			viewport->setScrollSpeedX(0.0f);
+
+		if (playerY < 379)
+			viewport->setScrollSpeedY(viewportConverter * -2);
+		else if (playerY > 389)
+			viewport->setScrollSpeedY(viewportConverter * 2);
 		else
 		{
 			viewport->setScrollSpeedY(0.0f);
 		}
+		viewport->moveViewport(viewport->getScrollSpeedX(), viewport->getScrollSpeedY(), 3200, 3200);
+	}
 
-		b2Vec2 rot;
-		rot.x = (mouseLoc.x - playerBody->GetPosition().x);
-		rot.y = (mouseLoc.y - playerBody->GetPosition().y);
-		float angle = atan2f(rot.y, rot.x);
+	if (game->getGSM()->getSpriteManager()->getPlayer()->isOutOfLives())//game->getGSM()->getSpriteManager()->getPlayer()->getPlayerHealth() <= 0)
+	{
+		game->getAudio()->stopAllAudio();
+		game->getGSM()->goToDeathScreen();
+	}
 
-
-		playerBody->SetLinearVelocity(playerV);
-		if (game->getGSM()->getPhyiscs()->getPlayerBody()->GetLinearVelocity().x == 0)
-			viewport->setScrollSpeedX(0);
-		if (game->getGSM()->getPhyiscs()->getPlayerBody()->GetLinearVelocity().y == 0)
-			viewport->setScrollSpeedY(0);
-
-		if (viewportMoved == true)
-		{
-			viewport->moveViewport(viewport->getScrollSpeedX(), viewport->getScrollSpeedY(), 3200, 3200);
-		}
-		else if (outsideX || outsideY)
-		{
-			if (playerX < 510)
-				viewport->setScrollSpeedX(viewportConverter * -2);
-			else if (playerX > 520)
-				viewport->setScrollSpeedX(viewportConverter * 2);
-			else
-				viewport->setScrollSpeedX(0.0f);
-
-			if (playerY < 379)
-				viewport->setScrollSpeedY(viewportConverter * -2);
-			else if (playerY > 389)
-				viewport->setScrollSpeedY(viewportConverter * 2);
-			else
-			{
-				viewport->setScrollSpeedY(0.0f);
-			}
-			viewport->moveViewport(viewport->getScrollSpeedX(), viewport->getScrollSpeedY(), 3200, 3200);
-		}
-
-		if (game->getGSM()->getSpriteManager()->getPlayer()->isOutOfLives())//game->getGSM()->getSpriteManager()->getPlayer()->getPlayerHealth() <= 0)
-		{
-			game->getAudio()->stopAllAudio();
-			game->getGSM()->goToDeathScreen();
-		}
-
-		/*if (playerBody->GetAngularVelocity() != 0)
-			playerBody->SetAngularVelocity(playerBody->GetAngularVelocity()/2);*/
+	/*if (playerBody->GetAngularVelocity() != 0)
+		playerBody->SetAngularVelocity(playerBody->GetAngularVelocity()/2);*/
 	gameWorld->Step(timeStep, velocityIterations, positionIterations);
 	gameWorld->ClearForces();
 	playerMoveLeft = false;

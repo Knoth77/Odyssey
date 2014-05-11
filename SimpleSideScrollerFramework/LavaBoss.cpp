@@ -51,7 +51,7 @@ void LavaBoss::think(Game *game)
 				bullet->setCurrentState(L"PRIMARY_FIRE");
 				game->getGSM()->getPhyiscs()->activateEnemyBullet(bullet, this->getBody()->GetPosition().x, this->getBody()->GetPosition().y);
 				game->getGSM()->getSpriteManager()->addActiveBullet(bullet);
-				lavaBurstCooldown = 40;
+				lavaBurstCooldown = 20;
 			}
 		}
 		else
@@ -78,7 +78,7 @@ void LavaBoss::think(Game *game)
 				bullet->setCurrentState(L"PRIMARY_FIRE");
 				game->getGSM()->getPhyiscs()->activateEnemyBullet(bullet, this->getBody()->GetPosition().x, this->getBody()->GetPosition().y);
 				game->getGSM()->getSpriteManager()->addActiveBullet(bullet);
-				lavaBurstCooldown = 40;
+				lavaBurstCooldown = 20;
 			}
 		}
 		else
@@ -106,7 +106,7 @@ void LavaBoss::think(Game *game)
 				bullet->setCurrentState(L"PRIMARY_FIRE");
 				game->getGSM()->getPhyiscs()->activateEnemyBullet(bullet, this->getBody()->GetPosition().x, this->getBody()->GetPosition().y);
 				game->getGSM()->getSpriteManager()->addActiveBullet(bullet);
-				lavaBurstCooldown = 40;
+				lavaBurstCooldown = 20;
 			}
 		}
 		else
