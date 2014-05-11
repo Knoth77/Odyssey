@@ -145,7 +145,7 @@ void LavaBoss::think(Game *game)
 		return;
 	}
 
-	if (this->isPlayerInRadius() || this->wasJustShot())
+	if ((this->isPlayerInRadius() || this->wasJustShot()) && this->getInvincible() != true)
 	{
 
 		if (ballCooldown <= 0)
