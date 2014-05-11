@@ -3,8 +3,13 @@
 
 # User-specific files
 *.suo
-*.user
+#*.user -- This is where $(OutDir) is saved
 *.sln.docstates
+
+#Frankie added this
+*.exe
+*.lib
+# The lib may be problematic, probably not though
 
 # Build results
 
