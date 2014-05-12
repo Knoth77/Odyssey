@@ -255,6 +255,9 @@
     <ClCompile Include="LavaBall.cpp">
       <Filter>src\sssf\gsm\sprite\projectiles</Filter>
     </ClCompile>
+    <ClCompile Include="TigerBot.cpp">
+      <Filter>src\sssf\gsm\ai</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\sssf_VS\targetver.h">
@@ -467,6 +470,9 @@
     </ClInclude>
     <ClInclude Include="LavaBall.h">
       <Filter>src\sssf\gsm\sprite\projectiles</Filter>
+    </ClInclude>
+    <ClInclude Include="TigerBot.h">
+      <Filter>src\sssf\gsm\ai</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

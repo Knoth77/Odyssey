@@ -8,6 +8,7 @@
 #include "Laser.h"
 #include "Rocket.h"
 #include "LavaBoss.h"
+#include "TigerBot.h"
 
 
 PhysicsCollisionListener::PhysicsCollisionListener()

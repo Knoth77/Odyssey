@@ -58,6 +58,7 @@ static const wstring	W_SKULL_BOT = L"SKULL_BOT";
 static const wstring	W_SPIDER_BOT = L"SPIDER_BOT";
 static const wstring	W_LAVA_BOSS = L"LAVA_BOSS";
 static const wstring	W_MAGE_BOSS = L"MAGE_BOSS";
+static const wstring	W_TIGER_BOT= L"TIGER_BOT";
 
 
 static const wstring	W_SPLASH_SCREEN_PATH = L"data/img/gui/overlays/odyssey_splash_screen_overlay.png";
