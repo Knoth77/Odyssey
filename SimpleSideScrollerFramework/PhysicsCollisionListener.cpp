@@ -82,13 +82,30 @@ void PhysicsCollisionListener::BeginContact(b2Contact *contact)
 				{
 					if (contact->GetFixtureA()->GetFilterData().categoryBits == phy->PLAYER)
 					{
-						Player *p = dynamic_cast<Player*>(A);
+ 					Player *p = dynamic_cast<Player*>(A);
 						p->setCollidingWithBot(true);
+
+						AnimatedSpriteType *b = B->getSpriteType();
+						AnimatedSpriteType *c = game->getGSM()->getSpriteManager()->getSpriteType(13);
+
+						if (b == c)
+						{
+							p->decPlayerHealth(20);
+						}
+
 					}
 					else if (contact->GetFixtureB()->GetFilterData().categoryBits == phy->PLAYER)
 					{
 						Player *p = dynamic_cast<Player*>(B);
 						p->setCollidingWithBot(true);
+
+						AnimatedSpriteType *b = A->getSpriteType();
+						AnimatedSpriteType *c = game->getGSM()->getSpriteManager()->getSpriteType(13);
+
+						if (b == c)
+						{
+							p->decPlayerHealth(20);
+						}
 					}
 
 				}
@@ -211,7 +228,7 @@ void PhysicsCollisionListener::BeginContact(b2Contact *contact)
 					a->handleCollision(game);
 					Player *p = static_cast<Player*>(B);
 					p->decPlayerHealth(a->getPrimaryDamage());
-					game->getHud()->setHealthWidth(game->getGSM()->getSpriteManager()->getPlayer()->getPlayerHealth(), game->getGSM()->getSpriteManager()->getPlayer()->getStartingHealth());
+					//game->getHud()->setHealthWidth(game->getGSM()->getSpriteManager()->getPlayer()->getPlayerHealth(), game->getGSM()->getSpriteManager()->getPlayer()->getStartingHealth());
 				}
 
 			}
@@ -241,7 +258,7 @@ void PhysicsCollisionListener::BeginContact(b2Contact *contact)
 					b->handleCollision(game);
 					Player *p = static_cast<Player*>(A);
 					p->decPlayerHealth(b->getPrimaryDamage());
-					game->getHud()->setHealthWidth(game->getGSM()->getSpriteManager()->getPlayer()->getPlayerHealth(), game->getGSM()->getSpriteManager()->getPlayer()->getStartingHealth());
+					//game->getHud()->setHealthWidth(game->getGSM()->getSpriteManager()->getPlayer()->getPlayerHealth(), game->getGSM()->getSpriteManager()->getPlayer()->getStartingHealth());
 				}
 
 			}

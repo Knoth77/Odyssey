@@ -75,7 +75,7 @@ void SpiderBot::think(Game *game)
 			Player *player = game->getGSM()->getSpriteManager()->getPlayer();
 			//player->setPlayerHealth(player->getPlayerHealth() - 10);
 			game->getGSM()->getSpriteManager()->getPlayer()->decPlayerHealth(50);
-			game->getHud()->setHealthWidth(game->getGSM()->getSpriteManager()->getPlayer()->getPlayerHealth(), game->getGSM()->getSpriteManager()->getPlayer()->getStartingHealth());
+			//game->getHud()->setHealthWidth(game->getGSM()->getSpriteManager()->getPlayer()->getPlayerHealth(), game->getGSM()->getSpriteManager()->getPlayer()->getStartingHealth());
 			readyToDamagePlayer = false;
 			thinkTime = 10;
 

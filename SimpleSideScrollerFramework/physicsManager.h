@@ -117,6 +117,7 @@ public:
 	void initLavaBullet(Bullet *sprite);
 	void activateBullet(Bullet *sprite);
 	void activateEnemyBullet(Bullet *sprite, float x, float y);
+	void activateMageLightning(Bullet *b, Bot *m, float angle);
 
 	/*Takes 3 bullets to activate and produce a tri spread like effect*/
 	void activateBulletSpread(Bullet *b1, Bullet *b2, Bullet *b3);

@@ -18,4 +18,5 @@
   <sprite_type>darkenergy</sprite_type>
   <sprite_type>sword</sprite_type>
   <sprite_type>lava_ball</sprite_type>
+  <sprite_type>lightning</sprite_type>
 </sprite_type_list>

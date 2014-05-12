@@ -255,6 +255,9 @@
     <ClCompile Include="LavaBall.cpp">
       <Filter>src\sssf\gsm\sprite\projectiles</Filter>
     </ClCompile>
+    <ClCompile Include="Lightning.cpp">
+      <Filter>src\sssf\gsm\sprite\projectiles</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\sssf_VS\targetver.h">
@@ -466,6 +469,9 @@
       <Filter>src\sssf\gsm\box2dmanager</Filter>
     </ClInclude>
     <ClInclude Include="LavaBall.h">
+      <Filter>src\sssf\gsm\sprite\projectiles</Filter>
+    </ClInclude>
+    <ClInclude Include="Lightning.h">
       <Filter>src\sssf\gsm\sprite\projectiles</Filter>
     </ClInclude>
   </ItemGroup>

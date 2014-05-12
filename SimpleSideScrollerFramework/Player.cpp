@@ -84,6 +84,7 @@ void Player::decPlayerHealth(int x)
 	else
 	{
 		playerHealth = playerHealth - x;
+		game->getHud()->setHealthWidth(playerHealth, playerStartingHealth);
 		if (playerHealth <= 0)
 		{
 			outOfHealth = true;

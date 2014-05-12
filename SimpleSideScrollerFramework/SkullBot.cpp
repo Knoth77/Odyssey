@@ -104,7 +104,7 @@ void SkullBot::think(Game *game)
 				{
 					//player->setPlayerHealth(player->getPlayerHealth() - 5);
 					game->getGSM()->getSpriteManager()->getPlayer()->decPlayerHealth(10);
-					game->getHud()->setHealthWidth(game->getGSM()->getSpriteManager()->getPlayer()->getPlayerHealth(), game->getGSM()->getSpriteManager()->getPlayer()->getStartingHealth());
+					//game->getHud()->setHealthWidth(game->getGSM()->getSpriteManager()->getPlayer()->getPlayerHealth(), game->getGSM()->getSpriteManager()->getPlayer()->getStartingHealth());
 				}
 				dmgCountDown = 33;
 

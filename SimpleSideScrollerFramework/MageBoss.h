@@ -22,6 +22,7 @@ private:
 	boolean pivot;
 	boolean fired;
 	bool dashB;
+	int lightningCooldown;
 
 	float rangeX;
 	float rangeY;
@@ -32,6 +33,8 @@ private:
 	Game *game;
 
 	bool orbsActive;
+
+	float lightningAngle;
 
 
 	const float pixelScaling = 0.009765625;
@@ -133,6 +136,11 @@ public:
 	void decBulletCooldown()
 	{
 		bulletCooldown--;
+	}
+
+	float getLightningAngle()
+	{
+		return lightningAngle;
 	}
 
 	void changeAnimationState();

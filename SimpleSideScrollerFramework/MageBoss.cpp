@@ -1,6 +1,7 @@
 #include "MageBoss.h"
 #include "Fireball.h"
 #include "MageBullet.h"
+#include "Lightning.h"
 #include <cmath>
 #include <math.h>
 
@@ -19,6 +20,8 @@ MageBoss::MageBoss()
 	dashCooldown = 15;
 	srand(time(NULL));
 	orbsActive = false;
+	lightningCooldown = 3;
+	lightningAngle = 0.0f;
 }
 
 
@@ -310,20 +313,55 @@ void MageBoss::think(Game *game)
 	}
 	else if (this->getCurrentState() == L"PHASE_THREE_IDLE")
 	{
-		//if (this->getCurrentState() == L"PHASE_THREE_IDLE")
-		//{
-		/*float pixelScaling = game->getGSM()->getPhyiscs()->getPixelScaling();
-		b2PolygonShape shape;
-		shape.SetAsBox((252 * pixelScaling) / 2, (288 * pixelScaling) / 2);
-		b2Fixture *ft = this->getBody()->GetFixtureList();
-		b2Shape *sp = ft->GetShape();
-		sp-> = shape;*/
-		//ftl.shape = ft->GetShape();
-		//b2Shape *sp = ft->GetShape();
+		if (this->isPlayerInRadius() || this->wasJustShot())
+		{
 
-		//this->getBody()->SetTransform(bPos, 0.0f);
-		//}
-		//this->setCurrentState(L"PHASE_THREE_IDLE");
+			if (lightningCooldown <= 0)
+			{
+				//45
+				Bullet *lightning = game->getGSM()->getSpriteManager()->getBulletRecycler()->retrieveBullet(game, L"LIGHTNING");
+				lightning->setDamageType('P');
+				lightning->setCurrentState(L"PRIMARY_FIRE");
+				game->getGSM()->getPhyiscs()->activateMageLightning(lightning, this, 45.0 + lightningAngle);
+				game->getGSM()->getSpriteManager()->addActiveBullet(lightning);
+				//90
+				lightning = game->getGSM()->getSpriteManager()->getBulletRecycler()->retrieveBullet(game, L"LIGHTNING");
+				lightning->setDamageType('P');
+				lightning->setCurrentState(L"PRIMARY_FIRE");
+				game->getGSM()->getPhyiscs()->activateMageLightning(lightning, this, 90.0 + lightningAngle);
+				game->getGSM()->getSpriteManager()->addActiveBullet(lightning);
+				//135
+				lightning = game->getGSM()->getSpriteManager()->getBulletRecycler()->retrieveBullet(game, L"LIGHTNING");
+				lightning->setDamageType('P');
+				lightning->setCurrentState(L"PRIMARY_FIRE");
+				game->getGSM()->getPhyiscs()->activateMageLightning(lightning, this, 135.0 + lightningAngle);
+				game->getGSM()->getSpriteManager()->addActiveBullet(lightning);
+				//225
+				lightning = game->getGSM()->getSpriteManager()->getBulletRecycler()->retrieveBullet(game, L"LIGHTNING");
+				lightning->setDamageType('P');
+				lightning->setCurrentState(L"PRIMARY_FIRE");
+				game->getGSM()->getPhyiscs()->activateMageLightning(lightning, this, 225.0 + lightningAngle);
+				game->getGSM()->getSpriteManager()->addActiveBullet(lightning);
+				//270
+				lightning = game->getGSM()->getSpriteManager()->getBulletRecycler()->retrieveBullet(game, L"LIGHTNING");
+				lightning->setDamageType('P');
+				lightning->setCurrentState(L"PRIMARY_FIRE");
+				game->getGSM()->getPhyiscs()->activateMageLightning(lightning, this, 270.0 + lightningAngle);
+				game->getGSM()->getSpriteManager()->addActiveBullet(lightning);
+				//315
+				lightning = game->getGSM()->getSpriteManager()->getBulletRecycler()->retrieveBullet(game, L"LIGHTNING");
+				lightning->setDamageType('P');
+				lightning->setCurrentState(L"PRIMARY_FIRE");
+				game->getGSM()->getPhyiscs()->activateMageLightning(lightning, this, 315.0 + lightningAngle);
+				game->getGSM()->getSpriteManager()->addActiveBullet(lightning);
+
+				lightningCooldown = 1;
+			}
+			else
+				lightningCooldown--;
+		}
+
+		lightningAngle += 2;
 	}
 
 }

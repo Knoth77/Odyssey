@@ -55,7 +55,7 @@ void MageBullet::detonate(Game *game)
 		b2Body *body = *(bodyIT);
 		Player *p = static_cast<Player*>(body->GetUserData());
 		p->decPlayerHealth(50);
-		game->getHud()->setHealthWidth(game->getGSM()->getSpriteManager()->getPlayer()->getPlayerHealth(), game->getGSM()->getSpriteManager()->getPlayer()->getStartingHealth());
+		//game->getHud()->setHealthWidth(game->getGSM()->getSpriteManager()->getPlayer()->getPlayerHealth(), game->getGSM()->getSpriteManager()->getPlayer()->getStartingHealth());
 		bodyIT++;
 	}
 

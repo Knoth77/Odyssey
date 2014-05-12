@@ -30,6 +30,7 @@
 #include "LavaBurst.h"
 #include "DarkEnergyEffect.h"
 #include "LavaBall.h"
+#include "Lightning.h"
 
 // GAME OBJECT INCLUDES
 
@@ -287,6 +288,17 @@ void OdysseyDataLoader::loadWorld(Game *game, wstring levelInitFile)
 	AnimatedSpriteType *lavaBurstSS = spriteManager->getSpriteType(14);
 	AnimatedSpriteType *darkenergySS = spriteManager->getSpriteType(15);
 	AnimatedSpriteType *lavaBallSS = spriteManager->getSpriteType(17);
+	AnimatedSpriteType *lightningSS = spriteManager->getSpriteType(18);
+
+	Lightning *sampleLightning = new Lightning();
+
+	sampleLightning->setSpriteType(lightningSS);
+	sampleLightning->setAlpha(255);
+	sampleLightning->setCurrentState(PRIMARY_FIRE);
+	game->getGSM()->getPhyiscs()->initEnemyBullet(sampleLightning);
+
+	bulletRecycler->registerBulletType(L"LIGHTNING", sampleLightning);
+	bulletRecycler->initRecyclableBullets(game, L"LIGHTNING", 40);
 
 	ExplosionEffect *sampleExplosion = new ExplosionEffect();
 	sampleExplosion->setSpriteType(explosion);

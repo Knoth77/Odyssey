@@ -225,6 +225,7 @@ void physicsManager::initMageOrb(AnimatedSprite *orb, float x, float y, Bot *m)
 		bd.type = b2_dynamicBody;
 		bd.fixedRotation = true;
 
+		
 
 		b2CircleShape c;
 		c.m_radius = .205f;
@@ -954,6 +955,50 @@ void physicsManager::activateEnemyBullet(Bullet *bullet, float x, float y)
 
 		bullet->getBody()->SetTransform(bullet->getBody()->GetPosition(), angle);
 	}
+}
+
+void physicsManager::activateMageLightning(Bullet *bullet, Bot *m, float angle)
+{
+	bullet->getBody()->SetActive(true);
+	bullet->getBody()->SetTransform(m->getBody()->GetPosition(), 0.0f);
+
+	b2Vec2 calc;
+	calc.x = (cos(angle));
+	calc.y = (sin(angle));
+	calc.Normalize();
+
+	if (angle > 90 && angle < 180)
+	{
+		calc.x *= -1.0f;
+	}
+
+	if (angle > 180 && angle < 270)
+	{
+		calc.x *= -1.0f;
+		calc.y *= -1.0f;
+	}
+
+	if (angle > 270 && angle < 360)
+	{
+		calc.y *= -1.0f;
+	}
+
+	if (angle == 180)
+	{
+		calc.x *= -1.0f;
+	}
+
+	if (angle == 270)
+	{
+		calc.y *= -1.0f;
+	}
+
+	calc *= bullet->getSpeed();
+	float angle2 = atan2f(calc.y, calc.x);
+	bullet->getBody()->SetLinearVelocity(calc);
+	angle = angle * DEGTORAD;
+	bullet->getBody()->SetTransform(bullet->getBody()->GetPosition(), angle2);
+
 }
 
 void physicsManager::activateBullet(Bullet *bullet)
