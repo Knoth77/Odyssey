@@ -35,6 +35,7 @@
     <ClCompile Include="physicsManager.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="RangedBot.cpp" />
+    <ClCompile Include="RatBot.cpp" />
     <ClCompile Include="Rocket.cpp" />
     <ClCompile Include="SDKwavefile.cpp" />
     <ClCompile Include="ShootingStar.cpp" />
@@ -96,6 +97,7 @@
     <ClInclude Include="physicsManager.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="RangedBot.h" />
+    <ClInclude Include="RatBot.h" />
     <ClInclude Include="Rocket.h" />
     <ClInclude Include="SDKwavefile.h" />
     <ClInclude Include="ShootingStar.h" />

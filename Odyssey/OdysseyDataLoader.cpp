@@ -31,6 +31,7 @@
 #include "DarkEnergyEffect.h"
 #include "LavaBall.h"
 #include "TigerBot.h"
+#include "RatBot.h"
 
 // GAME OBJECT INCLUDES
 
@@ -469,7 +470,17 @@ void OdysseyDataLoader::loadBotsFromLua(wstring levelName, Game *game)
 				recycler->initRecyclableBots(game, W_TIGER_BOT, 2);
 			}
 
+			if (bTypeW == W_RAT_BOT)
+			{
+				botSpriteType = spriteManager->getSpriteType(19);
+				RatBot *sampleRatBot = new RatBot();
 
+				sampleRatBot->setSpriteType(botSpriteType);
+				game->getGSM()->getPhyiscs()->initMeleeBot(sampleRatBot, 124, 35, 50); // CHANGE VALUES LATER 
+				sampleRatBot->setHealth(500);
+				recycler->registerBotType(W_RAT_BOT, sampleRatBot);
+				recycler->initRecyclableBots(game, W_RAT_BOT, 2);
+			}
 
 			for (LuaTableIterator it2(botType); it2; it2.Next())
 			{
@@ -543,6 +554,18 @@ void OdysseyDataLoader::loadBotsFromLua(wstring levelName, Game *game)
 					bot->setAlpha(255);
 					bot->setCurrentState(L"IDLE");
 					TigerBot *testBot = dynamic_cast<TigerBot *>(bot);
+					spriteManager->addBot(testBot);
+					game->getGSM()->getPhyiscs()->activateBot(testBot, x, y);
+					if (position.GetByName("m").IsConvertibleToInteger())
+						testBot->changeMovementType(position.GetByName("m").GetInteger());
+				}
+
+				if (bTypeW == W_RAT_BOT)
+				{
+					bot->setSpriteType(botSpriteType);
+					bot->setAlpha(255);
+					bot->setCurrentState(L"IDLE");
+					RatBot *testBot = dynamic_cast<RatBot *>(bot);
 					spriteManager->addBot(testBot);
 					game->getGSM()->getPhyiscs()->activateBot(testBot, x, y);
 					if (position.GetByName("m").IsConvertibleToInteger())
