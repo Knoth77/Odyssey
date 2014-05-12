@@ -117,6 +117,7 @@ public:
 	unsigned int getCurrentImageID();
 	void setCurrentState(wstring newState);
 	void updateSprite();
+	void resetSprite();
 	// THE ONLY POINT OF THIS IS TO ALLOW FOR DYNAMIC CASTING
 	virtual void test();
 };

@@ -7,6 +7,7 @@ public:
 
 	LavaBall();
 	~LavaBall();
+	void update(Game *game);
 
 	void handleCollision(Game *game);
 	Bullet *clone(Game *game);

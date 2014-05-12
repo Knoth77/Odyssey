@@ -110,3 +110,9 @@ void AnimatedSprite::updateSprite()
 
 }
 
+void AnimatedSprite::resetSprite()
+{
+	this->animationCounter = 0;
+	this->frameIndex = 0;
+}
+

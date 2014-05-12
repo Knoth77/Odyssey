@@ -19,7 +19,7 @@ public:
 	Bullet();
 	~Bullet();
 
-	void update();
+	virtual void update();
 	int getPrimaryDamage()
 	{
 		return primaryDamage;
@@ -60,6 +60,7 @@ public:
 	{
 		primaryDamage = x;
 	}
+	
 	//void setSecondaryDamage(int x) { secondaryDamage = x};
 	
 	// WE WILL HAVE MANY TYPES OF BULLETS THAT WILL DO DIFFERANT THINGS ON IMPACT, THE DEFAULT BEHAVOIR THOUGH

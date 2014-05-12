@@ -119,7 +119,9 @@ Bullet* BulletRecycler::retrieveBullet(Game *game, wstring BulletType)
 
 		// NOW GET THE LAST ELEMENT
 		Bullet* BulletToReturn = BulletsOfTypeWeNeed->back();
+		BulletToReturn->resetSprite();
 		BulletsOfTypeWeNeed->pop_back();
+		
 		return BulletToReturn;
 	}
 }
