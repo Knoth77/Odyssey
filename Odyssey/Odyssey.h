@@ -12,6 +12,7 @@ static const string		W_DEBUG_FILE = "data/DebugOutput.txt";
 static const wstring	W_INIT_FILE = L"data/OdysseySettings.cfg";
 static const wstring	W_GREEN_CURSOR_PATH = L"data/img/gui/cursor/green_cursor.png";
 
+
 //~~Hud Constants Start~~//
 //Health Bar
 static const wstring W_HEALTH_ZERO_PATH = L"data/img/gui/hud/healthbar/health_zero.png";

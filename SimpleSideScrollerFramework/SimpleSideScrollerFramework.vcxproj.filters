@@ -258,6 +258,12 @@
     <ClCompile Include="Lightning.cpp">
       <Filter>src\sssf\gsm\sprite\projectiles</Filter>
     </ClCompile>
+    <ClCompile Include="RatBot.cpp">
+      <Filter>src\sssf\gsm\ai</Filter>
+    </ClCompile>
+    <ClCompile Include="TigerBot.cpp">
+      <Filter>src\sssf\gsm\ai</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\sssf_VS\targetver.h">
@@ -473,6 +479,12 @@
     </ClInclude>
     <ClInclude Include="Lightning.h">
       <Filter>src\sssf\gsm\sprite\projectiles</Filter>
+    </ClInclude>
+    <ClInclude Include="TigerBot.h">
+      <Filter>src\sssf\gsm\ai</Filter>
+    </ClInclude>
+    <ClInclude Include="RatBot.h">
+      <Filter>src\sssf\gsm\ai</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

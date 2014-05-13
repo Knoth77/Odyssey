@@ -19,4 +19,6 @@
   <sprite_type>sword</sprite_type>
   <sprite_type>lava_ball</sprite_type>
   <sprite_type>lightning</sprite_type>
+   <sprite_type>tiger</sprite_type>
+  <sprite_type>rat</sprite_type>
 </sprite_type_list>
