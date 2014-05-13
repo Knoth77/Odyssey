@@ -30,6 +30,7 @@
 #include "../SimpleSideScrollerFramework/src/sssf/gui/ScreenGUI.h"
 #include "../SimpleSideScrollerFramework/src/sssf/gui/SplashScreenGUI.h"
 #include "../../../../MageBullet.h"
+#include "../../../../../Odyssey/OdysseyDataLoader.h"
 
 /*
 	addSpriteToRenderList - This method checks to see if the sprite
@@ -392,7 +393,16 @@ void SpriteManager::update(Game *game)
 {
 	// UPDATE THE PLAYER SPRITE
 	
-
+	if (player.isOutOfLives())//game->getGSM()->getSpriteManager()->getPlayer()->getPlayerHealth() <= 0)
+	{
+		game->getAudio()->stopAllAudio();
+		game->getText()->setTextLow(8);
+		game->getText()->setTextHigh(9);
+		game->getText()->setTextIndex(8);
+		game->getGUI()->getScreen(GS_GAME_OVER)->setTextIndex(8);
+		game->getGSM()->goToMainMenu();
+		game->getGSM()->goToDeathScreen();
+	}
 
 	player.updateSprite();
 	player.updateStatus();
@@ -551,4 +561,43 @@ void SpriteManager::update(Game *game)
 		else
 		effectIt++;
 	}
+}
+
+
+void SpriteManager::resetBots(Game *game)
+{
+	// NOW UPDATE THE REST OF THE SPRITES
+	list<Bot*>::iterator botIterator;
+	botIterator = bots.begin();
+	while (botIterator != bots.end())
+	{
+		Bot *bot = (*botIterator);
+		if (bot->getType() == L"MAGE_BOSS" || bot->getType() == L"LAVA_BOSS")
+		{
+			// THE BOSSES ARE TOO COMPLICATED TO RESET RIGHT NOW SO JUST DELETE THEM
+			game->getGSM()->getPhyiscs()->deactivateBot(bot);
+			game->getGSM()->getPhyiscs()->getGameWorld()->DestroyBody(bot->getBody());
+			delete bot;
+		}
+		else
+		{
+			game->getGSM()->getPhyiscs()->deactivateBot(bot);
+			bot->reset(game);
+			bot->resetSprite();
+			bot->setMarkedForDeath(false);
+			recycler.recycleBot(bot->getType(),bot);
+			
+			
+		}
+
+		botIterator++;
+		
+	}
+	bots.clear();
+	OdysseyDataLoader* dl = dynamic_cast <OdysseyDataLoader*>(game->getDataLoader());
+	player.reset();
+	game->getGSM()->getPhyiscs()->resetPlayer(&player);
+	dl->loadBotsFromLua(game->getCurrentLevelFileName(), game);
+
+
 }

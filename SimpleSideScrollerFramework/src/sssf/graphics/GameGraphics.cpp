@@ -110,11 +110,7 @@ void GameGraphics::renderText(GameText *text)
 		
 	}
 
-	if (game->getGSM()->getCurrentGameState() == GS_GAME_OVER)
-	{
-		TextToDraw *textToDraw = text->getTextToDrawAtIndex(5);
-		renderTextToDraw(textToDraw);
-	}
+	
 	if (game->getGSM()->getCurrentGameState() == GS_GAME_IN_PROGRESS)
 	{
 		TextToDraw *textToDraw = text->getTextToDrawAtIndex(5);
@@ -170,7 +166,7 @@ void GameGraphics::renderText(GameText *text)
 			textToDraw->textAlphaCounter = textToDraw->textAlphaCounter--;
 	}
 
-	if (game->getGSM()->getCurrentGameState() == GS_MAIN_MENU || game->getGSM()->getCurrentGameState() == GS_PAUSED)
+	if (game->getGSM()->getCurrentGameState() == GS_MAIN_MENU || game->getGSM()->getCurrentGameState() == GS_PAUSED || game->getGSM()->getCurrentGameState() == GS_GAME_OVER)
 	{
 
 

@@ -60,7 +60,6 @@ private:
 
 	// THE BotRecycler MAKES SURE WE DON'T HAVE TO CONSTRUCT BOTS WHENEVER
 	// WE NEED TO SPAWN THEM, INSTEAD IT WILL RECYCLE THEM FOR US
-	BotRecycler recyclableBots;
 
 public:
 	// NOTHING TO INIT OR DESTROY
@@ -113,5 +112,6 @@ public:
 	void				unloadSprites(GameStateManager *gsm);
 	void				update(Game *game);
 	void				updateShootingStars(Game *game);
+	void				resetBots(Game *game);
 	//AnimatedSprite*		getLifeSprite(int id);
 };

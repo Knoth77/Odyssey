@@ -17,6 +17,13 @@ TigerBot::~TigerBot()
 {
 }
 
+void TigerBot::reset(Game *game)
+{
+	finishedAttacking = true;
+    chase = false;
+	MeleeBot::reset(game);
+}
+
 void TigerBot::think(Game *game)
 {
 

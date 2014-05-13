@@ -18,6 +18,9 @@ private:
 	Game *game;
 	AnimatedSprite *status;
 	unsigned int statusLoop;
+
+	int initX;
+	int initY;
 	
 
 public:
@@ -31,6 +34,22 @@ public:
 		ROCKET
 
 	};
+
+	void setInitPos(int x, int y)
+	{
+		initX = x;
+		initY = y;
+	}
+
+	int getInitX()
+	{
+		return initX;
+	}
+
+	int getInitY()
+	{
+		return initY;
+	}
 
 	void initStatusSprite();
 
@@ -128,6 +147,9 @@ public:
 		outOfHealth = false;
 		immuneCounter = 66;
 		isImmune = false;
+		statusLoop = 0;
+		status->setCurrentState(L"NONE");
+		
 	}
 };
 

@@ -377,11 +377,67 @@ void OdysseyKeyEventHandler::handleKeyEvents(Game *game)
 		}
 	}
 
-	if (game->getGSM()->getCurrentGameState() == GS_DEATH_SCREEN)
+	if (game->getGSM()->getCurrentGameState() == GS_GAME_OVER)
 	{
+		if (input->isKeyDownForFirstTime(VK_UP))
+		{
+			if (game->getGUI()->getScreen(GS_GAME_OVER)->getTextIndex() == game->getText()->getTextLow())
+			{
+			}
+			else
+			{
+				game->getGUI()->getScreen(GS_GAME_OVER)->setTextIndex(game->getGUI()->getScreen(GS_GAME_OVER)->getTextIndex() - 1);
+			}
+
+		}
+
+		if (input->isKeyDownForFirstTime(VK_DOWN))
+		{
+			if (game->getGUI()->getScreen(GS_GAME_OVER)->getTextIndex() == game->getText()->getTextHigh())
+			{
+			}
+			else
+			{
+				game->getGUI()->getScreen(GS_GAME_OVER)->setTextIndex(game->getGUI()->getScreen(GS_GAME_OVER)->getTextIndex() + 1);
+			}
+		}
+
+		game->getText()->setTextIndex(game->getGUI()->getScreen(GS_GAME_OVER)->getTextIndex());
+
+
 		if (input->isKeyDownForFirstTime(VK_RETURN))
 		{
-			game->quitGame();
+			int selected = game->getText()->getTextIndex();
+
+			if (selected == 8)
+			{
+				game->getGSM()->resetLevel(game, game->getCurrentLevelFileName());
+				game->getGSM()->goToGame();
+			}
+			if (selected == 9)
+			{
+				ifstream checkFile(SAVE_PATH);
+				if (checkFile) // IS A GAME IN PRORGESS?
+				{
+					game->getText()->setTextLow(1);
+					game->getText()->setTextHigh(4);
+					game->getText()->setTextIndex(1);
+					//game->getGSM()->goToMainMenu();
+				}
+				else
+				{
+					game->getText()->setTextLow(2);
+					game->getText()->setTextHigh(4);
+					game->getText()->setTextIndex(2);
+					game->getGUI()->getScreen(GS_MAIN_MENU)->setTextIndex(2);
+					//game->getGSM()->goToMainMenu();
+				}
+				checkFile.close();
+
+				game->quitGame();
+				return;
+			}
+			
 		}
 	}
 

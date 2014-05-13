@@ -21,6 +21,11 @@ SkullBot::~SkullBot()
 {
 }
 
+void SkullBot::reset(Game *game)
+{
+	MeleeBot::reset(game);
+}
+
 void SkullBot::changeAnimationState()
 {
 	if (this->getMarkedForDeath() == true)

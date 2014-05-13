@@ -33,7 +33,9 @@ MageBoss::~MageBoss()
 		if (orbs[i] != NULL)
 		{
 
-			orbs[i]->getBody();
+			game->getGSM()->getPhyiscs()->getGameWorld()->DestroyBody(orbs[i]->getBody());
+			delete orbs[i];
+			orbs[i] = NULL;
 		}
 	}
 }
@@ -145,6 +147,12 @@ void MageBoss::deactivateOrbs()
 	{
 		game->getGSM()->getPhyiscs()->deactivateMageOrb(orbs[i]);
 	}
+}
+
+void MageBoss::destroyOrbs()
+{
+	orbsActive = false;
+	//todo?
 }
 
 void MageBoss::think(Game *game)
@@ -451,5 +459,7 @@ Bot* MageBoss::clone(Game *game)
 	game->getGSM()->getPhyiscs()->initMageBoss(newBot, 40, 40, 50);
 	newBot->movementPattern->setBody(newBot->getBody());
 	newBot->registerGame(this->game);
+	newBot->setRangeX(this->rangeX);
+	newBot->setRangeY(this->rangeY);
 	return newBot;
 }

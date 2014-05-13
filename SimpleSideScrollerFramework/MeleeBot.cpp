@@ -13,7 +13,7 @@ MeleeBot::MeleeBot()
 	this->setJustShot(false);
 	readyToDamagePlayer = false;
 	playerInAttackRadius = false;
-	dmgCountDown = 33;
+	
 	//type = L"MELEE_BOT";
 }
 
@@ -29,6 +29,16 @@ void MeleeBot::think(Game *game)
 
 
 
+}
+
+void MeleeBot::reset(Game *game)
+{
+	this->setPlayerInRadius(false);
+	this->setJustShot(false);
+	readyToDamagePlayer = false;
+	playerInAttackRadius = false;
+	int resetHealth = game->getGSM()->getSpriteManager()->getBotRecycler()->viewSampleBot(this->getType())->getHealth();
+	this->setHealth(resetHealth);
 }
 
 

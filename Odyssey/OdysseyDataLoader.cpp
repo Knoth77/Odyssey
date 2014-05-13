@@ -273,6 +273,7 @@ void OdysseyDataLoader::loadWorld(Game *game, wstring levelInitFile)
 	player->setPlayerHealth(200);
 	player->setStartingHealth(200);
 	player->registerPlayer(game);
+	gsm->getSpriteManager()->getPlayer()->initStatusSprite();
 	player->reset();
 	BulletRecycler *bulletRecycler = spriteManager->getBulletRecycler();
 //	BulletRecycler *enemyBulletRecycler = spriteManager->getEnemyBulletRecycler();
@@ -380,10 +381,40 @@ void OdysseyDataLoader::loadWorld(Game *game, wstring levelInitFile)
 	bulletRecycler->registerBulletType(L"LAVA_BALL", sampleLavaBall);
 	bulletRecycler->initRecyclableBullets(game, L"LAVA_BALL", 40);
 
+	int result = -1;
 
 
+	if (levelInitFile == W_LEVEL_1_NAME)
+	{
+		result = luaPState->DoFile(LEVEL_1_LUA_PATH.c_str());
+	}
 
-	this->loadBotsFromLua(levelInitFile, game);
+	if (levelInitFile == W_LEVEL_2_NAME)
+	{
+		result = luaPState->DoFile(LEVEL_2_LUA_PATH.c_str());
+	}
+
+	if (levelInitFile == W_LEVEL_3_NAME)
+	{
+		result = luaPState->DoFile(LEVEL_3_LUA_PATH.c_str());
+	}
+
+	if (result != -1)
+	{
+		
+		LuaObject pX = luaPState->GetGlobal("playerStartX");
+		LuaObject pY = luaPState->GetGlobal("playerStartY");
+		int playerX = pX.GetInteger();
+		int playerY = pX.GetInteger();
+
+		player->setInitPos(playerX, playerY);
+
+		gsm->getPhyiscs()->initPlayer(player, playerX, playerY);
+		
+
+
+		this->loadBotsFromLua(levelInitFile, game);
+	}
 	
 
 }
@@ -396,18 +427,8 @@ void OdysseyDataLoader::loadBotsFromLua(wstring levelName, Game *game)
 	SpriteManager *spriteManager = gsm->getSpriteManager();
 	Player *player = spriteManager->getPlayer();
 	BotRecycler *recycler = spriteManager->getBotRecycler();
-
-	if (levelName == W_LEVEL_1_NAME)
-	{
-		int result = luaPState->DoFile(LEVEL_1_LUA_PATH.c_str());
-		LuaObject botTable = luaPState->GetGlobal("botTypes");
-		LuaObject pX = luaPState->GetGlobal("playerStartX");
-		LuaObject pY = luaPState->GetGlobal("playerStartY");
-		int playerX = pX.GetInteger();
-		int playerY = pX.GetInteger();
-
-		gsm->getPhyiscs()->initPlayer(player, playerX, playerY);
-		gsm->getSpriteManager()->getPlayer()->initStatusSprite();
+	
+	LuaObject botTable = luaPState->GetGlobal("botTypes");
 
 		AnimatedSpriteType *botSpriteType = NULL;
 
@@ -588,7 +609,8 @@ void OdysseyDataLoader::loadBotsFromLua(wstring levelName, Game *game)
 		}
 
 
-	}
+	
+	/*
 	else if (levelName == W_LEVEL_2_NAME)
 	{
 		int result = luaPState->DoFile(LEVEL_2_LUA_PATH.c_str());
@@ -824,7 +846,7 @@ void OdysseyDataLoader::loadBotsFromLua(wstring levelName, Game *game)
 		skBot = dynamic_cast<SkullBot*>(bot);
 		skBot->changeMovementType(SimpleMovement::LINEAR_VERTICAL);*/
 
-	}
+	//}*/
 }
 // THESE ARE HARD-CODED EXAMPLES OF GUI DATA LOADING
 void OdysseyDataLoader::hardCodedLoadGUIExample(Game *game)
@@ -1011,9 +1033,9 @@ void OdysseyDataLoader::initDeathScreen(Game *game, GameGUI *gui, DirectXTexture
 
 	SplashScreenGUI *deathScreen = new SplashScreenGUI();
 
-	deathScreen->setTextHigh(7);
-	deathScreen->setTextLow(6);
-	deathScreen->setTextIndex(8);
+	deathScreen->setTextHigh(9);
+	deathScreen->setTextLow(8);
+	deathScreen->setTextIndex(9);
 	// WE'LL ONLY HAVE ONE IMAGE FOR OUR GIANT BUTTON
 	unsigned int normalTextureID = guiTextureManager->loadTexture(W_DEATH_SCREEN_PATH);
 	unsigned int mouseOverTextureID = normalTextureID;
@@ -1028,7 +1050,7 @@ void OdysseyDataLoader::initDeathScreen(Game *game, GameGUI *gui, DirectXTexture
 	imageToAdd->imageID = normalTextureID;
 	deathScreen->addOverlayImage(imageToAdd);
 
-	gui->addScreenGUI(GS_DEATH_SCREEN, deathScreen);
+	gui->addScreenGUI(GS_GAME_OVER, deathScreen);
 }
 
 void OdysseyDataLoader::initLevelSelectScreen(Game *game, GameGUI *gui, DirectXTextureManager *guiTextureManager)

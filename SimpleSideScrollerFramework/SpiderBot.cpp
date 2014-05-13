@@ -17,6 +17,14 @@ SpiderBot::~SpiderBot()
 {
 }
 
+
+void SpiderBot::reset(Game *game)
+{
+	finishedAttacking = true;
+    chase = false;
+	MeleeBot::reset(game);
+}
+
 void SpiderBot::think(Game *game)
 {
 

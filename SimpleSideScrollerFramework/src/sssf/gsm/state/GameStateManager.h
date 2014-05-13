@@ -102,6 +102,7 @@ public:
 	void			shutdown();
 	void			loadLevel(Game *game, unsigned int levelNum);
 	void			loadLevel(Game *game, wstring levelName);
+	void			resetLevel(Game *game, wstring levelName);
 	void			unloadCurrentLevel();
 	void			update(Game *game);
 	void			updateForLevelSelect(Game *game);

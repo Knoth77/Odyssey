@@ -101,7 +101,7 @@ void GameStateManager::goToVictoryScreen()
 
 void GameStateManager::goToDeathScreen()
 {
-	currentGameState = GS_DEATH_SCREEN;
+	currentGameState = GS_GAME_OVER;
 }
 
 void GameStateManager::goToHelpScreen()
@@ -208,6 +208,15 @@ void GameStateManager::loadLevel(Game *game, unsigned int initLevel)
 		GameDataLoader *dataLoader = game->getDataLoader();
 		dataLoader->loadWorld(game, fileToLoad);
 	}
+}
+/*
+	resetLevel - resets all the sprites and other stuff on a level, this is used for say 
+	if the player dies and wants to restart the level
+*/
+void GameStateManager::resetLevel(Game *game, wstring levelName)
+{
+	spriteManager->resetBots(game);
+	game->getHud()->resetHud();
 }
 
 /*

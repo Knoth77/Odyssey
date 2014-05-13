@@ -84,6 +84,8 @@ public:
 		healthWidth = 300;
 		if (healthBar != NULL)
 			healthBar->width = 300;
+
+		livesBar->imageID = livesBarStates[currentLivesBarState];
 	}
 
 	// WHERE X IS CURRENT HEALTH, AND Y IS THE PLAYERS STARTING HEALTH

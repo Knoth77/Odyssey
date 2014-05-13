@@ -13,7 +13,8 @@
 
 
 wstring	W_SPALSH_TEXT = L"[Press ENTER To Play]";
-wstring	W_CONT_TEXT = L"[Press ENTER To Continue]";
+//wstring	W_CONT_TEXT = L"[Press ENTER To Continue]";
+wstring	W_CONT_TEXT =   L"Retry"; // for game over
 wstring	W_MAIN_TEXT_1 = L"Continue Game";
 wstring	W_MAIN_TEXT_2 = L"New Game";
 wstring	W_MAIN_TEXT_3 = L"Controls";
@@ -22,6 +23,8 @@ wstring	W_MAIN_TEXT_4 = L"Quit";
 wstring W_PAUSE_TEXT_1 = L"Resume";
 wstring W_PAUSE_TEXT_2 = L"Quit";
 wstring W_MOUSE_COORDS_TEXT = L"Mouse: (";
+
+wstring W_GAME_OVER_QUIT = L"Quit";
 
 OdysseyTextGenerator::OdysseyTextGenerator()
 {
@@ -45,6 +48,7 @@ void OdysseyTextGenerator::initText(Game *game)
 	text->addText(&W_PAUSE_TEXT_1, 500, 610, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
 	text->addText(&W_PAUSE_TEXT_2, 500, 640, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
 	text->addText(&W_CONT_TEXT, 500, 550, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
+	text->addText(&W_GAME_OVER_QUIT, 500, 570, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
 
 }
 

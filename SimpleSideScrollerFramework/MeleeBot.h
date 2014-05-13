@@ -11,7 +11,7 @@ public:
 
 	virtual void think(Game *game)=0;
 	virtual Bot* clone(Game *game)=0;
-
+	void reset(Game *game);
 
 	bool isReadyToDamagePlayer()
 	{

@@ -17,6 +17,11 @@ RatBot::~RatBot()
 {
 }
 
+void RatBot::reset(Game *game)
+{
+	MeleeBot::reset(game);
+}
+
 void RatBot::think(Game *game)
 {
 

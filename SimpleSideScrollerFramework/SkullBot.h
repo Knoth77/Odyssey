@@ -22,5 +22,7 @@ public:
 	Bot* clone(Game *game);
 	void think(Game *game);
 
+	void reset(Game *game);
+
 };
 

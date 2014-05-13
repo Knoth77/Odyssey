@@ -152,3 +152,10 @@ void BotRecycler::addMoreBots(Game *game,list<Bot *> *botsNeededList, wstring bo
 		botsNeededList->push_back(botClone);
 	}
 }
+
+
+Bot* BotRecycler::viewSampleBot(wstring sampleType)
+{
+	Bot *sample = registeredBotTypes[sampleType];
+	return sample;
+}

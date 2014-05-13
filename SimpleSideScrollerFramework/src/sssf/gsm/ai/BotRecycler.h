@@ -26,4 +26,5 @@ public:
 	Bot* retrieveBot(Game *game,wstring botType);
 
 	void reset(GameStateManager *gsm);
+	Bot* viewSampleBot(wstring botType);
 };

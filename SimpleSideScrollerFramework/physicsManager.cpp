@@ -5,6 +5,7 @@
 #include "../SimpleSideScrollerFramework/src/sssf/gsm/world/World.h"
 #include "../SimpleSideScrollerFramework/src/sssf/gsm/world/WorldLayer.h"
 #include"../SimpleSideScrollerFramework/src/sssf/gsm/sprite/SpriteManager.h"
+#include "../SimpleSideScrollerFramework/src/sssf/gui/GameGUI.h"
 #include "stdafx.h"
 
 #define DEGTORAD 0.0174532925199432957f
@@ -769,11 +770,7 @@ void physicsManager::gameWorldStep()
 		viewport->moveViewport(viewport->getScrollSpeedX(), viewport->getScrollSpeedY(), 3200, 3200);
 	}
 
-	if (game->getGSM()->getSpriteManager()->getPlayer()->isOutOfLives())//game->getGSM()->getSpriteManager()->getPlayer()->getPlayerHealth() <= 0)
-	{
-		game->getAudio()->stopAllAudio();
-		game->getGSM()->goToDeathScreen();
-	}
+	
 
 	/*if (playerBody->GetAngularVelocity() != 0)
 		playerBody->SetAngularVelocity(playerBody->GetAngularVelocity()/2);*/
@@ -1186,5 +1183,13 @@ void physicsManager::initWallForGame(float x, float y)
 	staticBody->CreateFixture(&myFixtureDef);
 
 
+}
+
+void physicsManager::resetPlayer(Player *p)
+{
+	float x = p->getInitX() * pixelScaling;
+	float y = p->getInitY() * pixelScaling;
+
+	p->getBody()->SetTransform(b2Vec2(x, y), p->getBody()->GetAngle());
 }
 

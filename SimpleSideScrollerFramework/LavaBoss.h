@@ -38,6 +38,7 @@ public:
 	//void setWalkTicks(int wT) { walkTicks = wT; }
 	Bot* clone(Game *game);
 	void think(Game *game);
+	void reset(Game *game){}
 
 };
 

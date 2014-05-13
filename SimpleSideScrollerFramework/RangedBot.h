@@ -29,5 +29,8 @@ public:
 	{
 		playerInRange = b;
 	}
+
+	void reset(Game *game)
+	{}
 };
 

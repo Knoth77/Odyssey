@@ -132,6 +132,8 @@ public:
 
 	void initPlayer(Player *player, float x, float y);
 
+	void resetPlayer(Player *p);
+
 	void movePlayerLeft();
 	void movePlayerRight();
 	void movePlayerUp();
