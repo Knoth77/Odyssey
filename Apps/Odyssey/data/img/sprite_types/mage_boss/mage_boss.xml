@@ -31,6 +31,13 @@
   <image_file id="26"  file_name="PhaseThreeShock/ShockTwoAura.png"/>
   <image_file id="27"  file_name="PhaseThreeShock/ShockThreeAura.png"/>
   <image_file id="28"  file_name="PhaseThreeShock/ShockFourAura.png"/>
+  <image_file id="29"  file_name="PhaseThree/Death/1.png"/>
+  <image_file id="30"  file_name="PhaseThree/Death/2.png"/>
+  <image_file id="32"  file_name="PhaseThree/Death/3.png"/>
+  <image_file id="33"  file_name="PhaseThree/Death/4.png"/>
+  <image_file id="34"  file_name="PhaseThree/Death/5.png"/>
+  <image_file id="35"  file_name="PhaseThree/Death/6.png"/>
+  <image_file id="36"  file_name="PhaseThree/Death/7.png"/>
  </images_list>
  <animations_list>
 
@@ -123,6 +130,27 @@
 	<pose image_id="28" duration="5"/>
 	<pose image_id="27" duration="5"/>
 	<pose image_id="26" duration="5"/>
+   </animation_sequence>
+  </animation_state>
+  
+      <animation_state>
+  <state>DEATH</state>
+   <animation_sequence>
+    <pose image_id="29" duration="5"/>
+	<pose image_id="30" duration="5"/>
+	<pose image_id="31" duration="5"/>
+	<pose image_id="32" duration="5"/>
+	<pose image_id="33" duration="5"/>
+	<pose image_id="34" duration="5"/>
+	<pose image_id="35" duration="5"/>
+	<pose image_id="36" duration="5"/>	
+   </animation_sequence>
+  </animation_state>
+  
+    <animation_state>
+  <state>DEAD</state>
+   <animation_sequence>
+    <pose image_id="36" duration="5"/>
    </animation_sequence>
   </animation_state>
   
