@@ -417,12 +417,12 @@ void SpriteManager::update(Game *game)
 	
 	if (player.isOutOfLives())//game->getGSM()->getSpriteManager()->getPlayer()->getPlayerHealth() <= 0)
 	{
-		game->getAudio()->stopAllAudio();
+		//game->getAudio()->stopAllAudio();
 		game->getText()->setTextLow(8);
 		game->getText()->setTextHigh(9);
 		game->getText()->setTextIndex(8);
 		game->getGUI()->getScreen(GS_GAME_OVER)->setTextIndex(8);
-		game->getGSM()->goToMainMenu();
+	//	game->getGSM()->goToMainMenu();
 		game->getGSM()->goToDeathScreen();
 	}
 
@@ -446,9 +446,14 @@ void SpriteManager::update(Game *game)
 
 				if ((bX < viewX || bY < viewY) || (bY > (viewY + viewH) || bX > (viewX + viewW)))
 				{
-					game->getGSM()->getPhyiscs()->deactivateBullet(bullet);
-					bulletRecycler.recycleBullet(bullet->getType(), bullet);
-					activeBullets.erase(bulletsIt++);
+					//if (bullet->getType() != L"LIGHTNING" && bullet->getType() != L"FIREBALL")
+					//{
+						game->getGSM()->getPhyiscs()->deactivateBullet(bullet);
+						bulletRecycler.recycleBullet(bullet->getType(), bullet);
+						activeBullets.erase(bulletsIt++);
+					//}
+					//else
+						//bulletsIt++;
 				}
 				else
 				{

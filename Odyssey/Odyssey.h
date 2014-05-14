@@ -34,8 +34,9 @@ static const wstring W_LIVES_THREE_PATH = L"data/img/gui/hud/lifebar/green/lives
 //~~Hud Constants End~~//
 
 //Music Constants
-static const wstring W_LEVEL_ONE_MUSIC_PATH = L"data/music/music5.wav";
-static const wstring W_LEVEL_TWO_MUSIC_PATH = L"data/music/music2.wav";
+static const wstring W_LEVEL_ONE_MUSIC_PATH = L"data/music/mainsoundtrack.wav";
+static const wstring W_LEVEL_TWO_MUSIC_PATH = L"data/music/mainsoundtrack.wav";
+
 
 static const wstring	W_LEVEL_ONE_NORMAL = L"data/img/gui/buttons/level1/planet1.png";
 static const wstring	W_LEVEL_ONE_SELECT1 = L"data/img/gui/buttons/level1/planet1_selected1.png";

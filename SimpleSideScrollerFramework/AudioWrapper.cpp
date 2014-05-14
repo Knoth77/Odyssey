@@ -189,8 +189,10 @@ int AudioWrapper::playPCM(IXAudio2* audioEngine, WCHAR *path, bool infiniteLoop)
 			{
 				buffer.LoopCount = XAUDIO2_MAX_LOOP_COUNT;
 				loopingVoices.push_back(i);
-				sourceVoices[i]->SetVolume(0.45f);//half volume for music
+				sourceVoices[i]->SetVolume(0.75f);//half volume for music
 			}
+			else
+				sourceVoices[i]->SetVolume(0.15f);
 
 			sourceVoices[i]->SubmitSourceBuffer(&buffer);
 			sourceVoices[i]->Start(0);
