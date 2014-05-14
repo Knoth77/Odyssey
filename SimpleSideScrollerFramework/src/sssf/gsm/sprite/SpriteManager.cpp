@@ -97,6 +97,17 @@ void SpriteManager::addSpriteToRenderList(AnimatedSprite *sprite,
 		}
 		
 	}
+	else
+	{
+		Effect *e = dynamic_cast<Effect*>(sprite);
+		if (e != 0)
+		{
+			rotation = e->getAngle();
+			x = x - 50;
+
+
+		}
+	}
 
 	// IS THE SPRITE VIEWABLE?
 	if (viewport->areWorldCoordinatesInViewport(	// HARD CODED VALUES FOR TESTING

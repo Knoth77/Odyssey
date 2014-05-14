@@ -264,6 +264,9 @@
     <ClCompile Include="TigerBot.cpp">
       <Filter>src\sssf\gsm\ai</Filter>
     </ClCompile>
+    <ClCompile Include="SkullAttackEffect.cpp">
+      <Filter>src\sssf\gsm\sprite\effects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\sssf_VS\targetver.h">
@@ -485,6 +488,9 @@
     </ClInclude>
     <ClInclude Include="RatBot.h">
       <Filter>src\sssf\gsm\ai</Filter>
+    </ClInclude>
+    <ClInclude Include="SkullAttackEffect.h">
+      <Filter>src\sssf\gsm\sprite\effects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

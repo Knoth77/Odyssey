@@ -41,6 +41,7 @@
     <ClCompile Include="SDKwavefile.cpp" />
     <ClCompile Include="ShootingStar.cpp" />
     <ClCompile Include="SimpleMovement.cpp" />
+    <ClCompile Include="SkullAttackEffect.cpp" />
     <ClCompile Include="SkullBot.cpp" />
     <ClCompile Include="SpiderBot.cpp" />
     <ClCompile Include="src\sssf\data_loader\GameDataLoader.cpp" />
@@ -104,6 +105,7 @@
     <ClInclude Include="SDKwavefile.h" />
     <ClInclude Include="ShootingStar.h" />
     <ClInclude Include="SimpleMovement.h" />
+    <ClInclude Include="SkullAttackEffect.h" />
     <ClInclude Include="SkullBot.h" />
     <ClInclude Include="SpiderBot.h" />
     <ClInclude Include="src\sssf\data_loader\GameDataLoader.h" />

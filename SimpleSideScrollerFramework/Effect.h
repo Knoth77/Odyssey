@@ -9,6 +9,7 @@ class Effect :	public AnimatedSprite
 protected:
 
 	wstring type;
+	float angle;
 
 public:
 	Effect();
@@ -20,6 +21,8 @@ public:
 		return type;
 	}
 	void reset();
+	float getAngle(){ return angle; }
+	void setAngle(float f){ angle = f; }
 
 	virtual Effect* clone(Game *game) = 0;
 };

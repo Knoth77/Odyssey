@@ -33,6 +33,7 @@
 #include "Lightning.h"
 #include "TigerBot.h"
 #include "RatBot.h"
+#include "SkullAttackEffect.h"
 
 // GAME OBJECT INCLUDES
 
@@ -292,6 +293,16 @@ void OdysseyDataLoader::loadWorld(Game *game, wstring levelInitFile)
 	AnimatedSpriteType *darkenergySS = spriteManager->getSpriteType(15);
 	AnimatedSpriteType *lavaBallSS = spriteManager->getSpriteType(17);
 	AnimatedSpriteType *lightningSS = spriteManager->getSpriteType(18);
+	AnimatedSpriteType *skullAttackSS = spriteManager->getSpriteType(21);
+
+	SkullAttackEffect *sampleSAE = new SkullAttackEffect();
+	sampleSAE->setSpriteType(skullAttackSS);
+	sampleSAE->setAlpha(255);
+	sampleSAE->setCurrentState(L"ATTACK");
+
+	effectRecycler->registerEffectType(L"SKULLATTACKEFFECT", sampleSAE);
+	effectRecycler->initRecyclableEffects(game, L"SKULLATTACKEFFECT", 40);
+
 
 	Lightning *sampleLightning = new Lightning();
 

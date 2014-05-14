@@ -13,6 +13,7 @@ SkullBot::SkullBot()
 	//lastState = "north";
 	//ticksMoved = 0;
 	type = L"SKULL_BOT";	
+	dmgCountDown = 33;
 }
 
 
@@ -101,17 +102,31 @@ void SkullBot::think(Game *game)
 
 			// WHEN THE PLAYER IS IN THE ATTACK RADIUS WE NOW CAN CONTROL WHEN TO DAMAGE HIM
 			// IT CAN BE ON A SET INTERVAL OR ON A SPECIFIC FRAME OF THE ATTACK ANIMATION
+
+			if (dmgCountDown == 6)
+			{
+				Effect *skullAttack = game->getGSM()->getSpriteManager()->getEffectRecycler()->retrieveEffect(game, L"SKULLATTACKEFFECT");
+
+				skullAttack->setDefaultX(((this->getBody()->GetPosition().x) / game->getGSM()->getPhyiscs()->getPixelScaling()));
+				skullAttack->setDefaultY(((this->getBody()->GetPosition().y) / game->getGSM()->getPhyiscs()->getPixelScaling()));
+				skullAttack->setCurrentState(L"ATTACK");
+
+				float dx = game->getGSM()->getPhyiscs()->getPlayerBody()->GetPosition().x - this->getBody()->GetPosition().x;
+				float dy = game->getGSM()->getPhyiscs()->getPlayerBody()->GetPosition().y - this->getBody()->GetPosition().y;
+				float angle = atan2f(dy, dx);
+
+				skullAttack->setAngle(angle);
+
+				game->getGSM()->getSpriteManager()->addEffect(skullAttack);
+			}
+
 			dmgCountDown--;
 			if (dmgCountDown == 0)
 			{
-				Player *player = game->getGSM()->getSpriteManager()->getPlayer();
-				if (!player->getDamageImune())
-				{
-					//player->setPlayerHealth(player->getPlayerHealth() - 5);
-					game->getGSM()->getSpriteManager()->getPlayer()->decPlayerHealth(10);
-					//game->getHud()->setHealthWidth(game->getGSM()->getSpriteManager()->getPlayer()->getPlayerHealth(), game->getGSM()->getSpriteManager()->getPlayer()->getStartingHealth());
-				}
+				Player *player = game->getGSM()->getSpriteManager()->getPlayer();				
+				game->getGSM()->getSpriteManager()->getPlayer()->decPlayerHealth(10);				
 				dmgCountDown = 33;
+
 
 			}
 
