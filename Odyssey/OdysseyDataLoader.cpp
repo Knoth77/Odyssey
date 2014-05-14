@@ -24,9 +24,11 @@
 #include "SkullBot.h"
 #include "SpiderBot.h"
 #include "LavaBoss.h"
+#include "Andromalius.h"
 #include "MageBoss.h"
 #include "Fireball.h"
 #include "MageBullet.h"
+#include "AndromaliusBullet.h"
 #include "LavaBurst.h"
 #include "DarkEnergyEffect.h"
 #include "LavaBall.h"
@@ -294,6 +296,7 @@ void OdysseyDataLoader::loadWorld(Game *game, wstring levelInitFile)
 	AnimatedSpriteType *lavaBallSS = spriteManager->getSpriteType(17);
 	AnimatedSpriteType *lightningSS = spriteManager->getSpriteType(18);
 	AnimatedSpriteType *skullAttackSS = spriteManager->getSpriteType(21);
+	AnimatedSpriteType *andromaliusBulletSS = spriteManager->getSpriteType(23);
 
 	SkullAttackEffect *sampleSAE = new SkullAttackEffect();
 	sampleSAE->setSpriteType(skullAttackSS);
@@ -371,6 +374,18 @@ void OdysseyDataLoader::loadWorld(Game *game, wstring levelInitFile)
 
 	bulletRecycler->registerBulletType(L"MAGE_BULLET", sampleMageBullet);
 	bulletRecycler->initRecyclableBullets(game, L"MAGE_BULLET", 40);
+
+
+	AndromaliusBullet *sampleAndroMaliusBullet = new AndromaliusBullet();
+
+	sampleAndroMaliusBullet->setSpriteType(andromaliusBulletSS);
+	sampleAndroMaliusBullet->setAlpha(255);
+	sampleAndroMaliusBullet->setCurrentState(PRIMARY_FIRE);
+	game->getGSM()->getPhyiscs()->initEnemyBullet(sampleAndroMaliusBullet);
+
+	bulletRecycler->registerBulletType(L"ANDROMALIUS_BULLET", sampleAndroMaliusBullet);
+	bulletRecycler->initRecyclableBullets(game, L"ANDROMALIUS_BULLET", 40);
+
 
 	LavaBurst *sampleLavaBurst = new LavaBurst();
 

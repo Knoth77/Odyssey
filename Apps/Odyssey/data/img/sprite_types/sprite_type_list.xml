@@ -23,4 +23,5 @@
   <sprite_type>rat</sprite_type>
   <sprite_type>skullattack</sprite_type>
   <sprite_type>andromalius</sprite_type>
+  <sprite_type>poison_burst</sprite_type>
 </sprite_type_list>
