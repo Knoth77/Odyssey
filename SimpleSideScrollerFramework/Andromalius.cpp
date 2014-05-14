@@ -41,21 +41,25 @@ void Andromalius::changeAnimationState()
 
 void Andromalius::nextMovement()
 {
+
 	if (this->isPlayerInRadius())
 	{
-
+		this->setCurrentState(L"DOWN");
+		this->getBody()->SetLinearVelocity(b2Vec2(0, 0));//Stop
 	}
+	this->getBody()->ApplyForce(b2Vec2(1, 0), b2Vec2(0,0), true);
 }
 
 
 void Andromalius::think(Game *game)
 {
 	//this->setCurrentState(L"LEFT");
-	return;
+	
 	int pX = this->getBody()->GetPosition().x;
 	int pY = this->getBody()->GetPosition().y;
 			nextMovement();
 			changeAnimationState();
+			
 			if (this->isPlayerInRadius() || this->wasJustShot())
 			{
 
@@ -83,10 +87,10 @@ void Andromalius::think(Game *game)
 			}
 			else
 			{
-				changeAnimationState();
+				//changeAnimationState();
 			}
 
-		
+			//return;
 	
 
 }
