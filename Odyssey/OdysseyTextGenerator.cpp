@@ -44,7 +44,7 @@ void OdysseyTextGenerator::initText(Game *game)
 	text->addText(&W_MAIN_TEXT_2, 500, 570, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
 	text->addText(&W_MAIN_TEXT_3, 500, 590, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
 	text->addText(&W_MAIN_TEXT_4, 500, 610, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
-	text->addText(&textToGenerate, 500, 10, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
+	text->addText(&textToGenerate, 500, 2, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
 	text->addText(&W_PAUSE_TEXT_1, 500, 610, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
 	text->addText(&W_PAUSE_TEXT_2, 500, 640, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
 	text->addText(&W_CONT_TEXT, 500, 550, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
@@ -63,6 +63,7 @@ void OdysseyTextGenerator::updateText(Game *game)
 	else//Append Player Hud Info
 	{
 		appendStats(game);
+		appendObjectives(game);
 	}
 }
 
@@ -99,5 +100,22 @@ void OdysseyTextGenerator::appendStats(Game* game)
 	wss << L"\tKills: ";
 	wss << game->getGSM()->getSpriteManager()->getNumKills();
 	textToGenerate.append(wss.str());
-	///game->getGSM()->getSpriteManager()->getBotsIterator();
+}
+
+void OdysseyTextGenerator::appendObjectives(Game* game)
+{
+	wstringstream wss;
+	if (game->getCurrentLevelFileName().compare(W_LEVEL_1_NAME) == 0)
+	{
+		wss << L"\nEliminate all enemies on this planet,\nand then take on the Balrog to escape!";
+	}
+	else if (game->getCurrentLevelFileName().compare(W_LEVEL_2_NAME) == 0)
+	{
+		wss << L"\nEliminate all enemies on this planet,\nand then take on the Mage to escape!";
+	}
+	else//3
+	{
+		wss << L"\nEliminate all enemies on this planet,\nand then take on Andromalius to escape!";
+	}
+	textToGenerate.append(wss.str());
 }

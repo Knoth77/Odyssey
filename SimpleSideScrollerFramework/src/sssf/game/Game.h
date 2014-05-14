@@ -76,7 +76,6 @@ private:
 	wstring				currentLevelFileName;
 	bool				_CENTER_SCREEN;
 	Hud* hud;
-
 public:
 	// INLINED ACCESSOR METHODS - THE REAL THINGS
 	GameStateManager*	getGSM()				{ return gsm;								}
