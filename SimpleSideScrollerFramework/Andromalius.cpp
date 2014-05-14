@@ -8,10 +8,13 @@ Andromalius::Andromalius()
 {
 	//movementPattern = new SimpleMovement(this->body, SimpleMovement::SQUARE);
 	bossHealth = 600;
+	moveTicks = 0;
+	maxMoveTicks = 40;
 	selectedGun = gunSelection::ANDROMALIUS_BULLET;
 	fireCooldown = 30;
 	bulletCooldown = 50;
 	type = L"ANDROMALIUS_BOSS";
+	lastOrientation = "right";
 	bulletFire = -1;
 	pivot = false;
 	fired = false;
@@ -37,6 +40,13 @@ void Andromalius::changeAnimationState()
 		else
 			this->setCurrentState(L"RIGHT");
 	}
+	else if (this->getBody()->GetLinearVelocity().x < 0)
+	{
+		if (this->isPlayerInRadius())
+			this->setCurrentState(L"LEFT_ATTACK");
+		else
+			this->setCurrentState(L"LEFT");
+	}
 }
 
 void Andromalius::nextMovement()
@@ -44,10 +54,27 @@ void Andromalius::nextMovement()
 
 	if (this->isPlayerInRadius())
 	{
+		this->getBody()->SetLinearVelocity(b2Vec2(0, 0));
 		this->setCurrentState(L"DOWN");
-		this->getBody()->SetLinearVelocity(b2Vec2(0, 0));//Stop
+		return;
 	}
-	this->getBody()->ApplyForce(b2Vec2(1, 0), b2Vec2(0,0), true);
+	
+
+	moveTicks++;
+	if (lastOrientation.compare("right") == 0)
+		this->getBody()->SetLinearVelocity(b2Vec2(1, 0));//East
+	else
+		this->getBody()->SetLinearVelocity(b2Vec2(-1, 0));//West
+	if (moveTicks > maxMoveTicks)
+	{
+		if (lastOrientation.compare("right") == 0)
+			lastOrientation = "left";
+		else
+			lastOrientation = "right";
+		moveTicks = 0;
+	}
+
+
 }
 
 
