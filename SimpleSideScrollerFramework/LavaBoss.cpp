@@ -133,7 +133,7 @@ void LavaBoss::think(Game *game)
 			if (b->getType() == L"LAVA_BURST")
 			{
 				bullPos = b->getBody()->GetPosition();
-				b->handleCollision(game);
+				b->setCollided(true);
 			}
 			active++;
 		}

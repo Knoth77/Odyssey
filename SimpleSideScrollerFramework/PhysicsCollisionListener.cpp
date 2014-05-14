@@ -10,6 +10,7 @@
 #include "LavaBoss.h"
 #include "TigerBot.h"
 #include "RatBot.h"
+#include "LavaBurst.h"
 
 
 PhysicsCollisionListener::PhysicsCollisionListener()
@@ -227,9 +228,28 @@ void PhysicsCollisionListener::BeginContact(b2Contact *contact)
 				}
 				else
 				{
-					a->handleCollision(game);
-					Player *p = static_cast<Player*>(B);
-					p->decPlayerHealth(a->getPrimaryDamage());
+					LavaBurst *lavaBurst = dynamic_cast<LavaBurst*>(A);
+					if (lavaBurst != 0)
+					{
+						if (lavaBurst->getCurrentState() == L"FULLSIZE")
+						{
+							a->handleCollision(game);
+							Player *p = static_cast<Player*>(B);
+							//p->decPlayerHealth(a->getPrimaryDamage());
+						}
+						else
+						{
+							a->handleCollision(game);
+							Player *p = static_cast<Player*>(B);
+							//p->decPlayerHealth(a->getPrimaryDamage());
+						}
+					}
+					else
+					{
+						a->handleCollision(game);
+						Player *p = static_cast<Player*>(B);
+						p->decPlayerHealth(a->getPrimaryDamage());
+					}
 					//game->getHud()->setHealthWidth(game->getGSM()->getSpriteManager()->getPlayer()->getPlayerHealth(), game->getGSM()->getSpriteManager()->getPlayer()->getStartingHealth());
 				}
 
@@ -257,9 +277,28 @@ void PhysicsCollisionListener::BeginContact(b2Contact *contact)
 				}
 				else
 				{
-					b->handleCollision(game);
-					Player *p = static_cast<Player*>(A);
-					p->decPlayerHealth(b->getPrimaryDamage());
+					LavaBurst *lavaBurst = dynamic_cast<LavaBurst*>(B);
+					if (lavaBurst != 0)
+					{
+						if (lavaBurst->getCurrentState() == L"FULLSIZE")
+						{
+							b->handleCollision(game);
+							Player *p = static_cast<Player*>(A);
+							//p->decPlayerHealth(b->getPrimaryDamage());
+						}
+						else
+						{
+							b->handleCollision(game);
+							Player *p = static_cast<Player*>(A);
+							//p->decPlayerHealth(b->getPrimaryDamage());
+						}
+					}
+					else
+					{
+						b->handleCollision(game);
+						Player *p = static_cast<Player*>(A);
+						p->decPlayerHealth(b->getPrimaryDamage());
+					}
 					//game->getHud()->setHealthWidth(game->getGSM()->getSpriteManager()->getPlayer()->getPlayerHealth(), game->getGSM()->getSpriteManager()->getPlayer()->getStartingHealth());
 				}
 

@@ -837,6 +837,44 @@ void physicsManager::initLavaBullet(Bullet *bullet)
 
 	b2FixtureDef fixtureDef;
 	fixtureDef.shape = &shape;
+	fixtureDef.density = 1000000.0f;
+	fixtureDef.isSensor = false;
+	fixtureDef.filter.categoryBits = collisionCatagory::ENEMY_BULLET;
+
+	uint16 mask = collisionCatagory::PLAYER | collisionCatagory::WALL;
+
+	fixtureDef.filter.maskBits = mask;
+
+	//myBodyDef.position.Set(x*pixelScaling, y*pixelScaling);
+
+	bullet->setBody(gameWorld->CreateBody(&myBodyDef));
+	b2Vec2 vel = bullet->getBody()->GetLinearVelocity();
+	vel.x = 0;
+	vel.y = 0;
+	bullet->getBody()->SetLinearVelocity(vel);
+	bullet->getBody()->CreateFixture(&fixtureDef);
+
+
+	//sprite->getBody()->SetTransform(sprite->getBody()->GetPosition(), 220 * DEGTORAD);
+}
+
+void physicsManager::initLavaBurstBullet(Bullet *bullet)
+{
+	/// static: zero mass, zero velocity, may be manually moved
+	b2BodyDef myBodyDef;
+	myBodyDef.userData = bullet;
+	myBodyDef.type = b2_staticBody;
+	myBodyDef.fixedRotation = true;
+
+	myBodyDef.bullet = true;
+	myBodyDef.active = false;
+
+
+	b2PolygonShape shape;
+	shape.SetAsBox(pixelScaling, pixelScaling);
+
+	b2FixtureDef fixtureDef;
+	fixtureDef.shape = &shape;
 	fixtureDef.density = 0.001f;
 	fixtureDef.isSensor = false;
 	fixtureDef.filter.categoryBits = collisionCatagory::ENEMY_BULLET;

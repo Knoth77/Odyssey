@@ -267,6 +267,9 @@
     <ClCompile Include="SkullAttackEffect.cpp">
       <Filter>src\sssf\gsm\sprite\effects</Filter>
     </ClCompile>
+    <ClCompile Include="LavaBurstRayCast.cpp">
+      <Filter>src\sssf\gsm\box2dmanager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\sssf_VS\targetver.h">
@@ -491,6 +494,9 @@
     </ClInclude>
     <ClInclude Include="SkullAttackEffect.h">
       <Filter>src\sssf\gsm\sprite\effects</Filter>
+    </ClInclude>
+    <ClInclude Include="LavaBurstRayCast.h">
+      <Filter>src\sssf\gsm\box2dmanager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

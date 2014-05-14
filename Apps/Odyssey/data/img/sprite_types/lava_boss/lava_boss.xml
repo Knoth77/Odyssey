@@ -147,6 +147,20 @@
    </animation_sequence>
   </animation_state>
   
+  <animation_state>
+  <state>DEATH</state>
+   <animation_sequence>
+	<pose image_id="29" duration="20"/>
+	<pose image_id="30" duration="20"/>
+	<pose image_id="31" duration="20"/>
+	<pose image_id="32" duration="20"/>
+	<pose image_id="33" duration="20"/>
+	<pose image_id="34" duration="20"/>
+	<pose image_id="35" duration="20"/>
+	<pose image_id="36" duration="20"/>
+	<pose image_id="20" duration="100000000000000000"/>
+   </animation_sequence>
+  </animation_state>
   
  </animations_list>  
 </sprite_type>

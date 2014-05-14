@@ -28,6 +28,7 @@
     <ClCompile Include="LavaBall.cpp" />
     <ClCompile Include="LavaBoss.cpp" />
     <ClCompile Include="LavaBurst.cpp" />
+    <ClCompile Include="LavaBurstRayCast.cpp" />
     <ClCompile Include="Lightning.cpp" />
     <ClCompile Include="MageBoss.cpp" />
     <ClCompile Include="MageBullet.cpp" />
@@ -92,6 +93,7 @@
     <ClInclude Include="LavaBall.h" />
     <ClInclude Include="LavaBoss.h" />
     <ClInclude Include="LavaBurst.h" />
+    <ClInclude Include="LavaBurstRayCast.h" />
     <ClInclude Include="Lightning.h" />
     <ClInclude Include="MageBoss.h" />
     <ClInclude Include="MageBullet.h" />

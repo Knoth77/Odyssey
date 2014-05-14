@@ -7,6 +7,8 @@ public:
 	LavaBurst();
 	~LavaBurst();
 
+
+	void update();
 	void handleCollision(Game *game);
 	Bullet *clone(Game *game);
 };

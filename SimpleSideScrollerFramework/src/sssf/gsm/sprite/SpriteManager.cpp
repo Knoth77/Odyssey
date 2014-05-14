@@ -454,12 +454,12 @@ void SpriteManager::update(Game *game)
 				{
 					if (bullet->hasCollided())
 					{
-						// THE BULLET IS NO LONGER AN ACTIVE BULLET SO RECYCLE IT
-						game->getGSM()->getPhyiscs()->deactivateBullet(bullet);
-						bulletRecycler.recycleBullet(bullet->getType(), bullet);
+							// THE BULLET IS NO LONGER AN ACTIVE BULLET SO RECYCLE IT
+							game->getGSM()->getPhyiscs()->deactivateBullet(bullet);
+							bulletRecycler.recycleBullet(bullet->getType(), bullet);
 							//	bullets.push_front(bullet);
 
-						activeBullets.erase(bulletsIt++);
+							activeBullets.erase(bulletsIt++);
 					}
 					else if (bullet->getBody()->IsActive())
 					{
@@ -471,9 +471,17 @@ void SpriteManager::update(Game *game)
 							if (b->getDetonateTime() <= 0)
 								b->detonate(game);
 						}
-
-						bullet->update();
-						bulletsIt++;
+						if (bullet->getType() == L"LAVA_BURST")
+						{
+							bullet->update();
+							bullet->handleCollision(game);
+							bulletsIt++;
+						}
+						else
+						{
+							bullet->update();
+							bulletsIt++;
+						}
 					}
 					
 				}

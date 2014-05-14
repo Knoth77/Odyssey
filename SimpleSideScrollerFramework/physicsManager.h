@@ -115,6 +115,7 @@ public:
 
 	void initEnemyBullet(Bullet *sprite);
 	void initLavaBullet(Bullet *sprite);
+	void initLavaBurstBullet(Bullet *sprite);
 	void activateBullet(Bullet *sprite);
 	void activateEnemyBullet(Bullet *sprite, float x, float y);
 	void activateMageLightning(Bullet *b, Bot *m, float angle);
