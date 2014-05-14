@@ -6,7 +6,7 @@
 
 Andromalius::Andromalius()
 {
-	movementPattern = new SimpleMovement(this->body, SimpleMovement::SQUARE);
+	//movementPattern = new SimpleMovement(this->body, SimpleMovement::SQUARE);
 	bossHealth = 600;
 	selectedGun = gunSelection::ANDROMALIUS_BULLET;
 	fireCooldown = 30;
@@ -44,6 +44,7 @@ void Andromalius::nextMovement()
 
 void Andromalius::think(Game *game)
 {
+	return;
 	int pX = this->getBody()->GetPosition().x;
 	int pY = this->getBody()->GetPosition().y;
 			nextMovement();
@@ -135,7 +136,7 @@ Bot* Andromalius::clone(Game *game)
 	Andromalius *newBot = new Andromalius();
 	newBot->setHealth(this->getHealth());
 	game->getGSM()->getPhyiscs()->initAndromaliusBoss(newBot, 40, 40, 50);
-	newBot->movementPattern->setBody(newBot->getBody());
+	//newBot->movementPattern->setBody(newBot->getBody());
 	newBot->registerGame(this->game);
 	newBot->setRangeX(this->rangeX);
 	newBot->setRangeY(this->rangeY);
