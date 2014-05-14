@@ -36,7 +36,7 @@ void LavaBoss::think(Game *game)
 	b2Vec2 playerPos = game->getGSM()->getSpriteManager()->getPlayer()->getBody()->GetPosition();
 	//this->getBody()->GetWorldCenter();
 	b2Vec2 bossPos = this->getBody()->GetPosition();
-
+	float pixelScale = game->getGSM()->getPhyiscs()->getPixelScaling();
 	if (health >= 3725 && health <= 3775)
 	{
 		if (sinkCooldown <= 400)
@@ -45,14 +45,20 @@ void LavaBoss::think(Game *game)
 			this->setInvincible(true);
 			if (lavaBurstCooldown <= 0)
 			{
-				this->setSelectedGun(LAVA_BURST);
-				Bullet *bullet = game->getGSM()->getSpriteManager()->getBulletRecycler()->retrieveBullet(game, L"LAVA_BURST");
-				//game->getAudio()->playSound(L"data\\sounds\\laser_pro.wav", false);
-				bullet->setDamageType('P');
-				bullet->setCurrentState(L"PRIMARY_FIRE");
-				game->getGSM()->getPhyiscs()->activateEnemyBullet(bullet, this->getBody()->GetPosition().x, this->getBody()->GetPosition().y);
-				game->getGSM()->getSpriteManager()->addActiveBullet(bullet);
-				lavaBurstCooldown = 20;
+					this->setSelectedGun(LAVA_BURST);
+					Bullet *bullet = game->getGSM()->getSpriteManager()->getBulletRecycler()->retrieveBullet(game, L"LAVA_BURST");
+					//game->getAudio()->playSound(L"data\\sounds\\laser_pro.wav", false);
+					bullet->setDamageType('P');
+					bullet->setCurrentState(L"PRIMARY_FIRE");
+					//float pX = (game->getGUI()->getViewport()->getViewportX()) * pixelScale; //* game->getGSM()->getPhyiscs()->getPixelScaling();
+					//float pY = (game->getGUI()->getViewport()->getViewportY()) * pixelScale; //* game->getGSM()->getPhyiscs()->getPixelScaling();
+					//float ppX = pX + ((rand() % 1000) * pixelScale);
+					//float ppY = pY + ((rand() % 768 + 100) * pixelScale);
+					game->getGSM()->getPhyiscs()->activateEnemyBullet(bullet, this->getBody()->GetPosition().x, this->getBody()->GetPosition().y);
+					//game->getGSM()->getPhyiscs()->activateEnemyBullet(bullet, ppX, ppY);
+					game->getGSM()->getSpriteManager()->addActiveBullet(bullet);
+
+					lavaBurstCooldown = 20;
 			}
 		}
 		else
@@ -77,8 +83,14 @@ void LavaBoss::think(Game *game)
 				//game->getAudio()->playSound(L"data\\sounds\\laser_pro.wav", false);
 				bullet->setDamageType('P');
 				bullet->setCurrentState(L"PRIMARY_FIRE");
+				//float pX = (game->getGUI()->getViewport()->getViewportX()) * pixelScale; //* game->getGSM()->getPhyiscs()->getPixelScaling();
+				//float pY = (game->getGUI()->getViewport()->getViewportY()) * pixelScale; //* game->getGSM()->getPhyiscs()->getPixelScaling();
+				//float ppX = pX + ((rand() % 1000) * pixelScale);
+				//float ppY = pY + ((rand() % 768 + 100) * pixelScale);
 				game->getGSM()->getPhyiscs()->activateEnemyBullet(bullet, this->getBody()->GetPosition().x, this->getBody()->GetPosition().y);
+				//game->getGSM()->getPhyiscs()->activateEnemyBullet(bullet, ppX, ppY);
 				game->getGSM()->getSpriteManager()->addActiveBullet(bullet);
+
 				lavaBurstCooldown = 20;
 			}
 		}
@@ -105,8 +117,14 @@ void LavaBoss::think(Game *game)
 				//game->getAudio()->playSound(L"data\\sounds\\laser_pro.wav", false);
 				bullet->setDamageType('P');
 				bullet->setCurrentState(L"PRIMARY_FIRE");
+				//float pX = (game->getGUI()->getViewport()->getViewportX()) * pixelScale; //* game->getGSM()->getPhyiscs()->getPixelScaling();
+				//float pY = (game->getGUI()->getViewport()->getViewportY()) * pixelScale; //* game->getGSM()->getPhyiscs()->getPixelScaling();
+				//float ppX = pX + ((rand() % 1000) * pixelScale);
+				//float ppY = pY + ((rand() % 768 + 100) * pixelScale);
 				game->getGSM()->getPhyiscs()->activateEnemyBullet(bullet, this->getBody()->GetPosition().x, this->getBody()->GetPosition().y);
+				//game->getGSM()->getPhyiscs()->activateEnemyBullet(bullet, ppX, ppY);
 				game->getGSM()->getSpriteManager()->addActiveBullet(bullet);
+
 				lavaBurstCooldown = 20;
 			}
 		}

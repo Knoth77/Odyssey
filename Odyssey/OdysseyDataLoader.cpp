@@ -380,7 +380,7 @@ void OdysseyDataLoader::loadWorld(Game *game, wstring levelInitFile)
 	game->getGSM()->getPhyiscs()->initLavaBurstBullet(sampleLavaBurst);
 
 	bulletRecycler->registerBulletType(L"LAVA_BURST", sampleLavaBurst);
-	bulletRecycler->initRecyclableBullets(game, L"LAVA_BURST", 40);
+	bulletRecycler->initRecyclableBullets(game, L"LAVA_BURST", 100);
 
 	LavaBall *sampleLavaBall = new LavaBall();
 

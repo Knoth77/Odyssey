@@ -974,9 +974,8 @@ void physicsManager::activateEnemyBullet(Bullet *bullet, float x, float y)
 		float angle = atan2f(vel.y, vel.x);
 		bullet->getBody()->SetLinearVelocity(vel);
 
-
-
 		bullet->getBody()->SetTransform(playerBody->GetPosition(), angle);
+		//bullet->getBody()->SetTransform(bullet->getBody()->GetPosition(), angle);
 	}
 	else
 	{
