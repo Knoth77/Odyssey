@@ -148,6 +148,8 @@ public:
 		immuneCounter = 66;
 		isImmune = false;
 		statusLoop = 0;
+
+		if (status != NULL)
 		status->setCurrentState(L"NONE");
 		
 	}
