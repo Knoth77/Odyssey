@@ -1,4 +1,5 @@
 #include "SpiderBot.h"
+#include "../Odyssey/Odyssey.h"
 
 
 SpiderBot::SpiderBot()
@@ -85,6 +86,7 @@ void SpiderBot::think(Game *game)
 			game->getGSM()->getSpriteManager()->getPlayer()->decPlayerHealth(50);
 			//game->getHud()->setHealthWidth(game->getGSM()->getSpriteManager()->getPlayer()->getPlayerHealth(), game->getGSM()->getSpriteManager()->getPlayer()->getStartingHealth());
 			readyToDamagePlayer = false;
+			game->getAudio()->playSound(W_SPIDER_ATTACK_SOUND_PATH, false);
 			thinkTime = 10;
 
 		}

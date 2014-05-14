@@ -23,7 +23,7 @@ private:
 	boolean fired;
 	bool dashB;
 	int lightningCooldown;
-
+	int soundCooldown;
 	float rangeX;
 	float rangeY;
 	b2Vec2 initPos;

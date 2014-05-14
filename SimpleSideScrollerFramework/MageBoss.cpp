@@ -1,4 +1,5 @@
 #include "MageBoss.h"
+#include "../Odyssey/Odyssey.h"
 #include "Fireball.h"
 #include "MageBullet.h"
 #include "Lightning.h"
@@ -367,6 +368,14 @@ void MageBoss::think(Game *game)
 			}
 			else
 				lightningCooldown--;
+
+			if (soundCooldown <= 0)
+			{
+				game->getAudio()->playSound(W_ELECTRIC_AMBIENT_SOUND_PATH, false);
+				soundCooldown = 20;
+			}
+			else
+				soundCooldown--;
 		}
 
 		lightningAngle += 2;
@@ -441,8 +450,14 @@ void MageBoss::dash(Game *game)
 	botBody->SetTransform(finalPos, botBody->GetAngle());
 
 	if (orbsActive)
-	this->reallignOrbs();
-
+	{
+		this->reallignOrbs();
+		game->getAudio()->playSound(W_MAGE_ORB_DASH_SOUND_PATH, false);
+	}
+	else
+	{
+		game->getAudio()->playSound(W_MAGE_DASH_SOUND_PATH, false);
+	}
 
 
 	//botBody->ApplyLinearImpulse(b2Vec2(30 * dX, 30 * dY), botBody->GetWorldCenter(), true);

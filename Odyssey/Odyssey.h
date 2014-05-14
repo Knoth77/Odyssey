@@ -7,6 +7,10 @@ static const bool		B_DEBUG = false;
 
 //Sound Files
 static const wstring	W_LASER_SOUND_PATH = L"data//sounds//laser.wav";
+static const wstring	W_MAGE_DASH_SOUND_PATH = L"data//sounds//mage_afterdash.wav";
+static const wstring	W_MAGE_ORB_DASH_SOUND_PATH = L"data//sounds//mageorb_afterdash.wav";
+static const wstring	W_ELECTRIC_AMBIENT_SOUND_PATH = L"data//sounds//electric_ambient.wav";
+static const wstring	W_SPIDER_ATTACK_SOUND_PATH = L"data//sounds//spiderattack.wav";
 
 static const string		W_DEBUG_FILE = "data/DebugOutput.txt";
 static const wstring	W_INIT_FILE = L"data/OdysseySettings.cfg";
