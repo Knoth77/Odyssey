@@ -64,6 +64,7 @@ static const wstring	W_SKULL_BOT = L"SKULL_BOT";
 static const wstring	W_SPIDER_BOT = L"SPIDER_BOT";
 static const wstring	W_LAVA_BOSS = L"LAVA_BOSS";
 static const wstring	W_MAGE_BOSS = L"MAGE_BOSS";
+static const wstring	W_ANDROMALIUS_BOSS = L"ANDROMALIUS_BOSS";
 static const wstring	W_TIGER_BOT= L"TIGER_BOT";
 static const wstring	W_RAT_BOT = L"RAT_BOT";
 

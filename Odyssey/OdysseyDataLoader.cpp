@@ -478,7 +478,6 @@ void OdysseyDataLoader::loadBotsFromLua(wstring levelName, Game *game)
 				recycler->registerBotType(W_SKULL_BOT, sampleSkullBot);
 				recycler->initRecyclableBots(game, W_SKULL_BOT, 13);
 			}
-
 			if (bTypeW == W_SPIDER_BOT)
 			{
 				botSpriteType = spriteManager->getSpriteType(6);
@@ -502,6 +501,19 @@ void OdysseyDataLoader::loadBotsFromLua(wstring levelName, Game *game)
 
 				recycler->registerBotType(W_LAVA_BOSS, sampleLavaBoss);
 				recycler->initRecyclableBots(game, W_LAVA_BOSS, 2);
+			}
+
+			if (bTypeW == W_ANDROMALIUS_BOSS)
+			{
+				botSpriteType = spriteManager->getSpriteType(22);
+				Andromalius *sampleAndromaliusBoss = new Andromalius();
+
+				sampleAndromaliusBoss->setSpriteType(botSpriteType);
+				game->getGSM()->getPhyiscs()->initLavaBoss(sampleAndromaliusBoss, 192, 234, 50); // CHANGE VALUES LATER 
+				sampleAndromaliusBoss->setHealth(600);
+
+				recycler->registerBotType(W_ANDROMALIUS_BOSS, sampleAndromaliusBoss);
+				recycler->initRecyclableBots(game, W_ANDROMALIUS_BOSS, 2);
 			}
 
 			if (bTypeW == W_MAGE_BOSS)
@@ -591,6 +603,18 @@ void OdysseyDataLoader::loadBotsFromLua(wstring levelName, Game *game)
 						testBot->changeMovementType(position.GetByName("m").GetInteger());
 				}
 
+				if (bTypeW == W_ANDROMALIUS_BOSS)
+				{
+					bot->setSpriteType(botSpriteType);
+					bot->setAlpha(255);
+					bot->setCurrentState(L"DOWN");
+					Andromalius *testBot = dynamic_cast<Andromalius *>(bot);
+					spriteManager->addBot(testBot);
+					game->getGSM()->getPhyiscs()->activateBot(testBot, x, y);
+					//if (position.GetByName("m").IsConvertibleToInteger())
+					//	testBot->changeMovementType(position.GetByName("m").GetInteger());
+				}
+
 				if (bTypeW == W_MAGE_BOSS)
 				{
 					bot->setSpriteType(botSpriteType);
@@ -598,8 +622,8 @@ void OdysseyDataLoader::loadBotsFromLua(wstring levelName, Game *game)
 					bot->setCurrentState(L"IDLE");
 					MageBoss *testBot = dynamic_cast<MageBoss *>(bot);
 					testBot->registerGame(game);
-					testBot->setRangeX(412);
-					testBot->setRangeY(412);
+					testBot->setRangeX(544);
+					testBot->setRangeY(320);
 					spriteManager->addBot(testBot);
 					bot->setDefaultX(x);
 					bot->setDefaultY(y);
