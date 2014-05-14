@@ -158,7 +158,14 @@
 	<pose image_id="34" duration="20"/>
 	<pose image_id="35" duration="20"/>
 	<pose image_id="36" duration="20"/>
-	<pose image_id="20" duration="100000000000000000"/>
+	<pose image_id="20" duration="20"/>
+   </animation_sequence>
+  </animation_state>
+  
+  <animation_state>
+  <state>DEAD</state>
+   <animation_sequence>
+    <pose image_id="20" duration="20"/>
    </animation_sequence>
   </animation_state>
   
