@@ -114,6 +114,7 @@ void GameGraphics::renderText(GameText *text)
 	if (game->getGSM()->getCurrentGameState() == GS_GAME_IN_PROGRESS)
 	{
 		TextToDraw *textToDraw = text->getTextToDrawAtIndex(5);
+		game->getGraphics()->setFontColorAlpha(255, 255, 255, 0);
 		renderTextToDraw(textToDraw);
 	}
 

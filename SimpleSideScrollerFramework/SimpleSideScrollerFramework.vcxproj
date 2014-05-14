@@ -14,6 +14,7 @@
     <Text Include="src\sssf_VS\ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Andromalius.cpp" />
     <ClCompile Include="AudioWrapper.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="BulletRecycler.cpp" />
@@ -77,6 +78,7 @@
     <ClCompile Include="TigerBot.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Andromalius.h" />
     <ClInclude Include="AudioWrapper.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="BulletRecycler.h" />
