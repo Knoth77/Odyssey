@@ -42,7 +42,6 @@ public:
 	enum gunSelection
 	{
 		ANDROMALIUS_BULLET
-
 	};
 
 	
