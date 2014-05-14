@@ -100,7 +100,7 @@ void WindowsInput::respondToMouseInput(Game *game)
 			}
 			else if (p->getSelectedGun() == p->SPREAD && shotTime == 0)
 			{
-				game->getAudio()->playSound(L"data\\sounds\\laser3.wav",false);
+				game->getAudio()->playSound(L"data\\sounds\\laser_pro.wav",false);
 				Bullet *bullet1 = gsm->getSpriteManager()->getBulletRecycler()->retrieveBullet(game, L"LASER");
 				bullet1->setDamageType('P');
 				Bullet *bullet2 = gsm->getSpriteManager()->getBulletRecycler()->retrieveBullet(game, L"LASER");
