@@ -15,6 +15,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Andromalius.cpp" />
+    <ClCompile Include="AndromaliusBullet.cpp" />
     <ClCompile Include="AudioWrapper.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="BulletRecycler.cpp" />
@@ -80,6 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Andromalius.h" />
+    <ClInclude Include="AndromaliusBullet.h" />
     <ClInclude Include="AudioWrapper.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="BulletRecycler.h" />

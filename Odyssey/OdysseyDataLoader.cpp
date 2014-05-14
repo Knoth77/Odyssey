@@ -24,9 +24,11 @@
 #include "SkullBot.h"
 #include "SpiderBot.h"
 #include "LavaBoss.h"
+#include "Andromalius.h"
 #include "MageBoss.h"
 #include "Fireball.h"
 #include "MageBullet.h"
+#include "AndromaliusBullet.h"
 #include "LavaBurst.h"
 #include "DarkEnergyEffect.h"
 #include "LavaBall.h"
@@ -294,6 +296,7 @@ void OdysseyDataLoader::loadWorld(Game *game, wstring levelInitFile)
 	AnimatedSpriteType *lavaBallSS = spriteManager->getSpriteType(17);
 	AnimatedSpriteType *lightningSS = spriteManager->getSpriteType(18);
 	AnimatedSpriteType *skullAttackSS = spriteManager->getSpriteType(21);
+	AnimatedSpriteType *andromaliusBulletSS = spriteManager->getSpriteType(23);
 
 	SkullAttackEffect *sampleSAE = new SkullAttackEffect();
 	sampleSAE->setSpriteType(skullAttackSS);
@@ -371,6 +374,18 @@ void OdysseyDataLoader::loadWorld(Game *game, wstring levelInitFile)
 
 	bulletRecycler->registerBulletType(L"MAGE_BULLET", sampleMageBullet);
 	bulletRecycler->initRecyclableBullets(game, L"MAGE_BULLET", 40);
+
+
+	AndromaliusBullet *sampleAndroMaliusBullet = new AndromaliusBullet();
+
+	sampleAndroMaliusBullet->setSpriteType(andromaliusBulletSS);
+	sampleAndroMaliusBullet->setAlpha(255);
+	sampleAndroMaliusBullet->setCurrentState(PRIMARY_FIRE);
+	game->getGSM()->getPhyiscs()->initEnemyBullet(sampleAndroMaliusBullet);
+
+	bulletRecycler->registerBulletType(L"ANDROMALIUS_BULLET", sampleAndroMaliusBullet);
+	bulletRecycler->initRecyclableBullets(game, L"ANDROMALIUS_BULLET", 40);
+
 
 	LavaBurst *sampleLavaBurst = new LavaBurst();
 
@@ -463,7 +478,6 @@ void OdysseyDataLoader::loadBotsFromLua(wstring levelName, Game *game)
 				recycler->registerBotType(W_SKULL_BOT, sampleSkullBot);
 				recycler->initRecyclableBots(game, W_SKULL_BOT, 13);
 			}
-
 			if (bTypeW == W_SPIDER_BOT)
 			{
 				botSpriteType = spriteManager->getSpriteType(6);
@@ -487,6 +501,19 @@ void OdysseyDataLoader::loadBotsFromLua(wstring levelName, Game *game)
 
 				recycler->registerBotType(W_LAVA_BOSS, sampleLavaBoss);
 				recycler->initRecyclableBots(game, W_LAVA_BOSS, 2);
+			}
+
+			if (bTypeW == W_ANDROMALIUS_BOSS)
+			{
+				botSpriteType = spriteManager->getSpriteType(22);
+				Andromalius *sampleAndromaliusBoss = new Andromalius();
+
+				sampleAndromaliusBoss->setSpriteType(botSpriteType);
+				game->getGSM()->getPhyiscs()->initLavaBoss(sampleAndromaliusBoss, 192, 234, 50); // CHANGE VALUES LATER 
+				sampleAndromaliusBoss->setHealth(600);
+
+				recycler->registerBotType(W_ANDROMALIUS_BOSS, sampleAndromaliusBoss);
+				recycler->initRecyclableBots(game, W_ANDROMALIUS_BOSS, 2);
 			}
 
 			if (bTypeW == W_MAGE_BOSS)
@@ -574,6 +601,18 @@ void OdysseyDataLoader::loadBotsFromLua(wstring levelName, Game *game)
 					game->getGSM()->getPhyiscs()->activateBot(testBot, x, y);
 					if (position.GetByName("m").IsConvertibleToInteger())
 						testBot->changeMovementType(position.GetByName("m").GetInteger());
+				}
+
+				if (bTypeW == W_ANDROMALIUS_BOSS)
+				{
+					bot->setSpriteType(botSpriteType);
+					bot->setAlpha(255);
+					bot->setCurrentState(L"DOWN");
+					Andromalius *testBot = dynamic_cast<Andromalius *>(bot);
+					spriteManager->addBot(testBot);
+					game->getGSM()->getPhyiscs()->activateBot(testBot, x, y);
+					//if (position.GetByName("m").IsConvertibleToInteger())
+					//	testBot->changeMovementType(position.GetByName("m").GetInteger());
 				}
 
 				if (bTypeW == W_MAGE_BOSS)

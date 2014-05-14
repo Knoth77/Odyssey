@@ -28,14 +28,10 @@ private:
 	float rangeY;
 	b2Vec2 initPos;
 
-	AnimatedSprite *orbs[4];
-
 	Game *game;
 
-	bool orbsActive;
-
 	float lightningAngle;
-
+	void nextMovement();
 
 	const float pixelScaling = 0.009765625;
 
@@ -45,9 +41,7 @@ public:
 
 	enum gunSelection
 	{
-		FIREBALL,
-		MAGE_BULLET,
-		ACID
+		ANDROMALIUS_BULLET
 
 	};
 
