@@ -15,6 +15,7 @@ public:
 	void appendMouseCoords(Game *game);
 	void appendExtraData(Game *game);
 	
-
+	void appendStats(Game *game);
+	void appendObjectives(Game* game);
 };
 

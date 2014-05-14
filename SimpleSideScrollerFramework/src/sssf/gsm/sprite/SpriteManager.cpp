@@ -489,7 +489,8 @@ void SpriteManager::update(Game *game)
 	// NOW UPDATE THE REST OF THE SPRITES
 	list<Bot*>::iterator botIterator;
 	botIterator = bots.begin();
-	int deathCount = 0;
+	//int deathCount = 0;
+	numKills = 0;
 	bool allDead = true;
 	while (botIterator != bots.end())
 	{
@@ -497,8 +498,7 @@ void SpriteManager::update(Game *game)
 
 		if (bot->getMarkedForDeath() == true && bot->getType() != W_MAGE_BOSS)
 		{
-		
-				deathCount++;
+			numKills++;
 				game->getGSM()->getPhyiscs()->deactivateBot(bot);
 				bot->updateSprite();
 				int size = bot->getSpriteType()->getSequenceSize(L"DEATH");
@@ -519,6 +519,7 @@ void SpriteManager::update(Game *game)
 		}
 		else if (bot->getCurrentState().find(L"DEATH") != -1 || bot->getCurrentState().find(L"DEAD") != -1)//is lava boss skip
 		{
+			numKills++;
 			//Prevent dead bots from thinking
 			botIterator++;
 		}

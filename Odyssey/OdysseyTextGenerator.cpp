@@ -44,7 +44,7 @@ void OdysseyTextGenerator::initText(Game *game)
 	text->addText(&W_MAIN_TEXT_2, 500, 570, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
 	text->addText(&W_MAIN_TEXT_3, 500, 590, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
 	text->addText(&W_MAIN_TEXT_4, 500, 610, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
-	text->addText(&textToGenerate, 10, 10, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
+	text->addText(&textToGenerate, 500, 10, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
 	text->addText(&W_PAUSE_TEXT_1, 500, 610, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
 	text->addText(&W_PAUSE_TEXT_2, 500, 640, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
 	text->addText(&W_CONT_TEXT, 500, 550, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
@@ -59,6 +59,10 @@ void OdysseyTextGenerator::updateText(Game *game)
 	{
 		appendMouseCoords(game);
 		appendExtraData(game);
+	}
+	else//Append Player Hud Info
+	{
+		appendStats(game);
 	}
 }
 
@@ -87,8 +91,13 @@ void OdysseyTextGenerator::appendExtraData(Game* game)
 		wss << health;
 		textToGenerate.append(wss.str());
 	}
-	//wss << _extraData;
-	//WindowsInput *input = (WindowsInput*)game->getInput();
-	//textToGenerate.append(wss.str());
-	//textToGenerate.append(W_MOUSE_COORDS_TEXT);
+}
+
+void OdysseyTextGenerator::appendStats(Game* game)
+{
+	wstringstream wss;
+	wss << L"\tKills: ";
+	wss << game->getGSM()->getSpriteManager()->getNumKills();
+	textToGenerate.append(wss.str());
+	///game->getGSM()->getSpriteManager()->getBotsIterator();
 }

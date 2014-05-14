@@ -34,7 +34,7 @@ private:
 	// THESE ARE THE BOTS IN THE GAME, LIKE ENEMIES, ROCKETS, OR ANYTHING
 	// THAT MOVES AROUND AND IS NOT THE PLAYER
 	list<Bot*> bots;
-
+	int numKills;
 	BotRecycler recycler;
 	BulletRecycler bulletRecycler;
 	
@@ -63,11 +63,11 @@ private:
 
 public:
 	// NOTHING TO INIT OR DESTROY
-	SpriteManager()		{}
+	SpriteManager()		{ numKills = 0; }
 	~SpriteManager()	{}
 
 	// INLINED ACCESSOR METHODS
-
+	int getNumKills() { return numKills; }
 	BotRecycler *getBotRecycler(){ return &recycler; }
 	BulletRecycler *getBulletRecycler(){ return &bulletRecycler; }
 //	BulletRecycler *getEnemyBulletRecycler(){ return &enemyBulletRecycler; }
