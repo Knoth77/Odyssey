@@ -274,7 +274,7 @@ void OdysseyDataLoader::loadWorld(Game *game, wstring levelInitFile)
 	player->setPlayerHealth(200);
 	player->setStartingHealth(200);
 	player->registerPlayer(game);
-	gsm->getSpriteManager()->getPlayer()->initStatusSprite();
+	
 	player->reset();
 	BulletRecycler *bulletRecycler = spriteManager->getBulletRecycler();
 //	BulletRecycler *enemyBulletRecycler = spriteManager->getEnemyBulletRecycler();
@@ -421,7 +421,7 @@ void OdysseyDataLoader::loadWorld(Game *game, wstring levelInitFile)
 		player->setInitPos(playerX, playerY);
 
 		gsm->getPhyiscs()->initPlayer(player, playerX, playerY);
-		
+		gsm->getSpriteManager()->getPlayer()->initStatusSprite();
 
 
 		this->loadBotsFromLua(levelInitFile, game);

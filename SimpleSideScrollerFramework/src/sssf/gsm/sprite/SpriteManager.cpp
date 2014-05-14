@@ -91,6 +91,15 @@ void SpriteManager::addSpriteToRenderList(AnimatedSprite *sprite,
 			y = y + 10;
 		}
 
+		if (sprite->getSpriteType() == this->getSpriteType(12))
+		{
+			if (sprite->getCurrentState() == L"SHIELD")
+			{
+				x = x - 30;
+				y = y - 35;
+			}
+		}
+
 		if (sprite->getSpriteType() == this->getSpriteType(17))
 		{
 			x = x - 126;
@@ -107,6 +116,8 @@ void SpriteManager::addSpriteToRenderList(AnimatedSprite *sprite,
 
 
 		}
+		
+		
 	}
 
 	// IS THE SPRITE VIEWABLE?

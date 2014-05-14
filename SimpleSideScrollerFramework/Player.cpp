@@ -15,6 +15,7 @@ Player::Player()
 	immuneCounter = 66;
 	isImmune = false;
 	statusLoop = 0;
+	status = NULL;
 
 }
 
@@ -73,6 +74,8 @@ void Player::updateSprite()
 		playerLives--;
 		outOfHealth = false;
 		game->getHud()->setHealthWidth(playerHealth, playerStartingHealth);
+		this->setStatus(L"NONE", 0);
+		statusLoop = 0;
 	}
 }
 
@@ -98,6 +101,7 @@ void Player::decPlayerHealth(int x)
 			{			
 				isImmune = true;
 				game->getHud()->loseLife();
+				this->setStatus(L"SHIELD", 100);
 			}
 		}
 	}
