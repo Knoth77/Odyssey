@@ -267,8 +267,8 @@
     <ClCompile Include="SkullAttackEffect.cpp">
       <Filter>src\sssf\gsm\sprite\effects</Filter>
     </ClCompile>
-    <ClCompile Include="LavaBurstRayCast.cpp">
-      <Filter>src\sssf\gsm\box2dmanager</Filter>
+    <ClCompile Include="Andromalius.cpp">
+      <Filter>src\sssf\gsm\ai</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -495,8 +495,8 @@
     <ClInclude Include="SkullAttackEffect.h">
       <Filter>src\sssf\gsm\sprite\effects</Filter>
     </ClInclude>
-    <ClInclude Include="LavaBurstRayCast.h">
-      <Filter>src\sssf\gsm\box2dmanager</Filter>
+    <ClInclude Include="Andromalius.h">
+      <Filter>src\sssf\gsm\ai</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

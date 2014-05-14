@@ -107,7 +107,7 @@ void OdysseyTextGenerator::appendObjectives(Game* game)
 	wstringstream wss;
 	if (game->getCurrentLevelFileName().compare(W_LEVEL_1_NAME) == 0)
 	{
-		wss << L"\nEliminate all enemies on this planet,\nand then take on the Balrog to escape!";
+		wss << L"\nEliminate all enemies on this planet,\nand then take on the Lava Lord to escape!";
 	}
 	else if (game->getCurrentLevelFileName().compare(W_LEVEL_2_NAME) == 0)
 	{
