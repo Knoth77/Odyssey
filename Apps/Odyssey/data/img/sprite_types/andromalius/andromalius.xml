@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <sprite_type>
- <width>32</width>
- <height>32</height>
+ <width>53</width>
+ <height>89</height>
  <images_list>
-  <image_file id="1"  file_name="left/(1).png"/>
-  <image_file id="2"  file_name="left/(2).png"/>
-  <image_file id="3"  file_name="left/(3).png"/>
-  <image_file id="4"  file_name="left/(4).png"/>
-  <image_file id="5"  file_name="left/(5).png"/>
-  <image_file id="6"  file_name="left/(6).png"/>
-  <image_file id="7"  file_name="left/(7).png"/>
-  <image_file id="8"  file_name="leftattack/(1).png"/>
-  <image_file id="9"  file_name="leftattack/(2).png"/>
-  <image_file id="10"  file_name="leftattack/(3).png"/>
-  <image_file id="11"  file_name="leftattack/(4).png"/>
-  <image_file id="12"  file_name="leftattack/(5).png"/>
-  <image_file id="13"  file_name="leftattack/(6).png"/>
-  <image_file id="14"  file_name="leftattack/(7).png"/>
-  <image_file id="15"  file_name="leftattack/(8).png"/>
+  <image_file id="1"  file_name="left/left.png"/>
+  <image_file id="2"  file_name="left/left2.png"/>
+  <image_file id="3"  file_name="left/left3.png"/>
+  <image_file id="4"  file_name="left/left4.png"/>
+  <image_file id="5"  file_name="left/left5.png"/>
+  <image_file id="6"  file_name="left/left6.png"/>
+  <image_file id="7"  file_name="left/left7.png"/>
+  <image_file id="8"  file_name="leftattack/left.png"/>
+  <image_file id="9"  file_name="leftattack/left2.png"/>
+  <image_file id="10"  file_name="leftattack/left3.png"/>
+  <image_file id="11"  file_name="leftattack/left4.png"/>
+  <image_file id="12"  file_name="leftattack/left5.png"/>
+  <image_file id="13"  file_name="leftattack/left6.png"/>
+  <image_file id="14"  file_name="leftattack/left7.png"/>
+  <image_file id="15"  file_name="leftattack/left8.png"/>
   <image_file id="16"  file_name="right/right1.png"/>
   <image_file id="17"  file_name="right/right2.png"/>
   <image_file id="18"  file_name="right/right3.png"/>
@@ -25,7 +25,7 @@
   <image_file id="20"  file_name="right/right5.png"/>
   <image_file id="21"  file_name="right/right6.png"/>
   <image_file id="22"  file_name="right/right7.png"/>
-  <image_file id="23"  file_name="rightattack/right1.png"/>
+  <image_file id="23"  file_name="rightattack/right.png"/>
   <image_file id="24"  file_name="rightattack/right2.png"/>
   <image_file id="25"  file_name="rightattack/right3.png"/>
   <image_file id="26"  file_name="rightattack/right4.png"/>
@@ -47,6 +47,7 @@
   <image_file id="42"  file_name="death/death8.png"/>
   <image_file id="43"  file_name="death/death9.png"/>  
  </images_list>
+ 
  <animations_list>
 
     <animation_state>
@@ -62,7 +63,7 @@
    </animation_sequence>
   </animation_state>
   
-      <animation_state>
+  <animation_state>
   <state>LEFT_ATTACK</state>
    <animation_sequence>
     <pose image_id="8" duration="6"/>

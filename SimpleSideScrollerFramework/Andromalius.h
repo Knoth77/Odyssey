@@ -19,6 +19,9 @@ private:
 	int bulletCooldown;
 	int bulletFire;
 	int dashCooldown;
+	int moveTicks;
+	int maxMoveTicks;
+	string lastOrientation;
 	boolean pivot;
 	boolean fired;
 	bool dashB;
@@ -42,7 +45,6 @@ public:
 	enum gunSelection
 	{
 		ANDROMALIUS_BULLET
-
 	};
 
 	
