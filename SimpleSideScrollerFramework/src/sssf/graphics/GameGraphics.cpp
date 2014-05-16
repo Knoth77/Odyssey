@@ -25,7 +25,7 @@
 	*/
 int frameCounter = -1;
 int lastR = 255, lastG = 255, lastB = 255;
-bool toggleAlpha = true, toggleRainbow = true;
+bool toggleAlpha = true, toggleRainbow = false;
 
 GameGraphics::GameGraphics()
 {

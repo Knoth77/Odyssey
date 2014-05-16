@@ -27,4 +27,5 @@
   <sprite_type>summon_sign</sprite_type>
   <sprite_type>flamethrower</sprite_type>
   <sprite_type>force_weapon</sprite_type>
+  <sprite_type>trishot</sprite_type>
 </sprite_type_list>

@@ -282,6 +282,9 @@
     <ClCompile Include="ForceBullet.cpp">
       <Filter>src\sssf\gsm\sprite\projectiles</Filter>
     </ClCompile>
+    <ClCompile Include="Trishot.cpp">
+      <Filter>src\sssf\gsm\sprite\projectiles</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\sssf_VS\targetver.h">
@@ -518,6 +521,9 @@
       <Filter>src\sssf\gsm\box2dmanager</Filter>
     </ClInclude>
     <ClInclude Include="ForceBullet.h">
+      <Filter>src\sssf\gsm\sprite\projectiles</Filter>
+    </ClInclude>
+    <ClInclude Include="Trishot.h">
       <Filter>src\sssf\gsm\sprite\projectiles</Filter>
     </ClInclude>
   </ItemGroup>

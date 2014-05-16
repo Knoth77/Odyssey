@@ -39,11 +39,11 @@ OdysseyTextGenerator::~OdysseyTextGenerator()
 void OdysseyTextGenerator::initText(Game *game)
 {
 	GameText *text = game->getText();
-	text->addText(&W_SPALSH_TEXT, 500, 550, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
-	text->addText(&W_MAIN_TEXT_1, 500, 550, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
-	text->addText(&W_MAIN_TEXT_2, 500, 570, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
-	text->addText(&W_MAIN_TEXT_3, 500, 590, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
-	text->addText(&W_MAIN_TEXT_4, 500, 610, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
+	text->addText(&W_SPALSH_TEXT, 400, 350, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
+	text->addText(&W_MAIN_TEXT_1, 430, 350, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
+	text->addText(&W_MAIN_TEXT_2, 455, 370, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
+	text->addText(&W_MAIN_TEXT_3, 455, 390, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
+	text->addText(&W_MAIN_TEXT_4, 475, 410, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
 	text->addText(&textToGenerate, 500, 2, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
 	text->addText(&W_PAUSE_TEXT_1, 500, 610, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
 	text->addText(&W_PAUSE_TEXT_2, 500, 640, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());

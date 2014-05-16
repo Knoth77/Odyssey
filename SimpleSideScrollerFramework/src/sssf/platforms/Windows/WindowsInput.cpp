@@ -115,11 +115,11 @@ void WindowsInput::respondToMouseInput(Game *game)
 			else if (p->getSelectedGun() == p->SPREAD && shotTime == 0)
 			{
 				game->getAudio()->playSound(L"data\\sounds\\laser_pro.wav",false);
-				Bullet *bullet1 = gsm->getSpriteManager()->getBulletRecycler()->retrieveBullet(game, L"LASER");
+				Bullet *bullet1 = gsm->getSpriteManager()->getBulletRecycler()->retrieveBullet(game, L"TRISHOT");
 				bullet1->setDamageType('P');
-				Bullet *bullet2 = gsm->getSpriteManager()->getBulletRecycler()->retrieveBullet(game, L"LASER");
+				Bullet *bullet2 = gsm->getSpriteManager()->getBulletRecycler()->retrieveBullet(game, L"TRISHOT");
 				bullet2->setDamageType('P');
-				Bullet *bullet3 = gsm->getSpriteManager()->getBulletRecycler()->retrieveBullet(game, L"LASER");
+				Bullet *bullet3 = gsm->getSpriteManager()->getBulletRecycler()->retrieveBullet(game, L"TRISHOT");
 				bullet3->setDamageType('P');
 				bullet1->setCurrentState(L"PRIMARY_FIRE");
 				bullet2->setCurrentState(L"PRIMARY_FIRE");
@@ -128,7 +128,7 @@ void WindowsInput::respondToMouseInput(Game *game)
 				gsm->getSpriteManager()->addActiveBullet(bullet1);
 				gsm->getSpriteManager()->addActiveBullet(bullet2);
 				gsm->getSpriteManager()->addActiveBullet(bullet3);
-				p->setNextShotTime(7);
+				p->setNextShotTime(10);
 
 			}
 			else if (p->getSelectedGun() == p->ROCKET && shotTime == 0)

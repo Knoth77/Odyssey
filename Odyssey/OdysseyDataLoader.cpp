@@ -37,6 +37,7 @@
 #include "TigerBot.h"
 #include "RatBot.h"
 #include "SkullAttackEffect.h"
+#include "Trishot.h"
 
 // GAME OBJECT INCLUDES
 
@@ -299,6 +300,7 @@ void OdysseyDataLoader::loadWorld(Game *game, wstring levelInitFile)
 	AnimatedSpriteType *skullAttackSS = spriteManager->getSpriteType(21);
 	AnimatedSpriteType *andromaliusBulletSS = spriteManager->getSpriteType(23);
 	AnimatedSpriteType *forceBulletSS = spriteManager->getSpriteType(26);
+	AnimatedSpriteType *triSS = spriteManager->getSpriteType(27);
 
 	SkullAttackEffect *sampleSAE = new SkullAttackEffect();
 	sampleSAE->setSpriteType(skullAttackSS);
@@ -345,6 +347,19 @@ void OdysseyDataLoader::loadWorld(Game *game, wstring levelInitFile)
 
 	bulletRecycler->registerBulletType(L"LASER", sampleLaser);
 	bulletRecycler->initRecyclableBullets(game, L"LASER", 40);
+
+	Trishot *sampleTrishot = new Trishot();
+
+	sampleTrishot->setSpriteType(triSS);
+	sampleTrishot->setAlpha(255);
+	sampleTrishot->setCurrentState(PRIMARY_FIRE);
+	game->getGSM()->getPhyiscs()->initBullet(sampleTrishot);
+
+
+	bulletRecycler->registerBulletType(L"TRISHOT", sampleTrishot);
+	bulletRecycler->initRecyclableBullets(game, L"TRISHOT", 40);
+
+
 
 
 	ForceBullet *sampleForceBullet = new ForceBullet();

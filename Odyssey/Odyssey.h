@@ -69,15 +69,15 @@ static const wstring	W_TIGER_BOT= L"TIGER_BOT";
 static const wstring	W_RAT_BOT = L"RAT_BOT";
 
 
-static const wstring	W_SPLASH_SCREEN_PATH = L"data/img/gui/overlays/odyssey_splash_screen_overlay.png";
+static const wstring	W_SPLASH_SCREEN_PATH = L"data/img/gui/overlays/newsplash.png";
 static const string		SAVE_PATH = "data/save/Progress.sav";
 static const wstring	W_LEVEL_SELECT_SCREEN_PATH = L"data/img/gui/overlays/odyssey_space_background.png";
-static const wstring	W_HELP_SCREEN_PATH = L"data/img/gui/overlays/HelpScreen.png";
+static const wstring	W_HELP_SCREEN_PATH = L"data/img/gui/overlays/HelpScreennew.png";
 static const wstring	W_WIN_SCREEN_PATH = L"data/img/gui/overlays/MissionComplete.png";
 static const wstring	W_DEATH_SCREEN_PATH = L"data/img/gui/overlays/DeathScreen.png";
 static const wstring	SPRITE_TYPES_DIR = L"data/img/sprite_types/";
 static const wstring	SPRITE_TYPES_LIST = SPRITE_TYPES_DIR + L"sprite_type_list.xml";
-static const wstring	W_MAIN_MENU_PATH = L"data/img/gui/overlays/odyssey_splash_screen_overlay.png";
+static const wstring	W_MAIN_MENU_PATH = L"data/img/gui/overlays/newsplash.png";
 static const wstring	W_PAUSE_SCREEN_PATH = L"data/img/gui/overlays/pause_screen.png";
 static const wstring	W_TITLE = L"TITLE";
 static const wstring	W_SCREEN_WIDTH = L"SCREEN_WIDTH";
