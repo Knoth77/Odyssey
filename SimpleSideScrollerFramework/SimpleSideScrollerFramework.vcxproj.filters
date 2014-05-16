@@ -279,6 +279,9 @@
     <ClCompile Include="FlamethrowerRayCast.cpp">
       <Filter>src\sssf\gsm\box2dmanager</Filter>
     </ClCompile>
+    <ClCompile Include="ForceBullet.cpp">
+      <Filter>src\sssf\gsm\sprite\projectiles</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\sssf_VS\targetver.h">
@@ -513,6 +516,9 @@
     </ClInclude>
     <ClInclude Include="FlamethrowerRayCast.h">
       <Filter>src\sssf\gsm\box2dmanager</Filter>
+    </ClInclude>
+    <ClInclude Include="ForceBullet.h">
+      <Filter>src\sssf\gsm\sprite\projectiles</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

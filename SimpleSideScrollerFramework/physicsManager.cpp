@@ -849,11 +849,19 @@ void physicsManager::initBullet(Bullet *bullet)
 
 
 	b2PolygonShape shape;
-	shape.SetAsBox((10 * pixelScaling) / 2, (10 * pixelScaling) / 2);
+	if (bullet->getType().compare(L"FORCE_BULLET") == 0)
+		shape.SetAsBox((10 * pixelScaling) / 2, (20 * pixelScaling) / 2);
+	else
+		shape.SetAsBox((10 * pixelScaling) / 2, (10 * pixelScaling) / 2);
 
 	b2FixtureDef fixtureDef;
 	fixtureDef.shape = &shape;
-	fixtureDef.density = 0.001f;
+	
+	if(bullet->getType().compare(L"FORCE_BULLET") == 0)
+		fixtureDef.density = 10.0f;
+	else
+		fixtureDef.density = 0.001f;
+
 	fixtureDef.isSensor = false;
 	fixtureDef.filter.categoryBits = collisionCatagory::PLAYER_BULLET;
 
@@ -873,6 +881,7 @@ void physicsManager::initBullet(Bullet *bullet)
 
 	//sprite->getBody()->SetTransform(sprite->getBody()->GetPosition(), 220 * DEGTORAD);
 }
+
 
 void physicsManager::initLavaBullet(Bullet *bullet)
 {
@@ -1104,8 +1113,21 @@ void physicsManager::activateBullet(Bullet *bullet)
 		yOffset = yOffset*-1.0;
 
 	b2Vec2 pos;
-	pos.x = playerBody->GetPosition().x * xOffset;
-	pos.y = playerBody->GetPosition().y * yOffset;
+	
+	if (bullet->getType().compare(L"FORCE_BULLET") == 0)//(-0.6f, -0.6f
+	{
+		pos.x = playerBody->GetPosition().x * xOffset;
+		pos.x -= 0.6f;
+	}
+	else
+		pos.x = playerBody->GetPosition().x * xOffset;
+	if (bullet->getType().compare(L"FORCE_BULLET") == 0)
+	{
+		pos.y = playerBody->GetPosition().y * yOffset;
+		pos.y -= 0.6f;
+	}
+	else
+		pos.y = playerBody->GetPosition().y * yOffset;
 
 	bullet->getBody()->SetTransform(pos, 0.0);
 

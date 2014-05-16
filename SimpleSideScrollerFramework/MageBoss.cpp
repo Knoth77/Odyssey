@@ -322,6 +322,17 @@ void MageBoss::think(Game *game)
 	}
 	else if (this->getCurrentState() == L"PHASE_THREE_IDLE")
 	{
+
+		if (this->getMarkedForDeath() == true)
+		{
+			int size = this->getSpriteType()->getSequenceSize(L"DEATH");
+			if (this->getFrameIndex() == size - 2)
+			{
+				this->setCurrentState(L"DEAD");
+			}
+			return;
+		}
+
 		if (this->isPlayerInRadius() || this->wasJustShot())
 		{
 

@@ -9,7 +9,7 @@ Rocket::Rocket()
 	speed = 8;
 	initCollide = false;
 	type = L"ROCKET";
-	primaryDamage = 15;
+	primaryDamage = 50;
 }
 
 

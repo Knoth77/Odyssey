@@ -371,6 +371,10 @@ void OdysseyKeyEventHandler::handleKeyEvents(Game *game)
 		{
 			game->getGSM()->getSpriteManager()->getPlayer()->setSelectedGun(game->getGSM()->getSpriteManager()->getPlayer()->FLAMETHROWER);
 		}
+		if (input->isKeyDown(FIVE_KEY))
+		{
+			game->getGSM()->getSpriteManager()->getPlayer()->setSelectedGun(game->getGSM()->getSpriteManager()->getPlayer()->FORCE);
+		}
 
 
 

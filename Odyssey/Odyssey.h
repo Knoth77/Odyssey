@@ -123,4 +123,5 @@ const unsigned int ONE_KEY = (unsigned int)'1';
 const unsigned int TWO_KEY = (unsigned int)'2';
 const unsigned int THREE_KEY = (unsigned int)'3';
 const unsigned int FOUR_KEY = (unsigned int)'4';
+const unsigned int FIVE_KEY = (unsigned int)'5';
 

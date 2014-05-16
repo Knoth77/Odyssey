@@ -38,7 +38,8 @@ public:
 		DEFAULT,
 		SPREAD,
 		ROCKET,
-		FLAMETHROWER
+		FLAMETHROWER,
+		FORCE
 
 	};
 

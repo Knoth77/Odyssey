@@ -141,6 +141,16 @@ void WindowsInput::respondToMouseInput(Game *game)
 				gsm->getSpriteManager()->addActiveBullet(bullet1);
 				p->setNextShotTime(20);
 			}
+			else if (p->getSelectedGun() == p->FORCE && shotTime == 0)
+			{
+				//game->getAudio()->playSound(L"data\\sounds\\rocket.wav", false);
+				Bullet *bullet1 = gsm->getSpriteManager()->getBulletRecycler()->retrieveBullet(game, L"FORCE_BULLET");
+				bullet1->setCurrentState(L"PRIMARY_FIRE");
+				bullet1->setDamageType('P');
+				gsm->getPhyiscs()->activateBullet(bullet1);
+				gsm->getSpriteManager()->addActiveBullet(bullet1);
+				p->setNextShotTime(10);
+			}
 			else if (p->getSelectedGun() == p->FLAMETHROWER)
 			{
 				if (p->getNextShotTime() == 0)

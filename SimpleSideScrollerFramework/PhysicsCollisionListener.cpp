@@ -4,6 +4,7 @@
 #include "src\sssf\gsm\state\GameStateManager.h"
 #include "physicsManager.h"
 #include "MeleeBot.h"
+#include "ForceBullet.h"
 #include "Fireball.h"
 #include "Laser.h"
 #include "Rocket.h"
@@ -46,7 +47,12 @@ void PhysicsCollisionListener::BeginContact(b2Contact *contact)
 			b = dynamic_cast<Bullet*>(A);
 			if (b != 0)
 			{
-				b->handleCollision(game);
+				if (b->getType().compare(L"FORCE_BULLET") == 0)
+				{
+					dynamic_cast<ForceBullet*>(A)->handleCollision(game);//Wall collide
+				}
+				else
+					b->handleCollision(game);
 			}
 		}
 		
@@ -57,6 +63,11 @@ void PhysicsCollisionListener::BeginContact(b2Contact *contact)
 
 			if (b != 0)
 			{
+				if (b->getType().compare(L"FORCE_BULLET") == 0)
+				{
+					dynamic_cast<ForceBullet*>(B)->handleCollision(game);//Wall collide
+				}
+				else
 				b->handleCollision(game);
 			}
 		}
@@ -223,7 +234,12 @@ void PhysicsCollisionListener::BeginContact(b2Contact *contact)
 					{
 						bot->setHealth(bot->getHealth() - a->getPrimaryDamage());
 						bot->setJustShot(true);
-						a->handleCollision(game);
+						if (a->getType().compare(L"FORCE_BULLET") == 0)
+						{
+							dynamic_cast<ForceBullet*>(A)->handleCollision(game, B);
+						}
+						else
+							a->handleCollision(game);
 					}
 				}
 				else
@@ -272,7 +288,12 @@ void PhysicsCollisionListener::BeginContact(b2Contact *contact)
 					{
 						bot->setHealth(bot->getHealth() - b->getPrimaryDamage());
 						bot->setJustShot(true);
-						b->handleCollision(game);
+						if (b->getType().compare(L"FORCE_BULLET") == 0)
+						{
+							dynamic_cast<ForceBullet*>(B)->handleCollision(game, A);
+						}
+						else
+							b->handleCollision(game);
 					}
 				}
 				else
