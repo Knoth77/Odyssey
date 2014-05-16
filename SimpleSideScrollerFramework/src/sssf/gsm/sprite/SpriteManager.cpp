@@ -609,7 +609,9 @@ void SpriteManager::update(Game *game)
 			{
 				bot->setMarkedForDeath(true);
 				if (bot->getType() != W_MAGE_BOSS)
+				{
 					bot->setCurrentState(L"DEATH");
+				}
 			}
 
 			botIterator++;

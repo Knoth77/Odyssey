@@ -76,7 +76,7 @@ void WindowsInput::respondToMouseInput(Game *game)
 
 	b2Vec2 clickedPoint = gsm->getPhyiscs()->getMouseClickedPoint();
 	b2Vec2 aCalc;
-	if (pBody != NULL)
+	if (pBody != NULL && gsm->getCurrentGameState() == GS_GAME_IN_PROGRESS)
 	{
 		aCalc.x = (clickedPoint.x - pBody->GetPosition().x);
 		aCalc.y = (clickedPoint.y - pBody->GetPosition().y);

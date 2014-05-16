@@ -423,6 +423,12 @@ void OdysseyKeyEventHandler::handleKeyEvents(Game *game)
 			if (selected == 8)
 			{
 				game->getGSM()->resetLevel(game, game->getCurrentLevelFileName());
+				Viewport *v = game->getGUI()->getViewport();
+				v->setScrollSpeedX(0);
+				v->setScrollSpeedY(0);
+				v->setViewportX(game->getGSM()->getSpriteManager()->getPlayer()->getInitX());
+				v->setViewportY(game->getGSM()->getSpriteManager()->getPlayer()->getInitY());
+
 				game->getGSM()->goToGame();
 			}
 			if (selected == 9)

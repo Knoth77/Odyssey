@@ -17,6 +17,7 @@ public:
 	AudioWrapper();
 	~AudioWrapper();
 	void playSound(wstring fileName, bool loop);
+	void playSound(wstring fileName, bool loop, float volume);
 	bool audioStillPlaying();
 	void stopAllAudio();
 	void stopLoopingAudio();
@@ -33,6 +34,7 @@ private:
 	IXAudio2MasteringVoice* masterVoice;
 
 	int playPCM(IXAudio2* audioEngine, WCHAR *path, bool infiniteLoop);
+	int playPCM(IXAudio2* audioEngine, WCHAR *path, bool infiniteLoop, float volume);
 
 	int initAudio();
 
