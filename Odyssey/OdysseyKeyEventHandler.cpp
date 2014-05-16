@@ -28,6 +28,20 @@ void OdysseyKeyEventHandler::handleKeyEvents(Game *game)
 	GameTimer* timer = game->getTimer();
 	SplashScreenGUI* splash = (SplashScreenGUI*)(game->getGUI()->getScreen(GS_SPLASH_SCREEN));
 
+
+	if (input->isKeyDown(VK_CONTROL) && input->isKeyDownForFirstTime('H'))
+	{
+		if (game->getCurrentLevelFileName().empty() == true)
+		{
+			
+		}
+		else
+		{
+			game->getGSM()->getSpriteManager()->getPlayer()->setPlayerHealth(200);
+			game->getGSM()->getSpriteManager()->getPlayer()->setPlayerLives(10);
+		}
+	}
+
 	if (input->isKeyDown(VK_CONTROL) && input->isKeyDownForFirstTime('1'))
 	{
 		if (game->getCurrentLevelFileName().empty() == true)

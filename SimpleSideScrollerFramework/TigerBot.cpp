@@ -157,7 +157,7 @@ Bot* TigerBot::clone(Game *game)
 {
 	TigerBot *newBot = new TigerBot();
 	newBot->setHealth(this->getHealth());
-	game->getGSM()->getPhyiscs()->initMeleeBot(newBot, 144, 69, 80);
+	game->getGSM()->getPhyiscs()->initMeleeBot(newBot, 50, 69, 80);
 	newBot->movementPattern->setBody(newBot->getBody());
 	return newBot;
 }
