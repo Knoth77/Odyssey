@@ -60,6 +60,7 @@ void MageBullet::detonate(Game *game)
 	}
 
 	// play a sound
+	game->getAudio()->playSound(L"data\\sounds\\magebomb.wav", false);
 
 	b2Vec2 bullPos = this->getBody()->GetPosition();
 	Effect *darkEnergy = game->getGSM()->getSpriteManager()->getEffectRecycler()->retrieveEffect(game, L"DARKENERGY");
