@@ -16,6 +16,7 @@ physicsManager::physicsManager()
 {
 	initLevelSelectWorld();
 	initGameWorld();
+	playerBody = NULL;
 }
 
 

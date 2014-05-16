@@ -104,6 +104,13 @@ void SpriteManager::addSpriteToRenderList(AnimatedSprite *sprite,
 		{
 			x = x - 126;
 		}
+
+		if (sprite->getSpriteType() == this->getSpriteType(25))
+		{
+			rotation = player.getMouseAngle();
+			x = x - 173;
+			y = y - 97;
+		}
 		
 	}
 	else
@@ -192,6 +199,7 @@ void SpriteManager::addSpriteItemsToRenderList(	Game *game)
 		// ADD THE PLAYER SPRITE
 		addSpriteToRenderList(&player, renderList, viewport);
 		addSpriteToRenderList(player.getStatus(), renderList, viewport);
+		addSpriteToRenderList(player.getFlameThrower(), renderList, viewport);
 
 
 		list<Bullet*>::iterator bulletsIt;
@@ -428,6 +436,7 @@ void SpriteManager::update(Game *game)
 
 	player.updateSprite();
 	player.updateStatus();
+	player.updateFlameThrower();
 	list<Bullet*>::iterator bulletsIt;
 	bulletsIt = activeBullets.begin();
 

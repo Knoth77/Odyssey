@@ -437,6 +437,7 @@ void OdysseyDataLoader::loadWorld(Game *game, wstring levelInitFile)
 
 		gsm->getPhyiscs()->initPlayer(player, playerX, playerY);
 		gsm->getSpriteManager()->getPlayer()->initStatusSprite();
+		gsm->getSpriteManager()->getPlayer()->initFlameThrower();
 
 
 		this->loadBotsFromLua(levelInitFile, game);

@@ -16,11 +16,17 @@ private:
 	int immuneCounter;
 	bool isImmune;
 	Game *game;
+
 	AnimatedSprite *status;
 	unsigned int statusLoop;
 
+	AnimatedSprite *flameThrower;
+	bool flameThrowerOn;
+
 	int initX;
 	int initY;
+
+	float mouseAngle;
 	
 
 public:
@@ -31,7 +37,8 @@ public:
 	{
 		DEFAULT,
 		SPREAD,
-		ROCKET
+		ROCKET,
+		FLAMETHROWER
 
 	};
 
@@ -51,13 +58,38 @@ public:
 		return initY;
 	}
 
+	void setMouseAngle(float x)
+	{
+		mouseAngle = x;
+	}
+
+	float getMouseAngle()
+	{
+		return mouseAngle;
+	}
+
 	void initStatusSprite();
+	void initFlameThrower();
 
 	void updateStatus();
+	void updateFlameThrower();
+
+	void startFlameThrower();
+	void stopFlameThrower();
+
+	bool isFlameThrowerOn()
+	{
+		return flameThrowerOn;
+	}
 
 	AnimatedSprite* getStatus()
 	{
 		return status;
+	}
+
+	AnimatedSprite* getFlameThrower()
+	{
+		return flameThrower;
 	}
 
 	void registerPlayer(Game *g)
@@ -120,6 +152,7 @@ public:
 
 	void decNextShotTime()
 	{
+		if (nextShowCountdown > 0)
 		nextShowCountdown--;
 	}
 
@@ -151,6 +184,9 @@ public:
 
 		if (status != NULL)
 		status->setCurrentState(L"NONE");
+
+		if (flameThrower != NULL)
+		flameThrower->setCurrentState(L"OFF");
 		
 	}
 };

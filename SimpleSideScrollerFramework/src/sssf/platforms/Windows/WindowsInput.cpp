@@ -71,10 +71,24 @@ void WindowsInput::respondToMouseInput(Game *game)
 
 	gui->updateGUIState(mousePoint->x, mousePoint->y, gsm->getCurrentGameState());
 	gsm->getPhyiscs()->setMouseLoc(mousePoint->x + (game->getGUI()->getViewport()->getViewportX()), mousePoint->y - (game->getGUI()->getViewport()->getViewportOffsetY()) + (game->getGUI()->getViewport()->getViewportY()));
+	Player *p = gsm->getSpriteManager()->getPlayer();
+	b2Body *pBody = gsm->getPhyiscs()->getPlayerBody();
+
+	b2Vec2 clickedPoint = gsm->getPhyiscs()->getMouseClickedPoint();
+	b2Vec2 aCalc;
+	if (pBody != NULL)
+	{
+		aCalc.x = (clickedPoint.x - pBody->GetPosition().x);
+		aCalc.y = (clickedPoint.y - pBody->GetPosition().y);
+		float angle = atan2f(aCalc.y, aCalc.x);
+		p->setMouseAngle(angle);
+	}
+
 	
+	
+
 	//&& (inputState[VK_LBUTTON].isFirstPress)
-	if ((GetAsyncKeyState(VK_LBUTTON) & 0X8000)
-		)
+	if ((GetAsyncKeyState(VK_LBUTTON) & 0X8000))
 	{
 		gui->checkCurrentScreenForAction(game);
 		if (gsm->isGameInProgress())
@@ -83,7 +97,7 @@ void WindowsInput::respondToMouseInput(Game *game)
 			game->getGSM()->getPhyiscs()->setMouseVec(mousePoint->x + (game->getGUI()->getViewport()->getViewportX()), mousePoint->y - (game->getGUI()->getViewport()->getViewportOffsetY()) + (game->getGUI()->getViewport()->getViewportY()));
 			// DO STUFF HERE FOR HANDLING WHICH BULLET BASED ON GUN, FOR NOW HARDCODED LASER
 
-			Player *p = gsm->getSpriteManager()->getPlayer();
+			
 			p->decNextShotTime();
 			unsigned int shotTime = p->getNextShotTime();
 
@@ -127,11 +141,25 @@ void WindowsInput::respondToMouseInput(Game *game)
 				gsm->getSpriteManager()->addActiveBullet(bullet1);
 				p->setNextShotTime(20);
 			}
+			else if (p->getSelectedGun() == p->FLAMETHROWER)
+			{
+				if (p->getNextShotTime() == 0)
+				p->startFlameThrower();
+
+			}
 		}
 		//ProjectileManager::createBullet(game, "PRIMARY", mousePoint);
 	}
-	else if ((GetAsyncKeyState(VK_RBUTTON) & 0X8000)
-		&& (inputState[VK_RBUTTON].isFirstPress))
+	else
+	{ 
+		if (p->getSelectedGun() == p->FLAMETHROWER)
+		{
+			p->stopFlameThrower();
+		}
+	}
+
+
+	/*else if ((GetAsyncKeyState(VK_RBUTTON) & 0X8000) && (inputState[VK_RBUTTON].isFirstPress))
 	{
 		// invoke physics here
 		if (gsm->isGameInProgress())
@@ -150,12 +178,12 @@ void WindowsInput::respondToMouseInput(Game *game)
 				bullet->setCurrentState(L"SECONDARY_FIRE");
 				bullet->setDamageType('S');
 				gsm->getPhyiscs()->activateBullet(bullet);
-				gsm->getSpriteManager()->addActiveBullet(bullet);*/
+				gsm->getSpriteManager()->addActiveBullet(bullet);
 				//p->setNextShotTime(2);
 			}
 			//ProjectileManager::createBullet(game, "SECONDARY", mousePoint);
 		}
-	}
+	}*/
 }
 
 /*

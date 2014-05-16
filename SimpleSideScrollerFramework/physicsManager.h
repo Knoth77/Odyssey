@@ -86,6 +86,11 @@ public:
 		mouseClicked = b;
 	}
 
+	b2Vec2 getMouseClickedPoint()
+	{
+		return clickedPoint;
+	}
+
 	void setMouseVec(float x, float y);
 	void setMouseLoc(float x, float y);
 

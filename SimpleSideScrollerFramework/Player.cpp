@@ -16,6 +16,9 @@ Player::Player()
 	isImmune = false;
 	statusLoop = 0;
 	status = NULL;
+	flameThrower = NULL;
+	flameThrowerOn = false;
+	mouseAngle = 0.0f;
 
 }
 
@@ -23,6 +26,8 @@ Player::Player()
 Player::~Player()
 {
 	delete status;
+	delete flameThrower;
+	flameThrower = NULL;
 	status = NULL;
 }
 
@@ -34,6 +39,17 @@ void Player::initStatusSprite()
 	status->setCurrentState(L"NONE");
 	status->setBody(this->getBody());
 }
+
+void Player::initFlameThrower()
+{
+	flameThrower = new AnimatedSprite();
+	flameThrower->setAlpha(255);
+	flameThrower->setSpriteType(game->getGSM()->getSpriteManager()->getSpriteType(25));
+	flameThrower->setCurrentState(L"OFF");
+	flameThrower->setBody(this->getBody());
+}
+
+
 
 void Player::updateStatus()
 {
@@ -51,6 +67,62 @@ void Player::updateStatus()
 		{
 			statusLoop--;
 		}
+	}
+}
+
+void Player::updateFlameThrower()
+{
+	if (flameThrower->getCurrentState() != L"OFF")
+	{
+		
+		flameThrower->updateSprite();
+		if (flameThrower->getCurrentState() == L"STARTUP")
+		{
+			int size = flameThrower->getSpriteType()->getSequenceSize(L"STARTUP");
+			int index = flameThrower->getFrameIndex();
+
+			if (index == size - 2)
+			{
+				flameThrower->setCurrentState(L"PRIMARY_FIRE");
+			}
+		}
+
+		if (flameThrower->getCurrentState() == L"PRIMARY_FIRE")
+			flameThrowerOn = true; 
+
+		if (flameThrower->getCurrentState() == L"STOP")
+		{
+			flameThrowerOn = false;
+			int size = flameThrower->getSpriteType()->getSequenceSize(L"STOP");
+			int index = flameThrower->getFrameIndex();
+			if (index == size - 2)
+			{
+				flameThrower->setCurrentState(L"OFF");
+			}
+		}
+
+	}
+	else
+		flameThrowerOn = false;
+}
+
+void Player::startFlameThrower()
+{
+	if (flameThrower->getCurrentState() == L"OFF")
+	flameThrower->setCurrentState(L"STARTUP");
+}
+
+void Player::stopFlameThrower()
+{
+	if (flameThrowerOn)
+	{
+		flameThrower->setCurrentState(L"STOP");
+		nextShowCountdown = 30;
+	}
+	else
+	{
+		flameThrower->setCurrentState(L"OFF");
+		flameThrowerOn = false;
 	}
 }
 

@@ -354,15 +354,22 @@ void OdysseyKeyEventHandler::handleKeyEvents(Game *game)
 		if (input->isKeyDown(ONE_KEY))
 		{
 			game->getGSM()->getSpriteManager()->getPlayer()->setSelectedGun(game->getGSM()->getSpriteManager()->getPlayer()->DEFAULT);
+			game->getGSM()->getSpriteManager()->getPlayer()->stopFlameThrower();
 		}
 
 		if (input->isKeyDown(TWO_KEY))
 		{
 			game->getGSM()->getSpriteManager()->getPlayer()->setSelectedGun(game->getGSM()->getSpriteManager()->getPlayer()->SPREAD);
+			game->getGSM()->getSpriteManager()->getPlayer()->stopFlameThrower();
 		}
 		if (input->isKeyDown(THREE_KEY))
 		{
 			game->getGSM()->getSpriteManager()->getPlayer()->setSelectedGun(game->getGSM()->getSpriteManager()->getPlayer()->ROCKET);
+			game->getGSM()->getSpriteManager()->getPlayer()->stopFlameThrower();
+		}
+		if (input->isKeyDown(FOUR_KEY))
+		{
+			game->getGSM()->getSpriteManager()->getPlayer()->setSelectedGun(game->getGSM()->getSpriteManager()->getPlayer()->FLAMETHROWER);
 		}
 
 
