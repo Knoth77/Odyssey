@@ -26,8 +26,8 @@ Viewport::Viewport()
 	scrollSpeedY = 2.032f;
 
 	// NO DEFAULTS FOR THESE
-	viewportX = 3000.0f;
-	viewportY = 3000.0f;
+	viewportX = 128.0f;
+	viewportY = 128.0f;
 	viewportWidth = 0.0f;
 	viewportHeight = 0.0f;
 	viewportOffsetX = 0;

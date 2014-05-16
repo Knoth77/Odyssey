@@ -503,7 +503,7 @@ void OdysseyDataLoader::loadBotsFromLua(wstring levelName, Game *game)
 				sampleSkullBot->setHealth(100);
 
 				recycler->registerBotType(W_SKULL_BOT, sampleSkullBot);
-				recycler->initRecyclableBots(game, W_SKULL_BOT, 13);
+				recycler->initRecyclableBots(game, W_SKULL_BOT, 19);
 			}
 			if (bTypeW == W_SPIDER_BOT)
 			{
@@ -565,7 +565,7 @@ void OdysseyDataLoader::loadBotsFromLua(wstring levelName, Game *game)
 				game->getGSM()->getPhyiscs()->initMeleeBot(sampleTigerBot, 84, 96, 80); // CHANGE VALUES LATER 
 				sampleTigerBot->setHealth(500);
 				recycler->registerBotType(W_TIGER_BOT, sampleTigerBot);
-				recycler->initRecyclableBots(game, W_TIGER_BOT, 2);
+				recycler->initRecyclableBots(game, W_TIGER_BOT, 13);
 			}
 
 			if (bTypeW == W_RAT_BOT)
