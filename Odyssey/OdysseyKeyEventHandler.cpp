@@ -38,7 +38,7 @@ void OdysseyKeyEventHandler::handleKeyEvents(Game *game)
 		else
 		{
 			game->getGSM()->getSpriteManager()->getPlayer()->setPlayerHealth(200);
-			game->getGSM()->getSpriteManager()->getPlayer()->setPlayerLives(3);
+			game->getGSM()->getSpriteManager()->getPlayer()->setPlayerLives(10);
 		}
 	}
 
