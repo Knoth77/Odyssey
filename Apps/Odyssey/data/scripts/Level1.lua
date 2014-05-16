@@ -25,7 +25,7 @@ SPIDER_BOT = {bot1={x=360,y=1000},bot2={x=256,y=1248},bot3={x=500,y=1248},
  
  TIGER_BOT = {bot1={x=2800, y=2800}},
  --RAT_BOT = {bot1={x=2600, y=2600}},
- ANDROMALIUS_BOSS = {bot1={x=2900, y = 2800}},
+ --ANDROMALIUS_BOSS = {bot1={x=2900, y = 2800}},
  LAVA_BOSS = {bot13={x=1632, y = 2570}},
  MAGE_BOSS = {bot1={x=2240,y=640}}
  

@@ -31,7 +31,8 @@ public:
 	{
 		DEFAULT,
 		SPREAD,
-		ROCKET
+		ROCKET,
+		FORCE
 
 	};
 

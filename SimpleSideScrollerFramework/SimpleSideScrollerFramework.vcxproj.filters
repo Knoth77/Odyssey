@@ -276,6 +276,9 @@
     <ClCompile Include="AndromaliusBullet.cpp">
       <Filter>src\sssf\gsm\sprite\projectiles</Filter>
     </ClCompile>
+    <ClCompile Include="ForceBullet.cpp">
+      <Filter>src\sssf\gsm\sprite\projectiles</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\sssf_VS\targetver.h">
@@ -506,6 +509,9 @@
     </ClInclude>
     <ClInclude Include="LavaBurstRayCast.h" />
     <ClInclude Include="AndromaliusBullet.h">
+      <Filter>src\sssf\gsm\sprite\projectiles</Filter>
+    </ClInclude>
+    <ClInclude Include="ForceBullet.h">
       <Filter>src\sssf\gsm\sprite\projectiles</Filter>
     </ClInclude>
   </ItemGroup>

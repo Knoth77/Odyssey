@@ -112,7 +112,6 @@ public:
 	void levelSelectWorldStep();
 
 	void initBullet(Bullet *sprite);
-
 	void initEnemyBullet(Bullet *sprite);
 	void initLavaBullet(Bullet *sprite);
 	void initLavaBurstBullet(Bullet *sprite);

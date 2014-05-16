@@ -6,7 +6,7 @@
 class Rocket :	public Bullet
 {
 private:
-	int splashDmg = 10;
+	int splashDmg = 30;
 
 public:
 	Rocket();

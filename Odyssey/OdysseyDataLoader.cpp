@@ -17,6 +17,7 @@
 #include "src\sssf\gsm\ai\BotRecycler.h"
 #include "BulletRecycler.h"
 #include "Laser.h"
+#include "ForceBullet.h"
 #include "Rocket.h"
 #include "Effect.h"
 #include "EffectRecycler.h"
@@ -297,6 +298,7 @@ void OdysseyDataLoader::loadWorld(Game *game, wstring levelInitFile)
 	AnimatedSpriteType *lightningSS = spriteManager->getSpriteType(18);
 	AnimatedSpriteType *skullAttackSS = spriteManager->getSpriteType(21);
 	AnimatedSpriteType *andromaliusBulletSS = spriteManager->getSpriteType(23);
+	AnimatedSpriteType *forceBulletSS = spriteManager->getSpriteType(24);
 
 	SkullAttackEffect *sampleSAE = new SkullAttackEffect();
 	sampleSAE->setSpriteType(skullAttackSS);
@@ -343,6 +345,15 @@ void OdysseyDataLoader::loadWorld(Game *game, wstring levelInitFile)
 
 	bulletRecycler->registerBulletType(L"LASER", sampleLaser);
 	bulletRecycler->initRecyclableBullets(game, L"LASER", 40);
+
+
+	ForceBullet *sampleForceBullet = new ForceBullet();
+	sampleForceBullet->setSpriteType(forceBulletSS);
+	sampleForceBullet->setAlpha(255);
+	sampleForceBullet->setCurrentState(PRIMARY_FIRE);
+	game->getGSM()->getPhyiscs()->initBullet(sampleForceBullet);
+	bulletRecycler->registerBulletType(L"FORCE_BULLET", sampleForceBullet);
+	bulletRecycler->initRecyclableBullets(game, L"FORCE_BULLET", 40);
 
 
 	Rocket *sampleRocket = new Rocket();

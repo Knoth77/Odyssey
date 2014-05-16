@@ -364,6 +364,10 @@ void OdysseyKeyEventHandler::handleKeyEvents(Game *game)
 		{
 			game->getGSM()->getSpriteManager()->getPlayer()->setSelectedGun(game->getGSM()->getSpriteManager()->getPlayer()->ROCKET);
 		}
+		if (input->isKeyDown(FOUR_KEY))
+		{
+			game->getGSM()->getSpriteManager()->getPlayer()->setSelectedGun(game->getGSM()->getSpriteManager()->getPlayer()->FORCE);
+		}
 
 
 
