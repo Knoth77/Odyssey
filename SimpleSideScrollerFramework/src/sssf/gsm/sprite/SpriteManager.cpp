@@ -31,6 +31,7 @@
 #include "../SimpleSideScrollerFramework/src/sssf/gui/SplashScreenGUI.h"
 #include "../../../../MageBullet.h"
 #include "../../../../../Odyssey/OdysseyDataLoader.h"
+#include "../../../../FlamethrowerRayCast.h"
 
 /*
 	addSpriteToRenderList - This method checks to see if the sprite
@@ -437,6 +438,37 @@ void SpriteManager::update(Game *game)
 	player.updateSprite();
 	player.updateStatus();
 	player.updateFlameThrower();
+
+	if (player.isFlameThrowerOn())
+	{
+		FlamethrowerRayCast cast;
+		cast.setIgnoreBody(player.getBody());
+		float x = game->getGSM()->getPhyiscs()->getPlayerBody()->GetPosition().x;
+		float y = game->getGSM()->getPhyiscs()->getPlayerBody()->GetPosition().y;
+
+		float pixelScaling = game->getGSM()->getPhyiscs()->getPixelScaling();
+		float32 L = 170 * pixelScaling;
+		b2Vec2 point1(player.getBody()->GetPosition().x, player.getBody()->GetPosition().y);
+		float angle = player.getMouseAngle();
+
+		b2Vec2 d(L * cosf(angle), L * sinf(angle));
+		b2Vec2 point2 = point1 + d;
+		game->getGSM()->getPhyiscs()->getGameWorld()->RayCast(&cast, point1, point2);
+
+		vector<b2Body*>::iterator bodyIT = cast.getBodiesFoundBegin();
+		while (bodyIT != cast.getBodiesFoundEnd())
+		{
+			b2Body *body = *(bodyIT);
+			Bot *bot = static_cast<Bot*>(body->GetUserData());
+			bot->setJustShot(true);
+			bot->setHealth(bot->getHealth() - 5);
+			bodyIT++;
+		}
+
+
+	}
+
+
 	list<Bullet*>::iterator bulletsIt;
 	bulletsIt = activeBullets.begin();
 
